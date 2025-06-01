@@ -1,0 +1,27 @@
+
+<div class="max-h-[500px] overflow-y-auto">
+  <table class="w-full border-collapse text-center">
+    <thead class="bg-gray-200 sticky top-0 z-10">
+      <tr>
+        <th class="border border-gray-400 p-2 sticky top-0 bg-gray-200 z-10">Produit</th>
+        @for (client of clients; track client) {
+          <th class="border border-gray-400 p-2 sticky top-0 bg-gray-200 z-10">{{ client }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (produit of produits; track produit) {
+        <tr class="hover:bg-yellow-300">
+          <td class="border border-gray-400 p-2">{{ produit }}</td>
+          @for (client of clients; track client) {
+            <td class="border border-gray-400 p-2">
+              @if (dataMap[client][produit] > 0) {
+                <p class="font-bold text-md md:text-xl">{{ dataMap[client][produit] }}</p>
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

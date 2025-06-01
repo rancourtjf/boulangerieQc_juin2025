@@ -1,0 +1,43 @@
+<!-- <div
+
+  *ngIf="!isAuth()"
+  class="w-full flex justify-center"
+>
+
+  <button
+    *ngIf="openClick === false"
+    class="w-1/2 md:w-1/4 btn btn-primary"
+    (click)="toggleComponent()"
+  >
+    <span class=" text-white p-2 mt-4 mb-4 rounded-sm shadow-sm">Explorer le logiciel</span>
+  </button>
+  <button
+    *ngIf="true"
+    class="w-1/2 md:w-1/4 btn btn-primary"
+    (click)="toggleComponent()"
+  >
+    Explorer le logiciel test
+  </button>
+
+  <button
+    *ngIf="openClick === true"
+    class="w-1/2 md:w-1/4 btn btn-primary"
+    (click)="toggleComponent()"
+  >
+    Retour accueil
+  </button>
+</div>
+<app-aide *ngIf="openClick === true"></app-aide> -->
+<div>
+  <app-backgroud-image></app-backgroud-image>
+  <div class="" *ngIf="(auth.isAuthenticated$ | async) === false">
+    <img
+      class=" w-3/4 h-3/4 bg-cover ml-auto mr-auto"
+      src="https://www.boulangerieqc.com/assets/images/fenetreprincipale.png"
+      alt="fenetre"
+    />
+  </div>
+
+  <app-footer *ngIf="(auth.isAuthenticated$ | async) === false"> </app-footer>
+
+</div>

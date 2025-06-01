@@ -1,0 +1,42 @@
+<div *ngIf="boulanger.role == 'boulanger'">
+  <h3 class="text-center mt-2 font-bold">
+    Ajouter une tâche à vos employés.
+  </h3>
+
+  <div class="w-3/4 md:w-1/2 mr-auto ml-auto">
+    <form [formGroup]="newTache" (ngSubmit)="envoiAjoutTache()">
+      <label for="descriptif">Contenu de la prochaine tâche</label>
+      <input class="form-control border-2" type="text" formControlName="descriptif" id="descriptif" />
+      <label for="dateDebut">Date début de cette tâche régulière</label>
+      <input class="form-control" type="date" formControlName="dateDebut" id="dateDebut" />
+      <label for="dateFin">Date fin de cette tâche régulière</label>
+      <input class="form-control" type="date" formControlName="dateFin" id="dateFin" /><br>
+      <label for="jourSemaine">jour de la semaine</label>
+      <select formControlName="jourSemaine">
+        <option [ngValue]="null" disabled>Choisir un jour</option>
+        <option *ngFor="let jourSemaine of listeJours" [ngValue]="jourSemaine">
+          {{jourSemaine}}
+        </option>
+      </select><br><br>
+      
+      <select formControlName="repetition">
+        <option [ngValue]="null" disabled>Répétition à combien de jour?</option>
+        <option *ngFor="let repetition of repetitionArray" [ngValue]="repetition">
+          {{repetition}}
+        </option>
+      </select><br><br>
+      <label for="nomEquipe">nom de l'équipe</label>
+      <select formControlName="nomEquipe">
+        <option [ngValue]="null" disabled>Choisir une équipe</option>
+        <option *ngFor="let nomEquipe of mesEquipes" [ngValue]="nomEquipe">
+          {{nomEquipe.nomEquipe}}
+        </option>
+      </select><br><br>
+
+      <button class="bg-blue-500 text-white p-2 mt-4 rounded-sm shadow-xl" type="submit">
+        Cliquez, pour ajouter cette tâche
+      </button>
+    </form>
+  </div>
+<app-voir-taches></app-voir-taches>
+</div>

@@ -1,0 +1,179 @@
+<div styleClass="user-form" class=" w-1/2 ml-auto mr-auto">
+    <form [formGroup]="userForm" (ngSubmit)="modifyBoulanger()" novalidate>
+      <!-- <div class="field mb-2">
+        <label for="id" class="block font-bold bg-green-200 p-2">Id du boulanger</label>
+        <input class="read-only:" type="text" pInputText placeholder="id du client" formControlName="id" />
+      </div> -->
+        <!-- idclient dans 4D Column -->
+      <div class="field mb-2">
+        <label for="idclient" class="block font-bold bg-green-200 p-2">Id 4D</label>
+        <input class="read-only:" type="text" pInputText placeholder="id du client dans 4D" formControlName="idclient" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="nom" class="block font-bold bg-green-200 p-2">nom de la boulangerie</label>
+        <input class="w-full" type="text" pInputText placeholder="nom de la boulangerie" formControlName="nom" />
+        <small class="p-error block" *ngIf="
+            userForm.get('nom')?.invalid &&
+            userForm.get('nom')?.dirty
+          ">
+          Le nom de la boulangerie est requis</small>
+      </div>
+
+      <div class="field mb-2">
+        <label for="courriel" class="block font-bold bg-green-200 p-2">courriel</label>
+        <input class="w-full" type="email" pInputText placeholder="courriel" formControlName="courriel" />
+        <small class="p-error block" *ngIf="
+            userForm.get('courriel')?.invalid && userForm.get('courriel')?.dirty
+          ">
+          Le courriel est requis</small>
+      </div>
+  
+      <div class="field mb-2">
+        <label for="adresse" class="block font-bold bg-green-200 p-2">adresse</label>
+        <input class="w-full" type="text" pInputText placeholder="adresse" formControlName="adresse" />
+      </div>
+      <div class="field mb-2">
+        <label for="nom" class="block font-bold bg-green-200 p-2">ville</label>
+        <input class="w-full" type="text" pInputText placeholder="ville" formControlName="ville" />
+      </div>
+  
+      <div class="field mb-2">
+        <label for="adresse" class="block font-bold bg-green-200 p-2">adresse</label>
+        <input class="w-full" type="text" pInputText placeholder="adresse" formControlName="adresse" />
+      </div>
+        <div class="field mb-2">
+          <label for="ville" class="block font-bold bg-green-200 p-2">ville</label>
+          <input type="text" pInputText placeholder="ville" formControlName="ville" />
+        </div>
+        <div class="field mb-2">
+          <label for="codepostal" class="block font-bold bg-green-200 p-2">Code postal</label>
+          <input type="text" pInputText placeholder="code postal" formControlName="codepostal" />
+        </div>
+
+      <div class="field mb-2">
+        <label for="telephone" class="block font-bold bg-green-200 p-2">no de téléphone</label>
+        <input class="w-full" type="text" pInputText placeholder="téléphone" formControlName="telephone" />
+      </div>
+      <div class="field mb-2">
+        <label for="courrielcommande" class="block font-bold bg-green-200 p-2">courrielcommande</label>
+        <input class="w-full" type="email" pInputText placeholder="courrielcommande" formControlName="courrielcommande" />
+      </div>
+      <div class="field mb-2">
+        <label for="courriel_retour_paye" class="block font-bold bg-green-200 p-2">courriel_retour_paye</label>
+        <input class="w-full" type="email" pInputText placeholder="courriel_retour_paye" formControlName="courriel_retour_paye" />
+      </div>
+      <div class="field mb-2">
+        <label for="date_code_acces_d" class="block font-bold bg-green-200 p-2">date_code_acces_d</label>
+        <input type="date" pInputText placeholder="date_code_acces_d" formControlName="date_code_acces_d" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="date_fin_acces_d" class="block font-bold bg-green-200 p-2">date_fin_acces_d</label>
+        <input type="date" pInputText placeholder="date_fin_acces_d" formControlName="date_fin_acces_d" />
+      </div>
+      
+      <div class="field mb-2">
+        <label for="debutCalendrierLundi" class="block font-bold bg-green-200 p-2">debutCalendrierLundi  1 ou 0</label>
+        <input type="text" pInputText placeholder="debutCalendrierLundi" formControlName="debutCalendrierLundi" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="datenewVersion" class="block font-bold bg-green-200 p-2">datenewVersion</label>
+        <input type="date" pInputText placeholder="datenewVersion" formControlName="datenewVersion" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="emailEnvoiAuBoulanger" class="block font-bold bg-green-200 p-2">emailEnvoiAuBoulanger</label>
+        <input class="w-full" type="email" pInputText placeholder="emailEnvoiAuBoulanger" formControlName="emailEnvoiAuBoulanger" />
+      </div>
+      
+
+      <div class="field mb-2">
+        <label for="heure_tombee_production_h" class="block font-bold bg-green-200 p-2">heure_tombee_production_h</label>
+        <input type="time" pInputText placeholder="heure_tombee_production_h" formControlName="heure_tombee_production_h" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="jours_conservation_FTP" class="block font-bold bg-green-200 p-2">jours_conservation_FTP</label>
+        <input type="number" pInputText placeholder="jours_conservation_FTP" formControlName="jours_conservation_FTP" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="monnaieCanada_b" class="block font-bold bg-green-200 p-2">monnaieCanada_b 1 ou 0</label>
+        <input type="text" pInputText placeholder="monnaieCanada_b" formControlName="monnaieCanada_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="noCompteTPS" class="block font-bold bg-green-200 p-2">noCompteTPS</label>
+        <input class="w-full" type="text" pInputText placeholder="noCompteTPS" formControlName="noCompteTPS" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="noCompteTVQ" class="block font-bold bg-green-200 p-2">noCompteTVQ</label>
+        <input class="w-full" type="text" pInputText placeholder="noCompteTVQ" formControlName="noCompteTVQ" />
+      </div>
+
+      <div class="field mb-2 ">
+        <label for="noVersion" class="block font-bold bg-green-200 p-2">noVersion</label>
+        <input class="w-full" type="text" pInputText placeholder="noVersion" formControlName="noVersion" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="ouvertlundi_b" class="block font-bold bg-green-200 p-2">ouvertlundi_b 1 ou 0</label>
+        <input type="text" pInputText placeholder="ouvertlundi_b" formControlName="ouvertlundi_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="ouvertmardi_b" class="block font-bold bg-green-200 p-2">ouvertmardi_b 1 ou 0</label>
+        <input class="w-full" type="text" pInputText placeholder="ouvertmardi_b" formControlName="ouvertmardi_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="ouvertmercredi_b" class="block font-bold bg-green-200 p-2">ouvertmercredi_b 1 ou 0</label>
+        <input class="w-full" type="text" pInputText placeholder="ouvertmercredi_b" formControlName="ouvertmercredi_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="ouvert_jeudi_b" class="block font-bold bg-green-200 p-2">ouvert_jeudi_b 1 ou 0</label>
+        <input class="w-full" type="text" pInputText placeholder="ouvert_jeudi_b" formControlName="ouvert_jeudi_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="ouvert_vendredi_b" class="block font-bold bg-green-200 p-2">ouvert_vendredi_b 1 ou 0</label>
+        <input class="w-full"  type="text" pInputText placeholder="ouvert_vendredi_b" formControlName="ouvert_vendredi_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="ouvert_samedi_b" class="block font-bold bg-green-200 p-2">ouvert_samedi_b 1 ou 0</label>
+        <input class="w-full" type="text" pInputText placeholder="ouvert_samedi_b" formControlName="ouvert_samedi_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="ouvert_dimanche_b" class="block font-bold bg-green-200 p-2">ouvert_dimanche_b 1 ou 0</label>
+        <input type="text" pInputText placeholder="ouvert_dimanche_b" formControlName="ouvert_dimanche_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="site_internet_a" class="block font-bold bg-green-200 p-2">  site_internet_a</label>
+        <input type="text" pInputText placeholder="site_internet_a" formControlName="site_internet_a" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="transmissionProduitComptable" class="block font-bold bg-green-200 p-2">transmissionProduitComptable 1 ou 0</label>
+        <input type="text" pInputText placeholder="transmissionProduitComptable" formControlName="transmissionProduitComptable" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="txtVersementBancaire" class="block font-bold bg-green-200 p-2">txtVersementBancaire</label>
+        <input class="w-full" type="text" pInputText placeholder="txtVersementBancaire" formControlName="txtVersementBancaire" />
+      </div>
+
+      
+    <div class="w-full">
+        <button class="btn bg-green-500 text-black  p-2 mt-2 rounded-sm shadow-lg" pButton type="submit"
+        label="Modifier fiche de la boulangerie" [disabled]="userForm.invalid"></button>
+    </div>
+ 
+    </form>
+  <div>

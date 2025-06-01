@@ -1,0 +1,188 @@
+
+<div class=" p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased w-full text-center flex justify-center">
+  <button (click)="goToCommande()"
+ 
+  class="mr-4 block cursor-pointer p-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased bg-gray-100 rounded-sm shadow-xl"
+>
+  Retour à la commande
+</button>
+</div>
+<div class="w-full flex justify-center">
+  <button (click)="simpleConfirmImage()" class="bg-green-400 p-4 text-md md:text-lg rounded-sm shadow-xl">Voir les coordonnées de votre boulanger   <img class="ml-4 w-16 h-16 inline-block mr-4" [src]="logoClient" alt="logo" />
+  </button>
+</div>
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+             <!-- idclient Column -->
+    <ng-container matColumnDef="idclient">
+        <th mat-header-cell *matHeaderCellDef>Id Client</th>
+        <td mat-cell *matCellDef="let element">{{ element.idclient }}</td>
+      </ng-container>
+    
+    <!-- nom Column -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
+    </ng-container>
+  
+    <!-- adresse Column -->
+    <ng-container matColumnDef="adresse">
+      <th mat-header-cell *matHeaderCellDef>Adresse</th>
+      <td mat-cell *matCellDef="let element">{{ element.adresse }}</td>
+    </ng-container>
+  
+    <!-- ville Column -->
+    <ng-container matColumnDef="ville">
+      <th mat-header-cell *matHeaderCellDef>Ville</th>
+      <td mat-cell *matCellDef="let element">{{ element.ville }}</td>
+    </ng-container>
+  
+    <!-- codepostal Column -->
+    <ng-container matColumnDef="codepostal">
+      <th mat-header-cell *matHeaderCellDef>Code postal</th>
+      <td mat-cell *matCellDef="let element">{{ element.codepostal }}</td>
+    </ng-container>
+    <!-- no courriel Column -->
+    <ng-container matColumnDef="courriel">
+      <th mat-header-cell *matHeaderCellDef>Courriel</th>
+      <td mat-cell *matCellDef="let element">{{ element.courriel }}</td>
+    </ng-container>
+    <!-- no telephone Column -->
+    <ng-container matColumnDef="telephone">
+      <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+      <td mat-cell *matCellDef="let element">{{ element.telephone }}</td>
+    </ng-container>
+      <!-- courriel de commandeColumn -->
+      <ng-container matColumnDef="courrielcommande">
+        <th mat-header-cell *matHeaderCellDef>Courriel de commande</th>
+        <td mat-cell *matCellDef="let element">{{ element.courrielcommande }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="courriel_retour_paye">
+        <th mat-header-cell *matHeaderCellDef>courriel_retour_paye</th>
+        <td mat-cell *matCellDef="let element">{{ element.courriel_retour_paye }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="date_code_acces_d">
+        <th mat-header-cell *matHeaderCellDef>date_code_acces_d</th>
+        <td mat-cell *matCellDef="let element">{{ element.date_code_acces_d }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="date_fin_acces_d">
+        <th mat-header-cell *matHeaderCellDef>date_fin_acces_d</th>
+        <td mat-cell *matCellDef="let element">{{ element.date_fin_acces_d }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="datenewVersion">
+        <th mat-header-cell *matHeaderCellDef>datenewVersion</th>
+        <td mat-cell *matCellDef="let element">{{ element.datenewVersion }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="debutCalendrierLundi">
+        <th mat-header-cell *matHeaderCellDef>debutCalendrierLundi</th>
+        <td mat-cell *matCellDef="let element">{{ element.debutCalendrierLundi }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="emailEnvoiAuBoulanger">
+        <th mat-header-cell *matHeaderCellDef>emailEnvoiAuBoulanger</th>
+        <td mat-cell *matCellDef="let element">{{ element.emailEnvoiAuBoulanger }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="heure_tombee_production_h">
+        <th mat-header-cell *matHeaderCellDef>heure_tombee_production_h</th>
+        <td mat-cell *matCellDef="let element">{{ element.heure_tombee_production_h }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="jours_conservation_FTP">
+        <th mat-header-cell *matHeaderCellDef>jours_conservation_FTP</th>
+        <td mat-cell *matCellDef="let element">{{ element.jours_conservation_FTP }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="monnaieCanada_b">
+        <th mat-header-cell *matHeaderCellDef>monnaieCanada_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.monnaieCanada_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="noCompteTPS">
+        <th mat-header-cell *matHeaderCellDef>noCompteTPS</th>
+        <td mat-cell *matCellDef="let element">{{ element.noCompteTPS }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="noCompteTVQ">
+        <th mat-header-cell *matHeaderCellDef>noCompteTVQ</th>
+        <td mat-cell *matCellDef="let element">{{ element.noCompteTVQ }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="noVersion">
+        <th mat-header-cell *matHeaderCellDef>noVersion</th>
+        <td mat-cell *matCellDef="let element">{{ element.noVersion }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ouvertlundi_b">
+        <th mat-header-cell *matHeaderCellDef>ouvertlundi_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.ouvertlundi_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ouvertmardi_b">
+        <th mat-header-cell *matHeaderCellDef>ouvertmardi_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.ouvertmardi_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ouvertmercredi_b">
+        <th mat-header-cell *matHeaderCellDef>ouvertmercredi_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.ouvertmercredi_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ouvert_jeudi_b">
+        <th mat-header-cell *matHeaderCellDef>ouvert_jeudi_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.ouvert_jeudi_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ouvert_vendredi_b">
+        <th mat-header-cell *matHeaderCellDef>ouvert_vendredi_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.ouvert_vendredi_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ouvert_samedi_b">
+        <th mat-header-cell *matHeaderCellDef>ouvert_samedi_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.ouvert_samedi_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ouvert_dimanche_b">
+        <th mat-header-cell *matHeaderCellDef>ouvert_dimanche_b</th>
+        <td mat-cell *matCellDef="let element">{{ element.ouvert_dimanche_b }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="site_internet_a">
+        <th mat-header-cell *matHeaderCellDef>site_internet_a</th>
+        <td mat-cell *matCellDef="let element">{{ element.site_internet_a }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="transmissionProduitComptable">
+        <th mat-header-cell *matHeaderCellDef>transmissionProduitComptable</th>
+        <td mat-cell *matCellDef="let element">{{ element.transmissionProduitComptable }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="txtVersementBancaire">
+        <th mat-header-cell *matHeaderCellDef>txtVersementBancaire</th>
+        <td mat-cell *matCellDef="let element">{{ element.txtVersementBancaire }}</td>
+      </ng-container>
+      <ng-container  matColumnDef="Modifier">
+        <th mat-header-cell *matHeaderCellDef>Modifier</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="mb-4"></div>
+          <button  class="mb-2" (click)=" modifBoulanger(element.id)"><fa-icon class="text-green-600"
+              [icon]="faEdit"></fa-icon> {{ element.id }}</button>
+          <hr class="border-4 mb-2">
+          <button  (click)=" deleteBoulangerie(element.id)"><fa-icon class="text-red-500 " [icon]="faTrash"></fa-icon> {{
+            element.id }}</button>
+        </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>

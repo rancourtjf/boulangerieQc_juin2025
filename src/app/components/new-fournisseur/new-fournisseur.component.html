@@ -1,0 +1,41 @@
+<h3 class="text-center mt-2 font-bold">Les coordonnées d'un nouveau fournisseur</h3>
+
+<div class="w-3/4 md:w-1/2 mr-auto ml-auto">
+    <form [formGroup]="newFournisseur" (ngSubmit)="ajoutFournisseur()">
+        <label for="nom">Nom du fournisseur</label>
+        <input class="form-control" type="text" formControlName="nom" id="nom">
+
+        <label for="courriel">Courriel du fournisseur</label>
+        <input class="form-control" type="email" formControlName="courriel" id="courriel">
+
+        <label for="ID4D">ID4D dans le logiciel BoulangerieQc 4D</label>
+        <input class="form-control" type="number" formControlName="ID4D" id="ID4D">
+
+        <label for="telephone">telephone</label>
+        <input class="form-control" type="text" formControlName="telephone" id="telephone">
+
+        <label for="adresse">adresse</label>
+        <input class="form-control" type="text" formControlName="adresse" id="adresse">
+
+        <label for="ville">ville</label>
+        <input class="form-control" type="text" formControlName="ville" id="ville">
+
+        <label for="code_postal">code_postal</label>
+        <input class="form-control" type="text" formControlName="code_postal" id="code_postal">
+
+        <label for="fax">fax</label>
+        <input class="form-control" type="text" formControlName="fax" id="fax">
+
+        <label for="prenom_responsable">prenom_responsable</label>
+        <input class="form-control" type="text" formControlName="prenom_responsable" id="prenom_responsable">
+
+        <label for="nom_responsable">nom_responsable</label>
+        <input class="form-control" type="text" formControlName="nom_responsable" id="nom_responsable">
+
+        <label for="nom">noID_logicielComptable</label>
+        <input class="form-control" type="text" formControlName="noID_logicielComptable" id="noID_logicielComptable">
+        
+        <button class="bg-blue-500 text-white p-2 mt-2 rounded-sm shadow-xl" type="submit">Cliquez pour valider le fournisseur</button>
+    </form>
+</div>
+

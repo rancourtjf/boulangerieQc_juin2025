@@ -1,0 +1,127 @@
+
+<div class="w-full flex justify-center text-2xl rounded-sm shadow-xl mb-4 mt-4">
+  <a href="https://www.legisquebec.gouv.qc.ca/fr/document/lc/P-39.1"
+    >Loi 25 accès aux renseignements personnels</a
+  >
+
+</div>
+
+  <app-accordion-rens/>
+
+
+
+<div class="px-2 mt-4">
+  <h2>Consentement à l'utilisation de cookies.</h2>
+  <p>Pour le bon fonctionnement de notre site Web, nous utilisons cookies. Afin d'obtenir votre consentement valide pour l'utilisation et le stockage de cookies dans le navigateur que vous utilisez pour accéder à notre site Web et pour documenter correctement ceci, nous utilisons une plateforme de gestion des consentements : CookieFirst. Cette technologie est fournie par Digital Data Solutions BV, Plantage Middenlaan 42a, 1018 DH, Amsterdam, Pays-Bas. Site web <a href='https://cookiefirst.com' title='Cookiefirst page'>: https://cookiefirst.com</a> désigné sous le nom de CookieFirst.</p>
+  <p>Lorsque vous accédez à notre site web, une connexion est établie avec le serveur de CookieFirstpour nous donner la possibilité d'obtenir un consentement valide de votre part pour l'utilisation de certains cookies. CookieFirst stocke ensuite un cookie dans votre navigateur afin de pouvoir activer uniquement les cookies auxquels vous avez consenti et de le documenter correctement. Les données traitées sont stockées jusqu'à l'expiration de la période de stockage prédéfinie ou jusqu'à ce que vous demandiez la suppression des données. Certaines périodes de conservation légales obligatoires peuvent s'appliquer nonobstant ce qui précède.</p>
+  <p>CookieFirst est utilisé pour obtenir le consentement légalement requis pour l'utilisation de cookies. La base juridique pour cela est l'article 6, paragraphe 1, point c), du règlement général sur la protection des données (RGPD).</p>
+  <h2>Accord de traitement des données</h2>
+  <p>Nous avons conclu un accord de traitement des données avec CookieFirst. Il s'agit d'un contrat requis par la loi sur la protection des données, qui garantit que les données des visiteurs de notre site Web ne sont traitées que conformément à nos instructions et dans le respect du GDPR.</p>
+  <h2>Fichiers journaux du serveur</h2>
+  <p>Notre site web et CookieFirst collectent et stockent automatiquement des informations dans ce qu'on appelle des fichiers journaux de serveur, que votre navigateur nous transmet automatiquement. Les données suivantes sont collectées :</p>
+  <ul>
+  <li>Votre statut de consentement ou le retrait du consentement.</li>
+  <li>Votre adresse IP anonyme</li>
+  <li>Des informations sur votre navigateur</li>
+  <li>Informations sur votre appareil</li>
+  <li>La date et l'heure de votre visite sur notre site web</li>
+  <li>L'url de la page web où vous avez enregistré ou mis à jour vos préférences de consentement</li>
+  <li>L'emplacement approximatif de l'utilisateur qui a enregistré ses préférences en matière de consentement.</li>
+  <li>un identifiant unique universel (UUID) du visiteur du site web qui a cliqué sur la bannière cookie.</li>
+  </ul>
+</div>
+
+
+
+<!-- <div class="bg-green-400 p-2 rounded-sm shadow-xl">
+  <a href="https://www.boulangerieqc.com/joindreRenseignements.html">Envoi de votre consentement pour la garde de vos données minimales</a>
+</div> -->
+
+<!-- 
+<div class="flex items-center justify-center p-12 bg-gray-200">
+
+  <div class="bg-gray-200 w-full md:w-2/3 rounded-sm shadow-xl">
+    <div class="mx-auto w-full p-2">
+      <form [formGroup]="helpForm" (ngSubmit)="envoiDemandeAide($event)">
+        <div class="mb-5">
+          <label
+            for="nom"
+            class="mb-3 block text-base font-medium text-[#07074D]"
+          >
+            Votre nom
+          </label>
+          <input
+            type="text"
+            formControlName="nom"
+            id="nom"
+            placeholder="Votre nom"
+            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-red-400 focus:shadow-md"
+          />
+        </div>
+
+        <div class="mb-5">
+          <label
+            for="sujet"
+            class="mb-3 block text-base font-medium text-[#07074D]"
+          >
+            Sujet: Consentement à la conservation de données personnelles.
+          </label>
+          <input
+            type="text"
+            formControlName="sujet"
+            id="sujet"
+            placeholder="Des questions face à ce consentement?"
+            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-red-400 focus:shadow-md"
+          />
+        </div>
+        <div class="mb-5">
+          <label
+            for="message"
+            class="mb-3 block text-base font-medium text-[#07074D]"
+          >
+            Votre message
+          </label>
+          <textarea
+            rows="4"
+            formControlName="message"
+            id="message"
+            placeholder="Entrez le contenu de votre message s'il y a lieu..."
+            class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-red-400 focus:shadow-md"
+          ></textarea>
+        </div>
+        <div class="mb-5">
+          <label
+            for="consentement"
+            class="mb-3 block text-base font-medium text-[#07074D]"
+          >
+            Votre consentement.
+          </label>
+          <select
+            class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-red-400 focus:shadow-md"
+            rows="5"
+            formControlName="consentement"
+            id="consentement"
+          >
+            <option value="Oui">
+              J'ai lu l'information sur les renseignements sous votre garde et
+              j'accepte!
+            </option>
+            <option value="Non" selected>
+              Je n'accepte pas. Je comprends que l'accès au site de commande Web
+              ne sera plus disponble par la suite.
+            </option>
+          </select>
+        </div>
+        <div>
+          <button
+            type="submit"
+            class="ml-auto mr-auto w-1/2 flex justify-center hover:shadow-form rounded-md cursor-pointer transition hover:scale-125 bg-yellow-400 py-3 px-8 text-base font-semibold text-black outline-hidden"
+          >
+            Envoyez votre consentement.
+            
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

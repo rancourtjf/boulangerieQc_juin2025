@@ -1,0 +1,68 @@
+
+ <!DOCTYPE html>
+ <html lang="fr-ca">
+   <head>
+     <meta charset="UTF-8" />
+     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+     <title>Nous joindre</title>
+   </head>
+ <body>
+     <!-- component -->
+     <div class="flex justify-center pb-4 ">
+         <a href=" https://www.boulangerieqc.com">
+           <img src="../../../assets/logo/logoLogiciel.png" alt="logo cédule de production BoulangerieQc">
+         </a>
+           </div>
+           <h2 class="w-full flex justify-center text-sm md:text-lg font-bold p-2">Pour communiquer avec nous pour de l'aide ou des renseignements.</h2>
+     <div class="flex items-center justify-center p-12 bg-gray-200 ">
+         <!-- Author: FormBold Team -->
+         <!-- Learn More: https://formbold.com -->
+         <div class="bg-gray-200 w-full md:w-2/3 rounded-sm shadow-xl">
+             <div class="mx-auto w-full p-2">
+                 <form  [formGroup]="helpForm" (ngSubmit)="envoiDemandeAide($event)">
+                
+                     <div class="mb-5">
+                         <label for="nom" class="mb-3 block text-base font-medium text-[#07074D]">
+                             Votre nom
+                         </label>
+                         <input type="text"  formControlName="nom" id="nom" placeholder="Votre nom"
+                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-red-400 focus:shadow-md" />
+                     </div>
+                
+                     <div class="mb-5">
+                         <label for="sujet" class="mb-3 block text-base font-medium text-[#07074D]">
+                             Sujet
+                         </label>
+                         <input type="text" formControlName="sujet" id="sujet" placeholder="C'est à quel sujet?"
+                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-red-400 focus:shadow-md" />
+                     </div>
+                     <div class="mb-5">
+                         <label for="message" class="mb-3 block text-base font-medium text-[#07074D]">
+                             Votre message
+                         </label>
+                         <textarea rows="4" formControlName="message" id="message" placeholder="Entre le contenu de ton message"
+                             class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-red-400 focus:shadow-md"></textarea>
+                     </div>
+                     <div>
+                         <button  type="submit"  
+                             class="ml-auto mr-auto w-1/2 flex justify-center hover:shadow-form rounded-md cursor-pointer transition hover:scale-125  bg-yellow-400 py-3 px-8 text-base font-semibold text-black outline-hidden">
+                             Envoyer le message
+                         </button>
+                     </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+    
+         <footer class="bg-light p-3 w-full text-center">
+               <p>
+                 © 2020 Copyright:
+                 Site propulsé par 
+                 <a href="https://www.boulangerieqc.com">BoulangerieQc</a>
+               </p>
+               <p >Lévis, Québec </p>
+           </footer>
+ </body>
+ </html>

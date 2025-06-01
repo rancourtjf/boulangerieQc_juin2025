@@ -1,0 +1,72 @@
+<div *ngIf="(auth.isAuthenticated$ | async) === true">
+
+    <form  action="emailAuBoulanger.php" method="post" enctype="multipart/form-data">
+        <label for="to">To:</label>
+        <input type="email" id="to" name="to"><br>
+        
+        <label for="subject">Sujet:</label>
+        <input type="text" id="subject" name="subject" value="Envoi de la commande"><br>
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" value="Voici la commande"></textarea><br>
+        
+        <label for="from">From:</label>
+        <input type="email" id="from" name="from" value="Le client X"><br>
+        
+        <label for="attachment">Attachment:</label>
+        <input type="file" id="attachment" name="attachment"><br>
+    
+        <input type="submit" value="Send">
+      </form>
+</div>
+<form [formGroup]="myForm" (ngSubmit)="submit()">
+  
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input 
+            formControlName="name"
+            id="name" 
+            type="text" 
+            class="form-control">
+        <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+            <div *ngIf="f.name.errors">Name is required.</div>
+            <div *ngIf="f.name.errors">Name should be 3 character.</div>
+        </div>
+    </div>
+      
+    <div class="form-group bg-red-200 border-2 border-black">
+        <label for="file">File</label>
+        <input 
+            formControlName="file"
+            id="file" 
+            type="file" 
+            class="form-control"
+            (change)="onFileChange($event)">
+        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+            <div *ngIf="f.file.errors">File is required.</div>
+        </div>
+    </div>
+          
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+<div class="text-center bg-blue-400">
+	<input class="form-control" type="file"
+			(change)="onChange($event)">
+
+	<button (click)="onUpload()"
+		class="btn btn-success">
+		Upload
+	</button>
+</div>
+
+<!-- Shareable short link of uploaded file -->
+<div class="container text-center jumbotron"
+	*ngIf="shortLink">
+	<h2> lien de téléchargement</h2>
+	<a href="{{shortLink}}">{{shortLink}}</a>
+</div>
+
+<!--Flag variable is used here-->
+<div class="container" *ngIf="loading">
+	<h3>Loading ...</h3>
+</div>

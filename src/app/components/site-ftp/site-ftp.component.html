@@ -1,0 +1,64 @@
+<button (click)="toggleAide()" class="w-1/2 md:w-1/4 btn btn-primary">
+  <span *ngIf="openAide === false">Explorer le logiciel - </span>
+  <span *ngIf="openAide === true">Retour à la production - </span>Aide
+</button>
+
+<app-aide *ngIf="openAide === true"></app-aide>
+<div class="grid grid-cols-2 justify-center">
+  <div class="flex justify-center items-center text-lg md:text-xl">
+    Vos documents !
+  </div>
+  <div class="grid grid-cols-1 gap-4">
+    <div >
+<button class="btn shadow-xl rounded-sm">
+    <a
+    class="text-lg md:text-xl ml-2"
+    *ngIf="(auth.isAuthenticated$ | async) === true"
+    [href]="
+      extractLienFTPService.boulanger.userURLSiteFTP +
+        'ProductionQuotidienne/' | safe:'url'
+    "
+    >Production Quotidienne plein écran <i class="fa-solid fa-maximize"></i
+  ></a>
+</button>
+
+    </div>
+    <div>
+        <button class="btn shadow-xl rounded-sm">
+            <a
+            class="text-lg md:text-xl ml-2"
+            *ngIf="(auth.isAuthenticated$ | async) === true"
+            [href]="
+              extractLienFTPService.boulanger.userURLSiteFTP +
+                'FacturationQuotidienne/' | safe:'url'
+            "
+            >Facturation Quotidienne plein écran <i class="fa-solid fa-maximize"></i
+          ></a>
+        </button>
+
+    </div>
+  </div>
+
+  <div>
+    <img
+      class="ml-auto mr-auto h-16 w-24 md:h-24 md:w-36"
+      [src]="logo | safe:'url'"
+      alt="logo"
+    />
+  </div>
+</div>
+
+<style type="text/css">
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<iframe
+  [src]="lienURL | safe:'url'"
+  title="cédule de production"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>

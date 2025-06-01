@@ -1,0 +1,19 @@
+<mat-form-field appearance="outline" class="w-full">
+    <mat-label>Heure rupture</mat-label>
+    <input
+      matInput
+      readonly
+      [value]="value"
+      [ngxMatTimepicker]="timepicker"
+      (click)="openPicker()"
+    />
+    <mat-icon matSuffix (click)="openPicker()">schedule</mat-icon>
+  </mat-form-field>
+  
+  <ngx-mat-timepicker
+    #timepicker
+    [defaultTime]="'00:00'"
+    [format]="24"
+    [enableKeyboardInput]="true"
+    (timeSet)="updateValue($event)"
+  ></ngx-mat-timepicker>

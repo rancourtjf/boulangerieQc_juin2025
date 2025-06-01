@@ -1,0 +1,126 @@
+<div styleClass="user-form" class=" w-1/2 ml-auto mr-auto">
+    <form [formGroup]="userForm" (ngSubmit)="AddIngredient()" novalidate>
+  
+
+      <div class="field mb-2">
+        <label for="fournisseur_a" class="block font-bold bg-green-200 p-2">fournisseur_a</label>
+        <input type="text" pInputText placeholder="fournisseur_a" formControlName="fournisseur_a" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="categorie" class="block font-bold bg-green-200 p-2">categorie</label>
+        <input type="text" pInputText placeholder="categorie" formControlName="categorie" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="coeffprixvente" class="block font-bold bg-green-200 p-2">coeffprixvente</label>
+        <input type="number" pInputText placeholder="coeffprixvente" formControlName="coeffprixvente" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="date_modif_stock" class="block font-bold bg-green-200 p-2">date_modif_stock</label>
+        <input type="Date" pInputText placeholder="date_modif_stock" formControlName="date_modif_stock" />
+      </div>
+      <div class="field mb-2">
+        <label for="date_modification" class="block font-bold bg-green-200 p-2">date_modification</label>
+        <input type="Date" pInputText placeholder="date_modification" formControlName="date_modification" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="description_fournisseur" class="block font-bold bg-green-200 p-2">description_fournisseur</label>
+        <input type="text" pInputText placeholder="description_fournisseur" formControlName="description_fournisseur" />
+      </div>
+      <div class="field mb-2">
+        <label for="fournisseurId_el" class="block font-bold bg-green-200 p-2">fournisseurId_el</label>
+        <input type="text" pInputText placeholder="fournisseurId_el" formControlName="fournisseurId_el" />
+      </div>
+      <div class="field mb-2">
+        <label for="id_categorie_ingredient" class="block font-bold bg-green-200 p-2">id_categorie_ingredient</label>
+        <input type="text" pInputText placeholder="id_categorie_ingredient" formControlName="id_categorie_ingredient" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="IdFournIngrBest" class="block font-bold bg-green-200 p-2">IdFournIngrBest</label>
+        <input type="text" pInputText placeholder="IdFournIngrBest" formControlName="IdFournIngrBest" />
+      </div>
+      <div class="field mb-2">
+        <label for="ingredient_description_a" class="block font-bold bg-green-200 p-2">ingredient_description_a</label>
+        <input type="text" pInputText placeholder="ingredient_description_a" formControlName="ingredient_description_a" />
+      </div>
+      <div class="field mb-2">
+        <label for="inventaire_b" class="block font-bold bg-green-200 p-2">inventaire 1 = oui, 0 = non</label>
+        <input type="number" pInputText placeholder="inventaire_b" formControlName="inventaire_b" />
+      </div>
+      <div class="field mb-2">
+        <label for="limite_alerte_kg" class="block font-bold bg-green-200 p-2">limite_alerte_kg</label>
+        <input type="number" pInputText placeholder="limite_alerte_kg" formControlName="limite_alerte_kg" />
+      </div>
+      <div class="field mb-2">
+        <label for="masquage_sur_etiquette" class="block font-bold bg-green-200 p-2">masquage_sur_etiquette</label>
+        <input type="number" pInputText placeholder="masquage_sur_etiquette" formControlName="masquage_sur_etiquette" />
+      </div>
+      <div class="field mb-2">
+        <label for="nbr_sacs" class="block font-bold bg-green-200 p-2">nbr_sacs</label>
+        <input type="number" pInputText placeholder="nbr_sacs" formControlName="nbr_sacs" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="no_code_ingr_fournisseur_a" class="block font-bold bg-green-200 p-2">no_code_ingr_fournisseur_a</label>
+        <input type="text" pInputText placeholder="no_code_ingr_fournisseur_a" formControlName="no_code_ingr_fournisseur_a" />
+      </div>
+      <div class="field mb-2">
+        <label for="nom_ingredient_a" class="block font-bold bg-green-200 p-2">nom_ingredient_a</label>
+        <input type="text" pInputText placeholder="nom_ingredient_a" formControlName="nom_ingredient_a" />
+      </div>
+      <div class="field mb-2">
+        <label for="nomIngrFournisseur" class="block font-bold bg-green-200 p-2">nomIngrFournisseur</label>
+        <input type="text" pInputText placeholder="nomIngrFournisseur" formControlName="nomIngrFournisseur" />
+      </div>
+      <div class="field mb-2">
+        <label for="prix_au_kilo_r" class="block font-bold bg-green-200 p-2">prix_au_kilo_r</label>
+        <input type="number" pInputText placeholder="prix_au_kilo_r" formControlName="prix_au_kilo_r" />
+      </div>
+      <div class="field mb-2">
+        <label for="prix_par_sac_r" class="block font-bold bg-green-200 p-2">prix_par_sac_r</label>
+        <input type="number" pInputText placeholder="prix_par_sac_r" formControlName="prix_par_sac_r" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="prixdevente" class="block font-bold bg-green-200 p-2">prixdevente</label>
+        <input type="number" pInputText placeholder="prixdevente" formControlName="prixdevente" />
+      </div>  
+      <div class="field mb-2">
+        <label for="produit_allergisant_b" class="block font-bold bg-green-200 p-2">produit_allergisant_b</label>
+        <input type="number" pInputText placeholder="produit_allergisant_b" formControlName="produit_allergisant_b" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="qte_en_stock_kg" class="block font-bold bg-green-200 p-2">qte_en_stock_kg</label>
+        <input type="number" pInputText placeholder="qte_en_stock_kg" formControlName="qte_en_stock_kg" />
+      </div>  
+      <div class="field mb-2">
+        <label for="qteOptimale" class="block font-bold bg-green-200 p-2">qteOptimale</label>
+        <input type="number" pInputText placeholder="qteOptimale" formControlName="qteOptimale" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="quantite_par_sac_en_kg_r" class="block font-bold bg-green-200 p-2">quantite_par_sac_en_kg_r</label>
+        <input type="number" pInputText placeholder="quantite_par_sac_en_kg_r" formControlName="quantite_par_sac_en_kg_r" />
+      </div>  
+      <div class="field mb-2">
+        <label for="unite_a" class="block font-bold bg-green-200 p-2">Choisissez une unité :</label>
+        <select  name="unite_a" class="form-control" formControlName="unite_a">
+          <option value="kg">kg</option>
+          <option value="litre">litre</option>
+          <option value="unite">unite</option>
+        </select>
+      </div>
+
+
+    <div class="w-full">
+        <button class="btn bg-green-500 text-black  p-2 mt-2 rounded-sm shadow-lg" pButton type="submit"
+        label="Ajouter cet ingrédient" [disabled]="userForm.invalid"></button>
+    </div>
+ 
+    </form>
+  <div>

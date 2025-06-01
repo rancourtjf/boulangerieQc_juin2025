@@ -1,0 +1,23 @@
+<div *ngIf="role() == 'boulanger'">
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      <p>
+        <select formControlName="client">
+          <option [ngValue]="null" disabled>Choisir un client</option>
+          <option
+            *ngFor="let client of listeDesClients()"
+            [ngValue]="client.idclient"
+          >
+            {{ client.nom }}
+          </option>
+        </select>
+@if(onClick){
+  <button class="ml-2 bg-green-400  p-2 rounded-sm shadow-sm bg-yellow-400 " type="submit">Ce client a été choisi</button>
+
+}
+@else{
+  <button class="ml-2 bg-green-400  p-2 rounded-sm shadow-sm" type="submit">Enregistrer client</button>
+}
+      </p>
+    </form>
+
+  </div>

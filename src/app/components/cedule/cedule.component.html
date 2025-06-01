@@ -1,0 +1,531 @@
+<style type="text/css">
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<a href=""></a>
+
+<div class="text-lg md:text-xl rounded-sm pl-2">
+  @if(isOpen()){
+  <div>
+    <!-- <div *ngIf="isAuth() === true"> -->
+    <h2 *ngIf="auth.user$ | async as user">{{ user.name }} <br /></h2>
+
+    Voici les documents de votre boulangerie!
+    @if(clientIndividuel.nom!=""){
+    <p class="font-bold">pour un client individuel</p>
+
+    {{clientIndividuel.prenom}} {{clientIndividuel.nom}}<br>
+    {{clientIndividuel.courriel}}<br>Tél.: {{clientIndividuel.telephone }}
+    se présentera au {{clientIndividuel.lieu}} pour
+
+    }
+
+    <img *ngIf="(auth.isAuthenticated$ | async) === true" class="ml-auto mr-auto h-16 w-24 md:h-24 md:w-36"
+      [src]="logoSignal()" alt="logo" />
+
+  </div>
+  }
+
+  <div *ngIf="auth.user$ | async as user" class="bg-yellow-400 shadow-xl w-1/2 md:w-1/4 p-2 ">
+
+    <div>
+      <button class="hover:bg-yellow-100" mat-button [matMenuTriggerFor]="menu">Transfert d'informations</button>
+    </div>
+    <hr>
+    <!-- <div class="mt-2 w-full  p-2 hover:bg-blue-600">
+      <button class="bg-green-800 text-white p-2 shadow-lg "(click)="commandeClientIndividuel()" mat-menu-item >Commande client individuel</button>
+    </div>
+    <hr> -->
+    <div class="mt-2 w-full  p-2 text-center">
+      <a *ngIf="(auth.isAuthenticated$ | async) === true" href="https://s031.panelbox.net:2096"
+        class="bg-black text-white p-2 shadow-lg">
+        Boîte courriel
+      </a>
+    </div>
+
+    @if(roleLogin === 'boulanger'){
+    <div class="w-1/16  py-4 text-center bg-green-200 hover:bg-green-400 shadow-xl">
+      <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user"
+        (click)="voirURL(user.email, false); reverseIsOpen()" routerLink="/clientIndividuel"
+        routerLinkActive="router-link-active">Commande client individuel
+      </a>
+    </div>
+    }
+
+    <mat-menu #menu="matMenu">
+      <button (click)="voirLoi()" mat-menu-item>Données personnelles</button>
+
+      <!-- @if(proprio() || outilGestion()){ -->
+      @if(outilGestion()){
+
+      <!-- <button (click)="gotoClients()"  mat-menu-item >Vos clients</button>
+        <button (click)="gotoViewEquipes()"  mat-menu-item >Voir les équipes</button>
+        <button (click)="gotoAddEquipe()"  mat-menu-item >Ajouter une équipe</button>
+        <button (click)="gotoAddTache()"  mat-menu-item >Ajouter une tâche</button>
+        <button (click)="gotoViewTaches()"  mat-menu-item >Voir les tâches</button>
+        <button (click)="newMessage()" mat-menu-item>Nouveau message web pour les clients</button>
+        <button (click)="newClient()" mat-menu-item>Ajouter nouveau client commercial</button>
+
+        <button (click)="gotoCommandeWebTable()" mat-menu-item >
+          Voir les commandes web
+        </button>
+        <button (click)="gotoDateGraphic()" mat-menu-item>Total $ par période</button>
+         <button (click)="gotoGraphicUnProduit()" mat-menu-item>Graphique $ un produit</button> -->
+
+      <!-- <div class="mt-2 w-full  p-2">
+          <a
+            *ngIf="(auth.isAuthenticated$ | async) === true"
+            href="https://s031.panelbox.net:2096"
+            class="bg-black text-white p-2 shadow-lg"
+          >
+            Boîte courriel
+          </a>
+        </div> -->
+      <!-- <div class="mt-2 w-full  p-2">
+        <a
+          *ngIf="(auth.isAuthenticated$ | async) === true"
+          href="https://www.boulangerieqc.com/licence_utilisation_generique.pdf"
+          class=" p-2"
+        >Contrat pour utilisation mensuelle de BoulangerieQc
+        </a> 
+        </div>  -->
+      }
+
+
+    </mat-menu>
+
+  </div>
+
+  <ng-container *ngIf="(auth.isAuthenticated$ | async) === true && role() == 'client'">
+    <app-message-affiche [message]="messageImport()"></app-message-affiche>
+  </ng-container>
+
+  <div *ngIf="(auth.isAuthenticated$ | async) === true" class="w-full text-center mt-2 mb-2">
+    <p class="underline mb-2 text-lg md:text-xxl">
+      @if(tabletteOK){ J'utilise une tablette ou un cellulaire! } @else{
+      J'utilise un ordinateur! }
+    </p>
+    <button (click)="tabletteAdd()"
+      class="inline-block p-2 text-md md:text-xl text-white bg-blue-600 shadow-xl hover:bg-red-600">
+      <p>
+        @if(tabletteOK){ Je veux utiliser un ordinateur! } @else{ Je veux
+        utiliser une tablette ou un cellulaire! }
+      </p>
+    </button>
+    <mat-radio-group aria-label="Faites un choix" [(ngModel)]="accesRole">
+      <mat-radio-button *ngIf="auth.user$ | async as user" (click)="voirURL(user.email, false, value)" value="1">
+        <span class="text-md md:text-lg font-bold">Boulangerie, votre production</span></mat-radio-button>
+      <!-- <mat-radio-button
+        *ngIf="auth.user$ | async as user"
+        (click)="voirURL(user.email, false, 2)"
+        value="2"
+        >Client - prise de commande</mat-radio-button
+      > -->
+    </mat-radio-group>
+  </div>
+  <!-- <app-new-client></app-new-client> -->
+
+  <div class="grid grid-cols-1 gap-3 mt-2">
+    <div *ngIf="(auth.isAuthenticated$ | async) === true && role() == 'boulanger'">
+      <div>
+        <a class="text-2xl bg-yellow-400 p-2 shadow-xl" mat-button
+          href="https://www.boulangerieqc.com/joindre.html">Nous joindre
+        </a>
+      </div>
+      <div class="mt-2">
+        <a class="text-2xl bg-red-600 text-white p-2 shadow-xl" mat-button
+          href="https://www.boulangerieqc.com/wiki/doku.php?id=start">Aide
+        </a>
+      </div>
+      <ng-container>
+        <div *ngIf="auth.user$ | async as user" class="w-full text-center my-2">
+          <button (click)="selectDay(-1)" class="p-2 text-sm md:text-md bg-green-200 shadow-xl hover:bg-red-600">
+            -1 jour
+          </button>
+          <!-- <button (click)="voirURL(user.email)" *ngIf="dossier === 'ProductionQuotidienne'"
+            class="bg-black p-2 text-white text-sm md:text-md shadow-xl hover:text-white">
+            <a [href]="lienURL + '/recettes/' | safe : 'url'">recettes du jour {{ datedujour() }}</a>
+          </button> -->
+          <button (click)="voirURL(user.email)" class="bg-red-400 p-2 text-white text-sm md:text-md shadow-xl">
+            <a [href]="lienURL + '/QuantiteParClient.pdf' | safe : 'url'">Clients liste produits
+            </a>
+          </button>
+
+
+          @if(projetSherbrooke()){
+
+          <ng-container>
+            <button class="bg-blue-400 text-sm md:text-md hover:bg-blue-200" mat-button
+              [matMenuTriggerFor]="animals">Cuisson</button>
+            <mat-menu #animals="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="boulangerie">Boulangerie</button>
+              <button mat-menu-item [matMenuTriggerFor]="viennoiseries">Viennoiseries</button>
+              <button mat-menu-item [matMenuTriggerFor]="patisseries">Pâtisseries</button>
+              <button mat-menu-item [matMenuTriggerFor]="metsPrepares">Mets préparés</button>
+            </mat-menu>
+
+            <mat-menu #boulangerie="matMenu">
+              <button (click)="verifierEtOuvrirPDF('/cuissonBossVraies.pdf')"
+                class="bg-blue-200 font-bold p-2  text-md md:text-md shadow-xl">
+                Cuisson Sherb
+              </button><br>
+              <button (click)="verifierEtOuvrirPDF('/cuisson1Boul.pdf')"
+                class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+                Cuisson1Boul
+              </button><br>
+              <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+  <a [href]="lienURL + '/cuisson2Boul.pdf' | safe : 'url'">Cuisson2Boul
+  </a>
+</button> -->
+              <button (click)="verifierEtOuvrirPDF('/cuisson2Boul.pdf')"
+                class="bg-blue-600 p-2 text-white  text-sm md:text-md shadow-xl">
+                Cuisson2Boul
+              </button>
+            </mat-menu>
+
+            <mat-menu #viennoiseries="matMenu">
+              <button (click)="verifierEtOuvrirPDF('/cuisson.pdf')"
+                class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+                cuisson
+              </button><br>
+              <button (click)="verifierEtOuvrirPDF('/cuisson1Vien.pdf')"
+                class="bg-blue-600 p-2 text-white text-sm md:text-md shadow-xl">
+                Cuisson1Vien
+              </button><br>
+
+              <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+    <a [href]="lienURL + '/cuisson2Vien.pdf' | safe : 'url'">Cuisson2Vien
+    </a>
+  </button> -->
+              <button (click)="verifierEtOuvrirPDF('/cuisson2Vien.pdf')"
+                class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+                Cuisson2Vien
+              </button>
+
+              <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+    <a [href]="lienURL + '/cuisson.pdf' | safe : 'url'">cuisson
+    </a>
+  </button> -->
+
+            </mat-menu>
+            <mat-menu #patisseries="matMenu">
+              <button mat-menu-item>Cuisson1</button>
+              <button mat-menu-item>Cuisson2</button>
+              <button mat-menu-item>CuissonTotale</button>
+            </mat-menu>
+            <mat-menu #metsPrepares="matMenu">
+              <button mat-menu-item>Cuisson1</button>
+              <button mat-menu-item>Cuisson2</button>
+              <button mat-menu-item>CuissonTotale</button>
+            </mat-menu>
+
+            <!-- <mat-menu #fish="matMenu">
+  <button mat-menu-item>Baikal oilfish</button>
+  <button mat-menu-item>Bala shark</button>
+  <button mat-menu-item>Ballan wrasse</button>
+  <button mat-menu-item>Bamboo shark</button>
+  <button mat-menu-item>Banded killifish</button>
+</mat-menu> -->
+
+          </ng-container>
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuissonBossVraies.pdf' | safe : 'url'">Cuisson Sherb
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuissonBossVraies.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            Cuisson Sherb
+          </button> -->
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuisson1Boul.pdf' | safe : 'url'">Cuisson1Boul
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuisson1Boul.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            Cuisson1Boul
+          </button> -->
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuisson2Boul.pdf' | safe : 'url'">Cuisson2Boul
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuisson2Boul.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            Cuisson2Boul
+          </button> -->
+
+          <!-- Modal d'erreur -->
+          <div *ngIf="showError" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white p-6 rounded-lg shadow-xl">
+              <h2 class="text-xl font-bold mb-4">ABSENT</h2>
+              <p class="mb-4">Le document PDF n'est pas disponible.</p>
+              <button (click)="showError = false" class="bg-red-500 text-white px-4 py-2 rounded-sm hover:bg-red-600">
+                Fermer
+              </button>
+            </div>
+          </div>
+
+
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuisson1Vien.pdf' | safe : 'url'">Cuisson1Vien
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuisson1Vien.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            Cuisson1Vien
+          </button> -->
+
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuisson2Vien.pdf' | safe : 'url'">Cuisson2Vien
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuisson2Vien.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            Cuisson2Vien
+          </button> -->
+
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuisson.pdf' | safe : 'url'">cuisson
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuisson.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            cuisson
+          </button> -->
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuissonPatisseries.pdf' | safe : 'url'">cuisson pâtisseries
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuissonPatisseries.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            cuisson pâtisseries
+          </button> -->
+          <!-- <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+              <a [href]="lienURL + '/cuissonMets.pdf' | safe : 'url'">cuisson produits transformés
+              </a>
+            </button> -->
+          <!-- <button 
+            (click)="verifierEtOuvrirPDF('/cuissonMets.pdf')" 
+            class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            cuisson produits transformés
+          </button> -->
+          }
+          <button (click)="voirURL(user.email)" *ngIf="dossier === 'ProductionQuotidienne'"
+            class="bg-yellow-500 p-2 text-sm md:text-md shadow-xl">
+            <a class="no-underline" [href]="lienURL + '/Client_par_produit.pdf' | safe : 'url'">Produits par client</a>
+          </button>
+          <button (click)="voirURL(user.email)" *ngIf="dossier === 'ProductionQuotidienne'"
+            class="bg-gray-600 text-white p-2 text-sm md:text-md shadow-xl">
+            <a class="no-underline" [href]="lienURL + '/ClientProduit.pdf' | safe : 'url'">Client/Produits</a>
+          </button>
+
+          <!-- <button (click)="voirURL(user.email)"
+            class="bg-blue-400 text-white p-2 text-sm md:text-md shadow-xl hover:text-gray-700">
+            <a [href]="lienURLFacturation | safe : 'url'">Factures client </a>
+          </button> -->
+          <!-- <button
+          class="mt-2 center rounded-lg bg-linear-to-tr from-red-600 to-red-400 py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email, false)"
+            routerLink="/factures"
+            routerLinkActive="router-link-active"
+            >Voir les factures
+          </a>
+        </button> -->
+
+          <button (click)="voirURL(user.email)" class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+            <a [href]="lienURL + '/Viennoiseries.pdf' | safe : 'url'">Viennoiseries
+            </a>
+          </button>
+          <!-- <button 
+          (click)="verifierEtOuvrirPDF('/Viennoiseries.pdf')" 
+          class="bg-blue-400 p-2 text-white text-sm md:text-md shadow-xl">
+          Viennoiseries
+        </button> -->
+          <button (click)="voirURL(user.email)"
+            class="bg-green-600 text-white p-2 text-sm md:text-md shadow-xl hover:text-gray-700">
+            <a [href]="lienURL + '/Ingredients.pdf' | safe : 'url'">Ingrédients
+            </a>
+          </button>
+
+          <button (click)="selectDay(1)" class="p-2 text-sm md:text-md bg-green-200 shadow-xl hover:bg-red-600">
+            +1 jour
+          </button>
+        </div>
+      </ng-container>
+
+      <div class="mt-2 mb-2 w-full text-center">
+        <!-- <app-voir-recettes-drag [datedujour]="datedujour()" /> -->
+        <app-voir-recettes [datedujour]="datedujour()" />
+
+      </div>
+
+      <!-- <div
+        class="w-1/2 ml-auto mr-auto py-4 text-center bg-green-200 hover:bg-green-400 rounded-sm shadow-xl"
+        *ngIf="(auth.isAuthenticated$ | async) === true"
+      >
+        <a
+          class="w-full flex justify-center"
+          *ngIf="auth.user$ | async as user"
+          (click)="voirURL(user.email)"
+          [routerLink]="['/recherche']"
+          routerLinkActive="router-link-active"
+          >Voir une journée de production</a
+        >
+      </div> -->
+      <div class="grid grid-cols-3 md:grid-cols-4">
+        <!-- <div
+          class="w-full md:w-1/2 text-md md:text-lg ml-auto mr-auto py-4 text-center bg-green-400 hover:bg-green-600 shadow-xl"
+          *ngIf="(auth.isAuthenticated$ | async) === true">
+          <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user" (click)="voirURL(user.email)"
+            [href]="lienListeRecette() | safe : 'url'">Voir les recettes pdf
+          </a>
+        </div> -->
+
+
+        <div
+          class="w-full md:w-1/2 text-md md:text-lg ml-auto mr-auto py-4 text-center text-lg md:text-xl bg-green-200 hover:bg-green-600 hover:text-white shadow-xl"
+          *ngIf="(auth.isAuthenticated$ | async) === true">
+          <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user" (click)="voirURL(user.email, false)"
+            routerLink="/recettesMysql" routerLinkActive="router-link-active">Voir les recettes de base
+          </a>
+        </div>
+        <div
+          class="w-full md:w-1/2 text-md md:text-lg ml-auto mr-auto py-4 text-center text-white bg-blue-400 hover:bg-blue-600 shadow-xl"
+          *ngIf="(auth.isAuthenticated$ | async) === true">
+          <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user" (click)="voirURL(user.email, false)"
+            routerLink="/factures" routerLinkActive="router-link-active">Voir bons commande
+          </a>
+
+        </div>
+        <div
+          class="w-full md:w-1/2 text-md md:text-lg ml-auto mr-auto py-4 text-center text-white bg-pink-400 hover:bg-blue-600 shadow-xl"
+          *ngIf="(auth.isAuthenticated$ | async) === true">
+          <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user" (click)="voirURL(user.email, false)"
+            routerLink="/details" routerLinkActive="router-link-active">Voir les détails
+          </a>
+        </div>
+
+        <!-- <div
+          class="w-1/2 ml-auto mr-auto py-4 text-center bg-yellow-400 hover:bg-yellow-300 rounded-sm shadow-xl"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email, false)"
+            [routerLink]="['/siteFTP']"
+            routerLinkActive="router-link-active"
+            >Voir votre production du dernier mois</a
+          >
+        </div> -->
+        <div
+          class="w-full md:w-1/2 text-md md:text-lg ml-auto mr-auto py-4 text-center bg-yellow-400 hover:bg-yellow-300 shadow-xl">
+          <button (click)="gotoCommandeWebTable()" class="">
+            Voir les commandes web
+          </button>
+        </div>
+      </div>
+
+      <!-- <div
+          class="w-1/2 ml-auto mr-auto py-4 text-center text-white bg-blue-400 hover:bg-blue-300 rounded-sm shadow-xl"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email)"
+            [routerLink]="['/commandesWeb']"
+            routerLinkActive="router-link-active"
+            >Voir les anciennes commandes Web</a
+          >
+        </div> -->
+    </div>
+
+    <div *ngIf="(auth.isAuthenticated$ | async) === true && role() == 'client'">
+      <div class="w-1/2 ml-auto mr-auto py-4 text-center bg-green-200 hover:bg-green-400 shadow-xl">
+        <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user"
+          (click)="voirURL(user.email, false); reverseIsOpen()" routerLink="/commande"
+          routerLinkActive="router-link-active">Passez votre commande
+        </a>
+      </div>
+
+      <div *ngIf="(auth.isAuthenticated$ | async) === true"
+        class="w-1/2 ml-auto mr-auto py-4 text-center bg-yellow-200 hover:bg-yellow-400 shadow-xl">
+        <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user" (click)="voirURL(user.email, true)"
+          routerLink="/commande" routerLinkActive="router-link-active">Entrez les invendus
+        </a>
+      </div>
+      <!-- <div class="w-1/2 ml-auto mr-auto py-4 text-center bg-blue-200 hover:bg-blue-400 shadow-xl">
+        <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user"
+          (click)="voirURL(user.email, false); reverseIsOpen()" routerLink="/heureRupture"
+          routerLinkActive="router-link-active">Entrez les heures de rupture
+        </a>
+      </div> -->
+
+      <div *ngIf="auth.user$ | async as user">
+        <div *ngIf="(auth.isAuthenticated$ | async) === true" class="w-full flex justify-center">
+          <button
+            class="mt-2 center bg-red-600 py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+            <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user"
+              (click)="voirURL(user.email, false)" routerLink="/factures" routerLinkActive="router-link-active">Voir les
+              bons de commande
+            </a>
+          </button>
+          <button
+            class="mt-2 center bg-blue-500 py-2 px-4 font-sans text-sm font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+            <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user"
+              (click)="voirURL(user.email, false)" routerLink="/afficheTache" routerLinkActive="router-link-active">Voir
+              les
+              tâches à faire
+            </a>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="auth.user$ | async as user ">
+        <div *ngIf="(auth.isAuthenticated$ | async) === true" class="w-full flex justify-center">
+          <button
+            class="mt-2 center bg-yellow-400 py-2 px-4 font-sans text-sm font-bold uppercase text-black shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+            <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user"
+              (click)="voirURL(user.email, false)" [routerLink]="['/facturesParam','FacturationHebdomadaire']"
+              routerLinkActive="router-link-active">Voir les factures regroupées à payer
+            </a>
+            <!-- https://www.digitalocean.com/community/tutorials/angular-query-parameters-fr -->
+          </button>
+        </div>
+      </div>
+      <div *ngIf="auth.user$ | async as user">
+        <div *ngIf="(auth.isAuthenticated$ | async) === true" class="w-full flex justify-center">
+          <button
+            class="mt-2 center bg-green-400 py-2 px-4 font-sans text-sm font-bold uppercase text-black shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+            <a class="w-full flex justify-center" *ngIf="auth.user$ | async as user"
+              (click)="voirURL(user.email, false)" [routerLink]="['/facturesParam','FactureSortie']"
+              routerLinkActive="router-link-active">Voir les factures regroupées payées
+            </a>
+            <!-- https://www.digitalocean.com/community/tutorials/angular-query-parameters-fr -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div
+      *ngIf="auth.user$ | async as user"
+      class="bg-yellow-300 rounded-sm shadow-xl w-1/4 md:w-1/6"
+    >
+      <button
+        (click)="voirURL(user.email, false, 3)"
+        class="text-lg md:text-xl w-full p-2 flex justify-center"
+      >
+        Besoin d'aide
+      </button>
+    </div> -->
+</div>

@@ -1,0 +1,30 @@
+.mystyle {
+    width: 100%;
+    padding: 2px;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+  }
+  .mystyleRed {
+    width: 100%;
+    padding: 2px;
+   
+    border-style: solid;
+    border-color:red;
+  
+    font-size: 20px;
+  }
+
+  .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 24px;
+  }
+  .hideme
+  {
+      display:none;
+      visibility:hidden;
+  }
+  .showme
+  {
+      display:inline;
+      visibility:visible;
+  }

@@ -1,0 +1,96 @@
+<div
+  class="p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased flex justify-center"
+>
+  <button
+    (click)="goToCommande()"
+    class="mr-4 block cursor-pointer p-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased bg-gray-100 rounded-sm shadow-xl"
+  >
+    Retour à la commande
+  </button>
+</div>
+<table
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8 demo-table"
+  matSort
+  matSortActive="dateLundi"
+  matSortDirection="desc"
+  (matSortChange)="sortData($event)"
+>
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- url_facture Column -->
+  <ng-container matColumnDef="nom_commandeCSV">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Utiliser cette commande</th>
+    <td mat-cell *matCellDef="let element">
+      <a href="{{ element.lienURL }}" target="_blank"
+        ><button class="bg-green-400 rounded-sm shadow-xl p-2" type="button">
+          {{ element.nom_commandeCSV}}
+        </button></a
+      >
+    </td>
+  </ng-container>
+
+  <!-- dateLundi Column -->
+  <ng-container matColumnDef="dateLundi">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date lundi</th>
+    <td mat-cell *matCellDef="let element">{{ element.dateLundi }}</td>
+  </ng-container>
+
+  <!-- nom Column -->
+  <ng-container matColumnDef="montant">
+    <th mat-header-cell *matHeaderCellDef>Montant $</th>
+    <td
+      class="font-bold"
+      
+      *matCellDef="let element"
+    >
+      {{ element.montant }} $
+    </td>
+  </ng-container>
+    <!-- invendus Column -->
+    <ng-container matColumnDef="invendus">
+      <th mat-header-cell *matHeaderCellDef >Invendus?</th>
+      <td mat-cell *matCellDef="let element">{{ element.invendus }}</td>
+    </ng-container>
+         <!-- id Column -->
+         <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+      
+ <!-- timeStamp Column -->
+ <ng-container matColumnDef="timeStamp">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header>timeStamp</th>
+  <td mat-cell *matCellDef="let element">{{ element.timeStamp }}</td>
+</ng-container>
+
+
+      <!-- idclient Column -->
+  <ng-container matColumnDef="idclient">
+    <th mat-header-cell *matHeaderCellDef >Téléchargez</th>
+    <!-- <td mat-cell *matCellDef="let element">{{ element.idclient }} -->
+      <td mat-cell *matCellDef="let element">
+      <app-file-save [lienURLToDownload]="element.lienURL" [nomFileToDownload]="element.nom_commandeCSV"></app-file-save>
+
+    </td>
+  </ng-container>
+        <!-- nomClient Column -->
+        <ng-container matColumnDef="nomClient">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+          <td mat-cell *matCellDef="let element">{{ element.nomClient }}</td>
+        </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<!-- <mat-paginator
+  [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[1, 10, 25, 100]"
+  showFirstLastButtons
+  aria-label="Select page"
+>
+  (page)="onPaginate($event)">
+</mat-paginator> -->

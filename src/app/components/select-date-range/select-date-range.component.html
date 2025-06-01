@@ -1,0 +1,32 @@
+<ng-container class="flex justify-center">
+    <mat-form-field >
+        <mat-label >Entrez un intervalle</mat-label>
+        <mat-date-range-input  [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start date" >
+    
+    
+          <input matEndDate formControlName="end" placeholder="End date">
+        </mat-date-range-input>
+        <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      
+        @if (range.controls.start.hasError('matStartDateInvalid')) {
+          <mat-error>Invalid start date</mat-error>
+        }
+        @if (range.controls.end.hasError('matEndDateInvalid')) {
+          <mat-error>Invalid end date</mat-error>
+        }
+     
+      </mat-form-field>
+      
+      <button
+      class=" w-1/2 flex justify-center mb-2 center rounded-lg bg-blue-500 ttext-white py-2 px-4 font-sans text-xs font-bold uppercase text-gray-100 shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+      (click)="onSubmitDateCommande()"
+   
+      type="submit"
+    >
+      Validez la date
+    </button>
+</ng-container>
+

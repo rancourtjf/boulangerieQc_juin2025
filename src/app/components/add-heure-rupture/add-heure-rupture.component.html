@@ -1,0 +1,35 @@
+<mat-form-field appearance="fill">
+    <mat-label>Date et heure</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="Choisir une date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
+
+  <div class="w-3/4 md:w-1/2 mr-auto ml-auto">
+
+    <!-- <mat-form-field>
+      <mat-select [(ngModel)]="selectedHour" name="hour">
+        <mat-option *ngFor="let hour of hours" [value]="hour">
+          {{hour}}:00
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <form [formGroup]="newTime" (ngSubmit)="envoiHeureRupture()">
+      <label for="message">Heure de rupture de ce produit</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="messageText"
+        id="messageText"
+      />
+
+      <button
+        class="bg-blue-500 text-white p-2 mt-2 rounded-sm shadow-xl"
+        type="submit"
+      >
+        Cliquez, pour mettre à jour le message sur la page web
+      </button>
+    </form>
+  </div>

@@ -1,0 +1,56 @@
+<div styleClass="user-form" class=" w-1/2 ml-auto mr-auto">
+    <form [formGroup]="userForm" (ngSubmit)="modifyFournisseur()" novalidate>
+     
+
+      <div class="field mb-2">
+        <label for="nom" class="block font-bold bg-green-200 p-2">nom du fournisseur</label>
+        <input type="text" pInputText placeholder="nom de la boulangerie" formControlName="nom" />
+        <small class="p-error block" *ngIf="
+            userForm.get('nomBoulangerie')?.invalid &&
+            userForm.get('nomBoulangerie')?.dirty
+          ">
+          Le nom du fournisseur est requis</small>
+      </div>
+      <div class="field mb-2">
+        <label for="courriel" class="block font-bold bg-green-200 p-2">courriel</label>
+        <input type="text" pInputText placeholder="courriel" formControlName="courriel" />
+        <small class="p-error block" *ngIf="
+            userForm.get('courriel')?.invalid && userForm.get('courriel')?.dirty
+          ">
+          Le courriel est requis</small>
+      </div>
+      <div class="field mb-2">
+        <label for="telephone" class="block font-bold bg-green-200 p-2">telephone</label>
+        <input class="w-full" type="text" pInputText placeholder="telephone" formControlName="telephone" />
+      </div>
+      <div class="field mb-2">
+        <label for="adresse" class="block font-bold bg-green-200 p-2">adresse</label>
+        <input class="w-full" type="text" pInputText placeholder="adresse" formControlName="adresse" />
+      </div>
+  
+      <div class="field mb-2">
+        <label for="ville" class="block font-bold bg-green-200 p-2">ville</label>
+        <input type="text" pInputText placeholder="ville" formControlName="ville" />
+      </div>
+        <div class="field mb-2">
+          <label for="fax" class="block font-bold bg-green-200 p-2">fax</label>
+          <input type="text" pInputText placeholder="fax" formControlName="fax" />
+        </div>
+        <div class="field mb-2">
+          <label for="prenom_responsable" class="block font-bold bg-green-200 p-2">prenom_responsable</label>
+          <input type="text" pInputText placeholder="prenom_responsable" formControlName="prenom_responsable" />
+        </div>
+
+      <div class="field mb-2">
+        <label for="nom_responsable" class="block font-bold bg-green-200 p-2">nom_responsable</label>
+        <input type="text" pInputText placeholder="nom_responsable" formControlName="nom_responsable" />
+      </div>
+     
+      
+    <div class="w-full">
+        <button class="btn bg-green-500 text-black  p-2 mt-2 rounded-sm shadow-lg" pButton type="submit"
+        label="Modifier fiche client" [disabled]="userForm.invalid"></button>
+    </div>
+ 
+    </form>
+  <div>

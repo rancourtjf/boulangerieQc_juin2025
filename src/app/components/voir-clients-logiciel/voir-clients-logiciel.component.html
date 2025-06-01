@@ -1,0 +1,263 @@
+<div class=" p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased flex justify-center ">
+  <button (click)="goToCommande()"
+    class="mr-4  cursor-pointer p-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased bg-gray-100 rounded-sm shadow-xl flex justify-center ">
+    Retour à la commande
+  </button>
+</div>
+
+<button class="btn bg-green-300 p-2" (click)="refresh()">Reload clients</button>
+ 
+<!-- Check on error, and display the error message -->
+@if (clientLogicielResource.error()) {
+  <div>{{ $any(clientLogicielResource.error()).message }}</div>
+  <div><button (click)="refresh()">Retry</button></div>
+}
+@else {
+  <!-- Make it obvious that something is happening in the background -->
+  @if(clientLogicielResource.isLoading()) {
+    <div>Chargement...</div>
+  }}
+
+  @if(clientLogicielResource.hasValue()){
+<table mat-table [dataSource]="clientLogicielResource.value().data" class="mat-elevation-z8" matSort matSortActive="nom"
+  matSortDirection="desc" (matSortChange)="sortData($event)">
+  <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- idclient dans 4D Column -->
+  <ng-container matColumnDef="nomBoulangerie">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>nom de la boulangerie</th>
+    <td mat-cell *matCellDef="let element">{{ element.nomBoulangerie }}</td>
+  </ng-container>
+  <!-- nom Column -->
+  <ng-container matColumnDef="prenom">
+    <th mat-header-cell *matHeaderCellDef >Prénom</th>
+    <td mat-cell *matCellDef="let element">{{ element.prenom }}</td>
+  </ng-container>
+  <ng-container matColumnDef="nomFamille">
+    <th mat-header-cell *matHeaderCellDef >nom de famille</th>
+    <td mat-cell *matCellDef="let element">{{ element.nomFamille }}</td>
+  </ng-container>
+
+  <!-- adresse Column -->
+  <ng-container matColumnDef="actifBoolean">
+    <th mat-header-cell *matHeaderCellDef>Licence active?</th>
+    <td mat-cell *matCellDef="let element">
+      @if(element.actifBoolean ==1){
+      Active depuis le {{element.dateDebut}}
+      }
+      @else{
+      Inactive depuis le {{element.dateFin}}
+      }
+    </td>
+  </ng-container>
+
+  <!-- ville Column -->
+  <ng-container matColumnDef="ville">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ville</th>
+    <td mat-cell *matCellDef="let element">{{ element.ville }}</td>
+  </ng-container>
+
+  <!-- no courriel Column -->
+  <ng-container matColumnDef="courriel">
+    <th mat-header-cell *matHeaderCellDef>Courriel</th>
+    <td mat-cell *matCellDef="let element"> <a href="mailto:{{ element.courriel }}" target="_blank">Envoi courriel</a>
+    </td>
+  </ng-container>
+  <h2>SMTP 4D</h2>
+  <!-- no host Column -->
+  <ng-container matColumnDef="host">
+    <th mat-header-cell *matHeaderCellDef>host messagerie</th>
+    <td mat-cell *matCellDef="let element"> {{ element.host }} </td>
+  </ng-container>
+  <!-- no user Column -->
+  <ng-container matColumnDef="user">
+    <th mat-header-cell *matHeaderCellDef>user messagerie</th>
+    <td mat-cell *matCellDef="let element"> {{ element.user }} </td>
+  </ng-container>
+  <!-- no password Column -->
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef>password messagerie</th>
+    <td mat-cell *matCellDef="let element"> {{ element.password }} </td>
+  </ng-container>
+  <!-- no port Column -->
+  <ng-container matColumnDef="port">
+    <th mat-header-cell *matHeaderCellDef>port messagerie</th>
+    <td mat-cell *matCellDef="let element"> {{ element.port }} </td>
+  </ng-container>
+  <!-- no logfile Column -->
+  <ng-container matColumnDef="logfile">
+    <th mat-header-cell *matHeaderCellDef>logfile 4D</th>
+    <td mat-cell *matCellDef="let element"> {{ element.logfile }} </td>
+  </ng-container>
+  <!-- no serveurFTP Column -->
+  <ng-container matColumnDef="serveurFTP">
+    <th mat-header-cell *matHeaderCellDef>serveurFTP</th>
+    <td mat-cell *matCellDef="let element"> {{ element.serveurFTP }} </td>
+  </ng-container>
+  <!-- no userFTP Column -->
+  <ng-container matColumnDef="userFTP">
+    <th mat-header-cell *matHeaderCellDef>userFTP</th>
+    <td mat-cell *matCellDef="let element"> {{ element.userFTP }} </td>
+  </ng-container>
+  <!-- no passwordFTP Column -->
+  <ng-container matColumnDef="passwordFTP">
+    <th mat-header-cell *matHeaderCellDef>passwordFTP</th>
+    <td mat-cell *matCellDef="let element"> {{ element.passwordFTP }} </td>
+  </ng-container>
+  <!-- no site_web_documents Column -->
+  <ng-container matColumnDef="site_web_documents">
+    <th mat-header-cell *matHeaderCellDef>site_web_documents</th>
+    <td mat-cell *matCellDef="let element"> {{ element.site_web_documents }} </td>
+  </ng-container>
+  <!-- no user_site_web Column -->
+  <ng-container matColumnDef="user_site_web">
+    <th mat-header-cell *matHeaderCellDef>user_site_web</th>
+    <td mat-cell *matCellDef="let element"> {{ element.user_site_web }} </td>
+  </ng-container>
+  <!-- no pwd_site_web Column -->
+  <ng-container matColumnDef="pwd_site_web">
+    <th mat-header-cell *matHeaderCellDef>pwd_site_web</th>
+    <td mat-cell *matCellDef="let element"> {{ element.pwd_site_web }} </td>
+  </ng-container>
+  <!-- no serveurFTP_bkup Column -->
+  <ng-container matColumnDef="serveurFTP_bkup">
+    <th mat-header-cell *matHeaderCellDef>serveurFTP_bkup</th>
+    <td mat-cell *matCellDef="let element"> {{ element.serveurFTP_bkup }} </td>
+  </ng-container>
+  <!-- no userFTP_bkup Column -->
+  <ng-container matColumnDef="userFTP_bkup">
+    <th mat-header-cell *matHeaderCellDef>userFTP_bkup</th>
+    <td mat-cell *matCellDef="let element"> {{ element.userFTP_bkup }} </td>
+  </ng-container>
+  <!-- no pwdFTPbkup Column -->
+  <ng-container matColumnDef="pwdFTPbkup">
+    <th mat-header-cell *matHeaderCellDef>pwdFTPbkup</th>
+    <td mat-cell *matCellDef="let element"> {{ element.pwdFTPbkup }} </td>
+  </ng-container>
+  <!-- no dataFile4DD Column -->
+  <ng-container matColumnDef="dataFile4DD">
+    <th mat-header-cell *matHeaderCellDef>dataFile4DD</th>
+    <td mat-cell *matCellDef="let element"> {{ element.dataFile4DD }} </td>
+  </ng-container>
+  <!-- no dataFile4DIndx Column -->
+  <ng-container matColumnDef="dataFile4DIndx">
+    <th mat-header-cell *matHeaderCellDef>dataFile4DIndx</th>
+    <td mat-cell *matCellDef="let element"> {{ element.dataFile4DIndx }} </td>
+  </ng-container>
+  <!-- no depotListePrixClients Column -->
+  <ng-container matColumnDef="depotListePrixClients">
+    <th mat-header-cell *matHeaderCellDef>depotListePrixClients</th>
+    <td mat-cell *matCellDef="let element"> {{ element.depotListePrixClients }} </td>
+  </ng-container>
+  <!-- no userFTPDepot Column -->
+  <ng-container matColumnDef="userFTPDepot">
+    <th mat-header-cell *matHeaderCellDef>userFTPDepot</th>
+    <td mat-cell *matCellDef="let element"> {{ element.userFTPDepot }} </td>
+  </ng-container>
+  <!-- no pwdFTPDepot Column -->
+  <ng-container matColumnDef="pwdFTPDepot">
+    <th mat-header-cell *matHeaderCellDef>pwdFTPDepot</th>
+    <td mat-cell *matCellDef="let element"> {{ element.pwdFTPDepot }} </td>
+  </ng-container>
+  <!-- no serveurFTPListePrixClients Column -->
+  <ng-container matColumnDef="serveurFTPListePrixClients">
+    <th mat-header-cell *matHeaderCellDef>serveurFTPListePrixClients</th>
+    <td mat-cell *matCellDef="let element"> {{ element.serveurFTPListePrixClients }} </td>
+  </ng-container>
+  <!-- no serveurFTPSansFTP Column -->
+  <ng-container matColumnDef="serveurFTPSansFTP">
+    <th mat-header-cell *matHeaderCellDef>serveurFTPSansFTP</th>
+    <td mat-cell *matCellDef="let element"> {{ element.serveurFTPSansFTP }} </td>
+  </ng-container>
+  <!-- no passwordFTPHash Column -->
+  <ng-container matColumnDef="passwordFTPHash">
+    <th mat-header-cell *matHeaderCellDef>passwordFTPHash</th>
+    <td mat-cell *matCellDef="let element"> {{ element.passwordFTPHash }} </td>
+  </ng-container>
+  <!-- no serveurFTPSansFTP_bkup Column -->
+  <ng-container matColumnDef="serveurFTPSansFTP_bkup">
+    <th mat-header-cell *matHeaderCellDef>serveurFTPSansFTP_bkup</th>
+    <td mat-cell *matCellDef="let element"> {{ element.serveurFTPSansFTP_bkup }} </td>
+  </ng-container>
+  <!-- no pwdFTPbkup_Hash Column -->
+  <ng-container matColumnDef="pwdFTPbkup_Hash">
+    <th mat-header-cell *matHeaderCellDef>pwdFTPbkup_Hash</th>
+    <td mat-cell *matCellDef="let element"> {{ element.pwdFTPbkup_Hash }} </td>
+  </ng-container>
+  <!-- no db_host_mysql Column -->
+  <ng-container matColumnDef="db_host_mysql">
+    <th mat-header-cell *matHeaderCellDef>db_host_mysql</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_host_mysql }} </td>
+  </ng-container>
+  <!-- no db_name_mysql Column -->
+  <ng-container matColumnDef="db_name_mysql">
+    <th mat-header-cell *matHeaderCellDef>db_name_mysql</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_name_mysql }} </td>
+  </ng-container>
+  <!-- no db_username_mysql Column -->
+  <ng-container matColumnDef="db_username_mysql">
+    <th mat-header-cell *matHeaderCellDef>db_username_mysql</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_username_mysql }} </td>
+  </ng-container>
+  <!-- no db_password_mysql Column -->
+  <ng-container matColumnDef="db_password_mysql">
+    <th mat-header-cell *matHeaderCellDef>db_password_mysql</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_password_mysql }} </td>
+  </ng-container>
+  <!-- no repertoireBoulangerie Column -->
+  <ng-container matColumnDef="repertoireBoulangerie">
+    <th mat-header-cell *matHeaderCellDef>repertoireBoulangerie</th>
+    <td mat-cell *matCellDef="let element"> {{ element.repertoireBoulangerie }} </td>
+  </ng-container>
+  <!-- no db_host_mysql_boulangerieqc Column -->
+  <ng-container matColumnDef="db_host_mysql_boulangerieqc">
+    <th mat-header-cell *matHeaderCellDef>db_host_mysql_boulangerieqc</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_host_mysql_boulangerieqc }} </td>
+  </ng-container>
+  <!-- no db_name_mysql_boulangerieqc Column -->
+  <ng-container matColumnDef="db_name_mysql_boulangerieqc">
+    <th mat-header-cell *matHeaderCellDef>db_name_mysql_boulangerieqc</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_name_mysql_boulangerieqc }} </td>
+  </ng-container>
+  <!-- no db_username_mysql_boulangerieqc Column -->
+  <ng-container matColumnDef="db_username_mysql_boulangerieqc">
+    <th mat-header-cell *matHeaderCellDef>db_username_mysql_boulangerieqc</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_username_mysql_boulangerieqc }} </td>
+  </ng-container>
+  <!-- no db_password_mysql_boulangerieqc Column -->
+  <ng-container matColumnDef="db_password_mysql_boulangerieqc">
+    <th mat-header-cell *matHeaderCellDef>db_password_mysql_boulangerieqc</th>
+    <td mat-cell *matCellDef="let element"> {{ element.db_password_mysql_boulangerieqc }} </td>
+  </ng-container>
+  <!-- no suiviDeProjetGoogle Column -->
+  <ng-container matColumnDef="suiviDeProjetGoogle">
+    <th mat-header-cell *matHeaderCellDef>suiviDeProjetGoogle</th>
+    <td mat-cell *matCellDef="let element"> {{ element.suiviDeProjetGoogle }} </td>
+  </ng-container>
+
+
+
+
+  <!-- no telephone Column -->
+  <ng-container matColumnDef="telephone">
+    <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+    <td mat-cell *matCellDef="let element">{{ element.telephone }}</td>
+    <button>Modifier</button>
+  </ng-container>
+  <ng-container matColumnDef="Modifier">
+    <th mat-header-cell *matHeaderCellDef>Modifier</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="mb-4"></div>
+      <button class="mb-2" (click)=" modifClientLogiciel(element.id)"><fa-icon class="text-green-600"
+          [icon]="faBookOpen"></fa-icon> {{ element.id }}</button>
+      <hr class="border-4 mb-2">
+      <button (click)=" deleteClientLogiciel(element.id)"><fa-icon class="text-red-500 " [icon]="faTrash"></fa-icon> {{
+        element.id }}</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+  }

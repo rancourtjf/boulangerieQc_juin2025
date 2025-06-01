@@ -1,0 +1,150 @@
+ <!-- Menu accordion tailwind alpine js -->
+    <!-- @click="expanded = ! expanded, flecheDown =!flecheDown, flecheUp =!flecheUp" -->
+    <div >
+        <button (click)="onExpanded(1)" 
+          class="w-full md:w-1/2 lg:w-1/3px-8 py-6 text-center mt-2 ml-auto mr-auto flex justify-center bg-gray-100 rounded-sm shadow-sm"
+          >
+          <div class="flex items-center justify-center ">
+            <!-- <img class="h-1/6 w-1/6 mr-4" src="../../assets/img/momanZen.png" alt="moman zen"> -->
+            <img class="h-1/6 w-1/6 mr-4" src="../../assets//images//loi25.png" alt="loi25">
+
+            <span>
+                Principe 1: Nous sommes responsable des renseignements personnels dont
+                nous avons la gestion.</span> 
+              <fa-icon *ngIf="expanded1==false" class="ml-2 text-gray-800 text-xl " [icon]="faArrowDown"></fa-icon>
+              <fa-icon *ngIf="expanded1==true" class="ml-2 text-gray-800 text-xl" [icon]="faArrowUp"></fa-icon>
+
+            <span class="ico-plus"></span>
+          </div>
+          <hr>
+        </button>
+        <!-- https://blog.mimacom.com/css-transitions-made-simple-with-angular-animations/ -->
+        <div *ngIf="expanded1==true" class="alert-banner relative w-full md:w-1/2 lg:w-1/3 flex justify-center ml-auto mr-auto bg-gray-50 ">
+          <img class="absolute  md:block  w-full h-full opacity-10 bg-cover" src="../../assets/img/yoga.png" alt="">
+          <div class="p-6 ">
+            <p>
+                Les renseignements que nous conservons sont uniquement réservés à la
+                facturation et la livraison de votre commande.
+              </p>
+              <ul class="list-disc">
+                <li>Nom du commerce</li>
+                <li>Adresse</li>
+                <li>Courriel de contact</li>
+                <li>Téléphone</li>
+                <li>Une copie de vos commandes quotidiennes.</li>
+                <li>
+                  Aucune information relative à vos coordonnées bancaires n'est conservée.
+                </li>
+                <li>
+                  Vos droits d'ouvrir le site de commande Web. Ceux-ci demeurent valides pour une semaine sans avoir à vous reconnecter lorsque vous êtes sur le même appareil.
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div >
+        <button (click)="onExpanded(2)" 
+          class="w-full md:w-1/2 lg:w-1/3px-8 py-6 text-center mt-2 ml-auto mr-auto flex justify-center bg-gray-100 rounded-sm shadow-sm"
+          >
+          <div class="flex items-center justify-center ">
+            <!-- <img class="h-1/6 w-1/6 mr-4" src="../../assets/img/momanZen.png" alt="moman zen"> -->
+
+            <span>
+                Principe 2: Aucune information n'est transmise en dehors de l'accès par
+                le responsable de la boulangerie qui fait votre commande.</span> 
+              <fa-icon *ngIf="expanded2==false" class="ml-2 text-gray-800 text-xl " [icon]="faArrowDown"></fa-icon>
+              <fa-icon *ngIf="expanded2==true" class="ml-2 text-gray-800 text-xl" [icon]="faArrowUp"></fa-icon>
+
+            <span class="ico-plus"></span>
+          </div>
+          <hr>
+        </button>
+        <!-- https://blog.mimacom.com/css-transitions-made-simple-with-angular-animations/ -->
+        <div *ngIf="expanded2==true" class="alert-banner relative w-full md:w-1/2 lg:w-1/3 flex justify-center ml-auto mr-auto bg-gray-50 ">
+          <img class="absolute  md:block  w-full h-full opacity-10 bg-cover" src="../../assets/img/yoga.png" alt="">
+          <div class="p-6 ">
+            <ul class="list-disc">
+                <li>
+                  Aucune collecte d'information dans des "cookies" ou Témoins sauf votre
+                  consentement.
+                </li>
+                <li>Pas de transmission de vos données à des tiers parties</li>
+                <li>
+                  Les informations recueillies sont protégées par des mots de passe
+                  complexes.
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div >
+        <button (click)="onExpanded(3)" 
+          class="w-full md:w-1/2 lg:w-1/3px-8 py-6 text-center mt-2 ml-auto mr-auto flex justify-center bg-gray-100 rounded-sm shadow-sm"
+          >
+          <div class="flex items-center justify-center ">
+            <!-- <img class="h-1/6 w-1/6 mr-4" src="../../assets/img/momanZen.png" alt="moman zen"> -->
+
+            <span>
+                Principe 3: Que se passe-t-il lors de la fin du contrat avec votre
+                boulangerie?</span> 
+              <fa-icon *ngIf="expanded3==false" class="ml-2 text-gray-800 text-xl " [icon]="faArrowDown"></fa-icon>
+              <fa-icon *ngIf="expanded3==true" class="ml-2 text-gray-800 text-xl" [icon]="faArrowUp"></fa-icon>
+
+            <span class="ico-plus"></span>
+          </div>
+          <hr>
+        </button>
+        <!-- https://blog.mimacom.com/css-transitions-made-simple-with-angular-animations/ -->
+        <div *ngIf="expanded3==true" class="alert-banner relative w-full md:w-1/2 lg:w-1/3 flex justify-center ml-auto mr-auto bg-gray-50 ">
+          <img class="absolute  md:block  w-full h-full opacity-10 bg-cover" src="../../assets/img/yoga.png" alt="">
+          <div class="p-6 ">
+            <ul class="list-disc">
+                <li>
+                  Toutes vos factures et informations seront détruites sur le site web
+                  ainsi que l'accès à ce site.
+                </li>
+                <li>
+                  Votre boulanger conservera les documents nécessaire au fonctionnement de
+                  l'administration de son entreprise.
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div >
+        <button (click)="onExpanded(4)" 
+          class="w-full md:w-1/2 lg:w-1/3px-8 py-6 text-center mt-2 ml-auto mr-auto flex justify-center bg-gray-100 rounded-sm shadow-sm"
+          >
+          <div class="flex items-center justify-left ">
+            <!-- <img class="h-1/6 w-1/6 mr-4" src="../../assets/img/momanZen.png" alt="moman zen"> -->
+
+            <span>
+                Principe 4: Vous vous posez des questions?</span> 
+              <fa-icon *ngIf="expanded4==false" class="ml-2 text-gray-800 text-xl " [icon]="faArrowDown"></fa-icon>
+              <fa-icon *ngIf="expanded4==true" class="ml-2 text-gray-800 text-xl" [icon]="faArrowUp"></fa-icon>
+
+            <span class="ico-plus"></span>
+          </div>
+          <hr>
+        </button>
+        <!-- https://blog.mimacom.com/css-transitions-made-simple-with-angular-animations/ -->
+        <div *ngIf="expanded4==true" class="alert-banner relative w-full md:w-1/2 lg:w-1/3 flex justify-center ml-auto mr-auto bg-gray-50 ">
+          <img class="absolute  md:block  w-full h-full opacity-10 bg-cover" src="../../assets/img/yoga.png" alt="">
+          <div class="p-6 ">
+            <p>
+                En tout temps, vous pouvez faire une demande d'informations quant aux
+                données entreposées sur le site web de BoulangerieQc en cliquant sur ce
+                lien.
+            
+              </p>
+          </div>
+        </div>
+        <div class="w-full flex justify-center mt-4">
+          <a
+          class="middle none center hidden rounded-lg bg-yellow-300 p-2 hover:bg-yellow-100 py-2 px-4 font-sans text-lg md:text-2xl text-gray-800 font-bold uppercase shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block "
+          href="https://www.boulangerieqc.com/joindre.html"
+          >Nous joindre</a>
+        </div>
+
+      </div>
+    

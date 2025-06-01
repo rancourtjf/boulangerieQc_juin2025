@@ -1,0 +1,25 @@
+
+<div *ngIf="(auth.isAuthenticated$ | async) === true">
+    <p>commande-produit works!</p>
+    <form action="emailAuBoulanger.php" method="post" enctype="multipart/form-data">
+        <label for="to">To:</label>
+        <input type="email" id="to" name="to"><br>
+        
+        <label for="subject">Sujet:</label>
+        <input type="text" id="subject" name="subject" value="Envoi de la commande"><br>
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" value="Voici la commande"></textarea><br>
+        
+        <label for="from">From:</label>
+        <input type="email" id="from" name="from" value="Le client X"><br>
+        
+        <label for="attachment">Attachment:</label>
+        <input type="file" id="attachment" name="attachment"><br>
+    
+        <input type="submit" value="Send">
+      </form>
+</div>
+
+
+

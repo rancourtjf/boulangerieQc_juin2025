@@ -1,0 +1,299 @@
+<div class="hidden md:block text-lg md:text-xl">
+  <div class="grid grid-cols-6 bg-yellow-50">
+    <div class="col-span-1">
+      <img class="ml-auto mr-auto h-16 w-24 md:h-24 md:w-36" src="https://www.boulangerieqc.com/logo40pc.png"
+        alt="logo" />
+    </div>
+    <nav class="grid grid-cols-5 p-4 bg-yellow-400 col-span-5">
+      <div *ngIf="(auth.isAuthenticated$ | async) === false">
+        <a class="text-2xl " mat-button routerLink="/">Accueil</a>
+      </div>
+      <div *ngIf="(auth.isAuthenticated$ | async) === false">
+        <button class="text-2xl bg-yellow-300 hover:bg-yellow-100 mt-0" mat-button [matMenuTriggerFor]="menu">
+          Outils
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <a class="text-md md:text-lg" href="https://www.boulangerieqc.com/revision/">Revision</a>
+          </button>
+          <button mat-menu-item>
+            <a class="text-md md:text-lg" href="https://www.boulangerieqc.com/poolish/poolish.html">Poolish</a>
+          </button>
+          <button mat-menu-item>
+            <a class="text-md md:text-lg" href="https://store20342804.company.site">Boutique</a>
+          </button>
+        </mat-menu>
+      </div>
+      <div *ngIf="(auth.isAuthenticated$ | async) === false">
+        <a class="text-2xl bg-yellow-300 p-2 hover:bg-yellow-100" mat-button
+          href="https://store20342804.company.site/Logiciel-BoulangerieQc-p179766581">Installer le logiciel</a>
+      </div>
+      <div grid grid-cols-2>
+        <div class="w-full">
+          <a class="text-2xl bg-yellow-300 p-2 hover:bg-yellow-100" mat-button href="https://www.boulangerieqc.com/joindre.html">Nous joindre
+          </a>
+        </div>
+        <div class="w-1/2  mr-auto ml-auto">
+          <img class="w-16 h-12 mt-2" src="https://www.boulangerieqc.com/assets/images/drapeauQuebec.png"
+            alt="drapeauQuebec">
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <!-- Login button: show if NOT authenticated -->
+
+        <button *ngIf="(auth.isAuthenticated$ | async) === false" id="qsLoginBtn"
+          class="bg-blue-500 text-white p-2 shadow-lg " (click)="loginWithRedirect()">
+          <mat-icon class="pt-2" aria-hidden="false" aria-label="login icon" fontIcon="login"></mat-icon>
+
+          Connexion
+        </button>
+        <div class="grid grid-cols-1">
+          <div>
+            @if(outilsGestion()){
+            <div *ngIf="(auth.isAuthenticated$ | async) === true">
+
+              <button class="text-2xl bg-red-500 text-white p-2 shadow-lg w-full " mat-button
+                [matMenuTriggerFor]="module">Accès BD</button>
+
+              <mat-menu #module="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="boulangerie">boulangerie</button>
+                <button mat-menu-item [matMenuTriggerFor]="clients">clients</button>
+                <button mat-menu-item [matMenuTriggerFor]="clientsLogiciel">clients logiciel</button>
+                <button mat-menu-item [matMenuTriggerFor]="ingredients">ingrédients</button>
+                <button mat-menu-item [matMenuTriggerFor]="recettes">recettes</button>
+                <button mat-menu-item [matMenuTriggerFor]="produits">produits</button>
+                <button mat-menu-item [matMenuTriggerFor]="taches">tâches</button>
+                <button mat-menu-item [matMenuTriggerFor]="fournisseurs">fournisseurs</button>
+                <button mat-menu-item [matMenuTriggerFor]="commandes">commandes</button>
+                <button mat-menu-item [matMenuTriggerFor]="graphiques">graphiques</button>
+                <button mat-menu-item [matMenuTriggerFor]="messageWeb">message web clients</button>
+                <button mat-menu-item [matMenuTriggerFor]="editor">modifier page web</button>
+
+              </mat-menu>
+
+              <mat-menu #boulangerie="matMenu">
+                <button (click)="gotoBoulanger()" mat-menu-item>Voir votre boulangerie</button>
+                <button (click)="gotoCreerBoulangerie()" mat-menu-item>Créer la boulangerie</button>
+              </mat-menu>
+              <mat-menu #clients="matMenu">
+                <button (click)="gotoClients()" mat-menu-item>Voir les clients</button>
+                <button (click)="gotoCreerClient()" mat-menu-item>Créer un client commercial</button>
+                <button (click)="newClient()" mat-menu-item>Nous aviser d'un nouveau client commercial</button>
+              </mat-menu>
+              <mat-menu #clientsLogiciel="matMenu">
+                @if( proprioBoulangerie() && dossierCommandesWeb() ==="boulangerieqc"){
+                <button (click)="gotoClientsLogiciel()" mat-menu-item>Voir les clients logiciel</button>
+                <button (click)="gotoCreerClientLogiciel()" mat-menu-item>Créer un client logiciel</button>
+                }
+              </mat-menu>
+              <mat-menu #commandes="matMenu">
+                <button (click)="gotoFactures()" mat-menu-item>Voir les commandes(factures)</button>
+                <button (click)="gotoDetails()" mat-menu-item>Détails des commandes lendemain</button>
+                <button mat-menu-item>Créer une commande</button>
+                <button (click)="gotoCommandeWebTable()" mat-menu-item>Voir les commandes web</button>
+              </mat-menu>
+              <mat-menu #fournisseurs="matMenu">
+                <button (click)="gotoFournisseur()" mat-menu-item>Voir les fournisseurs</button>
+                <button (click)="gotoNewFournisseur()" mat-menu-item>Créer un fournisseurs</button>
+              </mat-menu>
+
+              <mat-menu #graphiques="matMenu">
+             
+                <button (click)="gotoDateGraphic()" mat-menu-item>Total $ par période</button>
+                <button (click)="gotoGraphicUnProduit()" mat-menu-item>Graphique $ un produit</button>
+   
+              </mat-menu>
+
+              <mat-menu #ingredients="matMenu">
+                <button (click)="gotoIngredients()" mat-menu-item>Voir les ingrédients</button>
+                <button (click)="gotoAddIngredients()" mat-menu-item>Créer un ingrédients</button>
+              </mat-menu>
+
+              <mat-menu #messageWeb="matMenu">
+                <button (click)="newMessage()" mat-menu-item>Nouveau message web pour les clients</button>
+              </mat-menu>
+              <mat-menu #editor="matMenu">
+                <button (click)="newEditor()" mat-menu-item>Modifier votre page web</button>
+              </mat-menu>
+
+
+              <mat-menu #produits="matMenu">
+                <button (click)="gotoProduits()" mat-menu-item>Voir les produits</button>
+                <button mat-menu-item>Créer un produits</button>
+              </mat-menu>
+              <mat-menu #recettes="matMenu">
+                <button (click)="gotoRecettesBase()" mat-menu-item>Voir les recettes</button>
+                <button mat-menu-item>Créer une recette</button>
+              </mat-menu>
+              <mat-menu #taches="matMenu">
+                <button (click)="gotoViewEquipes()" mat-menu-item>Voir les équipes</button>
+                <button (click)="gotoAddEquipe()" mat-menu-item>Ajouter une équipe</button>
+                <button (click)="gotoAddTache()" mat-menu-item>Ajouter une tâche</button>
+                <button (click)="gotoViewTaches()" mat-menu-item>Voir les tâches</button>
+              </mat-menu>
+            </div>
+            }
+          </div>
+          <div class="mt-2 w-full ">
+            <button *ngIf="(auth.isAuthenticated$ | async) === true" class=""
+              class="bg-blue-500 text-white p-2 shadow-lg w-full" id="qsaccueiltBtn" (click)="accueil()">
+              <mat-icon class="pt-2" aria-hidden="false" aria-label="home icon" fontIcon="home"></mat-icon>
+
+              Accueil
+            </button>
+          </div>
+          <div class="w-full">
+            <button *ngIf="(auth.isAuthenticated$ | async) === true" class="bg-red-500 text-white p-2 shadow-lg w-full "
+              id="qsLogoutBtn" (click)="logout()">
+              Déconnexion
+              <mat-icon class="pt-2" aria-hidden="false" aria-label="logout icon" fontIcon="logout"></mat-icon>
+
+            </button>
+          </div>
+        </div>
+
+        <!-- / Login button -->
+      </div>
+    </nav>
+  </div>
+</div>
+
+<!-- menu pour appareil mobile -->
+<div class="block md:hidden">
+  <nav class="grid grid-cols-2 p-4 bg-yellow-400">
+    <div *ngIf="(auth.isAuthenticated$ | async) === false">
+      <button class="text-2xl bg-yellow-300  hover:bg-yellow-100" mat-button [matMenuTriggerFor]="menu">
+        Outils
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <a class="text-md md:text-lg" href="https://www.boulangerieqc.com/poolish/poolish.html">Poolish</a>
+        </button>
+        <button mat-menu-item>
+          <a class="text-md md:text-lg" href="https://www.boulangerieqc.com/revision/">Revision</a>
+        </button>
+        <button mat-menu-item>
+          <a class="text-md md:text-lg" href="https://store20342804.company.site">Boutique</a>
+        </button>
+      </mat-menu>
+    </div>
+    <div *ngIf="(auth.isAuthenticated$ | async) === false">
+      <a class="text-2xl bg-yellow-300 p-2 hover:bg-yellow-100" mat-button
+        href="https://store20342804.company.site/Logiciel-BoulangerieQc-p179766581">Installer logiciel</a>
+    </div>
+    <!-- <div *ngIf="(auth.isAuthenticated$ | async) === false">
+      <a class="text-2xl " mat-button routerLink="/joindre">Nous joindre</a>
+    </div> -->
+    <div grid grid-cols-2>
+      <div class="w-full">
+        <a class="text-2xl bg-yellow-300 p-2 hover:bg-yellow-100" mat-button href="https://www.boulangerieqc.com/joindre.html">Nous joindre
+        </a>
+      </div>
+      <div class="w-1/2 ">
+        <img class="w-16 h-12 " src="https://www.boulangerieqc.com/assets/images/drapeauQuebec.png"
+          alt="drapeauQuebec">
+      </div>
+    </div>
+    <div class="nav-item">
+      <!-- Login button: show if NOT authenticated -->
+
+      <button *ngIf="(auth.isAuthenticated$ | async) === false" id="qsLoginBtn"
+        class="bg-blue-500 text-white p-2 shadow-lg " (click)="loginWithRedirect()">
+        <mat-icon class="pt-2" aria-hidden="false" aria-label="login icon" fontIcon="login"></mat-icon>
+
+        Connexion
+      </button>
+      <button *ngIf="(auth.isAuthenticated$ | async) === true" class=""
+        class="nav-item bg-blue-500 text-white p-2 shadow-lg w-full" style="min-width: unset" id="qsLogoutBtn"
+        (click)="accueil()">
+        <div>
+          @if(outilsGestion()){
+          <div *ngIf="(auth.isAuthenticated$ | async) === true">
+
+            <button class="text-2xl bg-red-500 text-white p-2 shadow-lg w-full " mat-button
+              [matMenuTriggerFor]="module">Accès BD</button>
+
+            <mat-menu #module="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="boulangerie">boulangerie</button>
+              <button mat-menu-item [matMenuTriggerFor]="clients">clients</button>
+              <button mat-menu-item [matMenuTriggerFor]="ingredients">ingrédients</button>
+              <button mat-menu-item [matMenuTriggerFor]="recettes">recettes</button>
+              <button mat-menu-item [matMenuTriggerFor]="produits">produits</button>
+              <button mat-menu-item [matMenuTriggerFor]="fournisseurs">fournisseurs</button>
+              <button mat-menu-item [matMenuTriggerFor]="commandes">commandes</button>
+              <button mat-menu-item [matMenuTriggerFor]="graphiques">graphiques</button>
+              <button mat-menu-item [matMenuTriggerFor]="messageWeb">message web clients</button>
+
+            </mat-menu>
+            <mat-menu #boulangerie="matMenu">
+              <button (click)="gotoBoulanger()" mat-menu-item>Voir votre boulangerie</button>
+              <button (click)="gotoCreerBoulangerie()" mat-menu-item>Créer la boulangerie</button>
+            </mat-menu>
+            <mat-menu #clients="matMenu">
+              <button (click)="gotoClients()" mat-menu-item>Voir les clients</button>
+              <button (click)="gotoCreerClient()" mat-menu-item>Créer un client commercial</button>
+              <button (click)="newClient()" mat-menu-item>Nous aviser d'un nouveau client commercial</button>
+            </mat-menu>
+            <mat-menu #commandes="matMenu">
+              <button (click)="gotoFactures()" mat-menu-item>Voir les commandes(factures)</button>
+              <button (click)="gotoDetails()" mat-menu-item>Détails des commandes lendemain</button>
+              <button mat-menu-item>Créer une commande</button>
+              <button (click)="gotoCommandeWebTable()" mat-menu-item>Voir les commandes web</button>
+            </mat-menu>
+            <mat-menu #fournisseurs="matMenu">
+              <button (click)="gotoFournisseur()" mat-menu-item>Voir les fournisseurs</button>
+              <button (click)="gotoNewFournisseur()" mat-menu-item>Créer un fournisseurs</button>
+            </mat-menu>
+
+            <mat-menu #graphiques="matMenu">
+              @if( proprioBoulangerie()){
+              <button (click)="gotoDateGraphic()" mat-menu-item>Total $ par période</button>
+              <button (click)="gotoGraphicUnProduit()" mat-menu-item>Graphique $ un produit</button>
+              }
+            </mat-menu>
+
+            <mat-menu #ingredients="matMenu">
+              <button (click)="gotoIngredients()" mat-menu-item>Voir les ingrédients</button>
+              <button mat-menu-item>Créer un ingrédients</button>
+            </mat-menu>
+
+            <mat-menu #messageWeb="matMenu">
+              <button (click)="newMessage()" mat-menu-item>Nouveau message web pour les clients</button>
+
+            </mat-menu>
+
+
+            <mat-menu #produits="matMenu">
+              <button (click)="gotoProduits()" mat-menu-item>Voir les produits</button>
+              <button mat-menu-item>Créer un produits</button>
+            </mat-menu>
+            <mat-menu #recettes="matMenu">
+              <button (click)="gotoRecettesBase()" mat-menu-item>Voir les recettes</button>
+              <button mat-menu-item>Créer une recette</button>
+            </mat-menu>
+            <mat-menu #taches="matMenu">
+              <button (click)="gotoViewEquipes()" mat-menu-item>Voir les équipes</button>
+              <button (click)="gotoAddEquipe()" mat-menu-item>Ajouter une équipe</button>
+              <button (click)="gotoAddTache()" mat-menu-item>Ajouter une tâche</button>
+              <button (click)="gotoViewTaches()" mat-menu-item>Voir les tâches</button>
+            </mat-menu>
+          </div>
+          }
+        </div>
+        <mat-icon class="pt-2" aria-hidden="false" aria-label="home icon" fontIcon="home"></mat-icon>
+
+        Accueil
+      </button>
+      <button *ngIf="(auth.isAuthenticated$ | async) === true" class=""
+        class="nav-item bg-red-600 text-white p-2 shadow-lg w-full" style="min-width: unset" id="qsLogoutBtn"
+        (click)="logout()">
+        Déconnexion
+        <mat-icon class="pt-2" aria-hidden="false" aria-label="logout icon" fontIcon="logout"></mat-icon>
+
+      </button>
+
+      <!-- / Login button -->
+    </div>
+  </nav>
+</div>

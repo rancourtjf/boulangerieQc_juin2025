@@ -1,0 +1,237 @@
+<app-navbar-factures />
+<app-message></app-message>
+
+<!-- <div>Client individuel</div>
+<p>{{clientIndividuel.prenom}} {{clientIndividuel.nom}} {{clientIndividuel.courriel}} {{clientIndividuel.telephone}}</p> -->
+
+<button (click)="Recommencer()" class="bg-blue-400 text-white p-2 shadow-xl">Recommencer</button>
+<ng-container *ngIf="role != 'livraison'">
+    <div class="w-full text-center bg-gray-100" *ngIf="commande1semaine == 1">
+        <form [formGroup]="inputDate">
+            <label for="dateCommande">Choississez un <span class="font-bold text-xl">Lundi</span> début de
+                commande 1 semaine</label>
+            <mat-form-field>
+                <!-- {{dateChoisie | customDate:'fr'}} -->
+                {{ dateChoisie | date : "dd/MM/yy HH:mm" }}
+
+                <input matInput [matDatepicker]="dp" [matDatepickerFilter]="dateFilter" placeholder="Verbose datepicker"
+                    type="Date" class="form-control hidden" name="dateCommande" formControlName="dateCommande" />
+
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field>
+            <button
+                class="mb-2 center rounded-lg bg-green-500 py-2 px-4 font-sans text-xs font-bold uppercase text-gray-100 shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+                (click)="onSubmitDateCommande()" type="submit">
+                Validez la date
+            </button>
+        </form>
+    </div>
+    <div class="p-2 w-full ml-auto mr-auto bg-green-200 font-bold text-xxl">Entrée des heures de rupture des produits
+        {{jourdelaCommande}} {{ dateStringCommande }}</div>
+
+    <!-- retrait de la saisie heure par horloge -->
+    <!-- <mat-form-field appearance="outline" class="bg-green-200 text-xxl hidden">
+
+        <mat-label class="p-2 text-xxl ">Heure de rupture</mat-label>
+        <input (click)="obtenirListeProduitZero()" type="text" matInput [ngxMatTimepicker]="timepicker" [format]="24"
+            [required]="required"  [formControl]="formControlItem" />
+
+        <mat-icon matPrefix *ngIf="formControlItem.value && !formControlItem.disabled && !required"
+            (click)="onClear($event)">
+            close
+        </mat-icon>
+
+        <mat-icon matSuffix *ngIf="!formControlItem.disabled" (click)="openFromIcon(timepicker)">schedule</mat-icon>
+    </mat-form-field> -->
+
+    <ngx-mat-timepicker #timepicker [enableKeyboardInput]="true" [max]="maxTime" [min]="minTime"></ngx-mat-timepicker>
+    <div class="ml-auto mr-auto text-center w-1/2 md:w-1/4 border-4 border-black p-2 mb-2 rounded-lg">
+        <button class="bg-green-400 p-2 rounded-sm shadow-sm" (click)="tabletteAdd()">
+            @if(tabletteOK){
+            <p>J'utilise une tablette ou un cellulaire <fa-icon class="ml-2 p-2 bg-white"
+                    [icon]="faMobilePhone"></fa-icon>
+            </p>
+            } @else{
+            <p>J'utilise un ordinateur <fa-icon class="ml-2 p-2 bg-white" [icon]="faDesktop"></fa-icon></p>
+            }
+        </button>
+    </div>
+    <div *ngIf="submitted1sem" class="w-full text-center">
+        <mat-radio-group aria-label="Faites un choix" [(ngModel)]="commande1semaine">
+            <mat-radio-button (click)="
+          this.router.navigate(['/cedule']); (this.commande1semaine === 1)
+        " value="1">
+                Reprendre à neuf</mat-radio-button>
+
+            <mat-radio-button value="2"><span
+                    class=" rounded-lg border-2 border-black bg-red-400 p-2 text-black text-lg md:text-xl">Pour quelle
+                    journée?</span></mat-radio-button>
+
+
+
+            <!-- <mat-radio-button (click)="commandeClientIndividuel()" value="5">Commande client individuel</mat-radio-button> -->
+            <!-- <mat-radio-button (click)="obtenirListeProduitZero()" value="4">
+        <span class="font-bold text-red-600 text-lg md:text-xl">Remettre les quantités à 0</span></mat-radio-button> -->
+        </mat-radio-group>
+    </div>
+
+    <div class="w-full text-center" *ngIf="commande1semaine == 2">
+        <form [formGroup]="inputDate1jour">
+            <label for="dateCommande">Date commande 1 jour</label>
+            <mat-form-field>
+                <input matInput [matDatepicker]="dp" placeholder="Verbose datepicker" type="Date" class="form-control"
+                    name="dateCommande" formControlName="dateCommande" />
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field>
+            <button class="btn bg-green-200 p-2" (click)="onSubmitDateCommande1jour()" type="submit">
+                Validez la date
+            </button>
+        </form>
+    </div>
+    <!-- 
+    <div class="w-full flex justify-center my-4" *ngIf="saisieVerticale == true">
+        <button (click)="saisieVerticale = !saisieVerticale"
+            class="middle none center inline-block rounded-lg bg-linear-to-tr from-green-500 to-green-300 py-2 px-4 font-sans text-xs font-bold uppercase shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+            Confirmez pour Saisie horizontale par pain avec touche TAB<mat-icon>swap_horiz</mat-icon>
+        </button>
+    </div> -->
+
+    <div class="w-full text-center font-bold bg-gray-100 p-2">
+
+        <img class="ml-4 w-16 h-16 inline-block mr-4" [src]="logoClient" alt="logo" />
+
+        Heures de rupture
+        <span *ngIf="commande1semaine == 1">de la semaine du {{ dateLundiString }}</span>
+        <span class="border-2 border-black ml-4 bg-gray-100 text-lg p-2" *ngIf="commande1semaine == 2">du
+            {{jourdelaCommande}} {{ dateStringCommande }}</span> pour:
+        {{ nomClient }}
+        <span class="ml-4 text-red-600 font-bold text-md md:text-lg" *ngIf="invendusActif">Pour des INVENDUS</span>
+    </div>
+    <ng-container *ngIf="loading">Chargement en cours...</ng-container>
+    <ng-container *ngIf="!loading">
+        <form id="datatableArrow" *ngIf="submitted1sem" [formGroup]="commandeForm" (ngSubmit)="envoiCommande()">
+            <table class="ml-4 flex justify-center bg-gray-100 text-sm">
+                <!-- <thead>
+          <tr class="flex justify-center ">
+            <th>Produit</th>
+            <th>{{jourdelaCommande}} {{  dateStringCommande }}</th>
+            <th>heure rupture</th>
+         
+           
+          </tr>
+        </thead> -->
+                <tbody formArrayName="Rows">
+                    <!-- <tr *ngFor="let itemrow of commandeForm.controls.Rows.controls; let i=index;let l=last" -->
+                    <tr *ngFor="
+              let itemrow of getFormControls.controls;
+              let i = index;
+              let l = last
+            " id="idRow{{ i }}" [formGroupName]="i">
+
+                        <td class="">
+                            <input readonly id="{{ 'variete_poids_a' + i }}" formControlName="variete_poids_a"
+                                class="bg-gray-600 text-gray-50 w-72 text-left pl-2 text-md hover:text-md md:text-lg shadow-sm " />
+                        </td>
+                        <td class="">
+                            .......
+                        </td>
+
+                        <td>
+                            <mat-form-field appearance="outline" class="w-40 mx-auto">
+                                <mat-label>Heure rupture</mat-label>
+                            <input    matInput
+                            [ngxMatTimepicker]="sharedTimepicker"
+                            [format]="24"
+                             [tabIndex]="getTabIndex(0)" id="{{ 'heureRupture' + i }}"
+                               readonly
+                                formControlName="heureRupture"
+                                class="form-control text-xl text-center transform hover:scale-150"
+                                (change)="envoiInput(i)"
+                                (keydown)="focusMyInput($event, i, 'heureRupture')" [class.invalid]="
+                             
+                      commandeForm.get('heureRupture')?.invalid &&
+                      commandeForm.get('heureRupture')?.dirty &&
+                      commandeForm.get('heureRupture')?.touched
+                    " />
+        <mat-icon matSuffix (click)="openFromIcon(sharedTimepicker, i)">schedule</mat-icon>
+    </mat-form-field>
+                    
+    <ngx-mat-timepicker
+    #sharedTimepicker
+    [enableKeyboardInput]="true"
+    [min]="minTime"
+    [max]="maxTime"
+    (timeSet)="onTimeSelected($event,i)"
+></ngx-mat-timepicker>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+            <div class="border-2 border-red-600 my-4">
+
+
+                <form [formGroup]="formMessage" (ngSubmit)="envoiMessage($event)">
+                    <label class="font-bold" for="inputMessage">Ajoutez un message dans le courriel d'envoi</label>
+                    <input
+                        class="border-4 border-green-400 bg-gray-100 w-3/4 md:w-1/2 ml-2 py-4 text-lg md:text-md md:text-lg"
+                        type="text" formControlName="inputMessage" />
+                    <button class="font-bold p-4 ml-2 bg-green-200 hover:bg-green-400 shadow-sm inline-block"
+                        type="submit">
+                        Ajouter le message
+                    </button>
+                </form>
+            </div>
+
+            <div class="w-full md:w-3/4 mr-auto ml-auto grid grid-cols-3 gap-2 md:grid-cols-3">
+                <div>
+                    <button type="submit"
+                        class="btn bg-yellow-400 p-2 shadow-xl rounded-sm hover:bg-yellow-800 hover:text-white">
+                        1 - Validez ces données: {{ totalCommande() | number : ".2" }} $
+                    </button>
+                </div>
+
+                <div>
+                    <button *ngIf="submitted1sem" (click)="downloadCSV(dataListeProdSignal())" type="button"
+                        class="btn bg-yellow-400 p-2 rounded-sm shadow-xl hover:bg-yellow-200">
+                        @if(!tabletteOK){ 2 - Téléchargement et
+                        <span class="font-bold text-red-600">Envoi automatique au boulanger</span>
+                        } @else { 2 - Téléchargement et
+                        <span class="font-bold text-red-600">faire l'étape 3 </span>
+                        }
+                    </button>
+
+                </div>
+                @if(tabletteOK){
+                <app-file-upload-rupture></app-file-upload-rupture>
+                <div>
+                    <!-- <app-file-upload [dateLundiCommandeString]="dateLundiString" [objDataToMysql]="objDataToMysql"
+                        [montant]=0 [oldCommande]="oldCommande"></app-file-upload> -->
+                    <!-- <app-file-upload></app-file-upload> -->
+                </div>
+
+                }
+            </div>
+        </form>
+        <!-- test mat-form-field
+        <mat-form-field appearance="outline">
+            <mat-label>Heure Rupture</mat-label>
+            <input type="text" matInput [ngxMatTimepicker]="timepicker" [format]="24" [required]="required" readonly
+                [formControl]="formControlItem" />
+
+            <mat-icon matPrefix *ngIf="formControlItem.value && !formControlItem.disabled && !required"
+                (click)="onClear($event)">
+                close
+            </mat-icon>
+
+            <mat-icon matSuffix *ngIf="!formControlItem.disabled" (click)="openFromIcon(timepicker)">schedule</mat-icon>
+        </mat-form-field>
+
+        <ngx-mat-timepicker #timepicker [enableKeyboardInput]="true" [max]="maxTime"
+            [min]="minTime"></ngx-mat-timepicker> -->
+    </ng-container>

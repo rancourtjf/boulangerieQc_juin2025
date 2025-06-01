@@ -1,0 +1,208 @@
+<div styleClass="user-form" class=" w-1/2 ml-auto mr-auto">
+    <form [formGroup]="userForm" (ngSubmit)="modifyUser()" novalidate>
+      <div class="field mb-2">
+        <label for="id" class="block font-bold bg-green-200 p-2">Id du client</label>
+        <input class="read-only:" type="text" pInputText placeholder="id du client" formControlName="id" />
+      </div>
+        <!-- idclient dans 4D Column -->
+      <div class="field mb-2">
+        <label for="idclient" class="block font-bold bg-green-200 p-2">Id 4D</label>
+        <input class="read-only:" type="text" pInputText placeholder="id du client dans 4D" formControlName="idclient" />
+      </div>
+      <div class="field mb-2">
+        <label for="actif" class="block font-bold bg-green-200 p-2">actif</label>
+        <input class="read-only:" type="text" pInputText placeholder="actif dans 4D" formControlName="actif" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="nomBoulangerie" class="block font-bold bg-green-200 p-2">nom de la boulangerie</label>
+        <input class="field-sizing-content w-full" type="text" pInputText placeholder="nom de la boulangerie" formControlName="nomBoulangerie" />
+        <small class="p-error block" *ngIf="
+            userForm.get('nomBoulangerie')?.invalid &&
+            userForm.get('nomBoulangerie')?.dirty
+          ">
+          Le nom de la boulangerie est requis</small>
+      </div>
+      <div class="field mb-2">
+        <label for="courriel" class="block font-bold bg-green-200 p-2">courriel</label>
+        <input class="w-full"  type="text" pInputText placeholder="courriel" formControlName="courriel" />
+        <small class="p-error block" *ngIf="
+            userForm.get('courriel')?.invalid && userForm.get('courriel')?.dirty
+          ">
+          Le courriel est requis</small>
+      </div>
+  
+      <div class="field mb-2">
+        <label for="googlemap" class="block font-bold bg-green-200 p-2">googlemap</label>
+        <input class="w-full" type="text" pInputText placeholder="googlemap" formControlName="googlemap" />
+      </div>
+      <div class="field mb-2">
+        <label for="nom" class="block font-bold bg-green-200 p-2">Nom entreprise</label>
+        <input class="w-full" type="text" pInputText placeholder="Nom complet" formControlName="nom" />
+      </div>
+  
+      <div class="field mb-2">
+        <label for="adresse" class="block font-bold bg-green-200 p-2">adresse</label>
+        <input class="w-full" type="text" pInputText placeholder="adresse" formControlName="adresse" />
+      </div>
+        <div class="field mb-2">
+          <label for="ville" class="block font-bold bg-green-200 p-2">ville</label>
+          <input class="w-full" type="text" pInputText placeholder="ville" formControlName="ville" />
+        </div>
+        <div class="field mb-2">
+          <label for="codepostal" class="block font-bold bg-green-200 p-2">Code postal</label>
+          <input type="text" pInputText placeholder="code postal" formControlName="codepostal" />
+        </div>
+
+      <div class="field mb-2">
+        <label for="telephone" class="block font-bold bg-green-200 p-2">no de téléphone</label>
+        <p>Numéro: {{ userForm.get('telephone')?.value | phoneFormat }}</p>
+        <input type="text" pInputText placeholder="téléphone" formControlName="telephone"  />
+      </div>
+      <div class="field mb-2">
+        <label for="emailUserWeb" class="block font-bold bg-green-200 p-2">emailUserWeb</label>
+        <input class="w-full" type="text" pInputText placeholder="emailUserWeb" formControlName="emailUserWeb" />
+      </div>
+      <div class="field mb-2">
+        <label for="motPasseWeb" class="block font-bold bg-green-200 p-2">motPasseWeb</label>
+        <input type="text" pInputText placeholder="motPasseWeb" formControlName="motPasseWeb" />
+      </div>
+      <div class="field mb-2">
+        <label for="prenomContact" class="block font-bold bg-green-200 p-2">prenomContact</label>
+        <input class="w-full" type="text" pInputText placeholder="prenomContact" formControlName="prenomContact" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="nomContact" class="block font-bold bg-green-200 p-2">nomContact</label>
+        <input class="w-full" type="text" pInputText placeholder="nomContact" formControlName="nomContact" />
+      </div>
+      
+      <div class="field mb-2">
+        <label for="regroupement" class="block font-bold bg-green-200 p-2">regroupement  1 ou 0</label>
+        <input type="text" pInputText placeholder="regroupement" formControlName="regroupement" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="idComptable" class="block font-bold bg-green-200 p-2">idComptable</label>
+        <input type="text" pInputText placeholder="idComptable" formControlName="idComptable" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="frais_transport" class="block font-bold bg-green-200 p-2">frais_transport</label>
+        <input type="text" pInputText placeholder="frais_transport" formControlName="frais_transport" />
+      </div>
+      
+
+      <div class="field mb-2">
+        <label for="activation_Frais_transport" class="block font-bold bg-green-200 p-2">activation_Frais_transport  1 ou 0</label>
+        <input type="text" pInputText placeholder="activation_Frais_transport" formControlName="activation_Frais_transport" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="qteMincommande" class="block font-bold bg-green-200 p-2">qteMincommande</label>
+        <input type="number" pInputText placeholder="qteMincommande" formControlName="qteMincommande" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="achat_minimum_sans_frais" class="block font-bold bg-green-200 p-2">achat_minimum_sans_frais</label>
+        <input type="number" pInputText placeholder="achat_minimum_sans_frais" formControlName="achat_minimum_sans_frais" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="version" class="block font-bold bg-green-200 p-2">version</label>
+        <input type="text" pInputText placeholder="version" formControlName="version" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="commercial" class="block font-bold bg-green-200 p-2">commercial  1 ou 0</label>
+        <input type="text" pInputText placeholder="commercial" formControlName="commercial" />
+      </div>
+
+      <div class="field mb-2 ">
+        <label for="cueillette" class="block font-bold bg-green-200 p-2">cueillette</label>
+        <input class="w-full" type="text" pInputText placeholder="cueillette" formControlName="cueillette" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="identifiant" class="block font-bold bg-green-200 p-2">identifiant</label>
+        <input type="text" pInputText placeholder="identifiant" formControlName="identifiant" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="userURLSiteFTP" class="block font-bold bg-green-200 p-2">userURLSiteFTP</label>
+        <input class="w-full" type="text" pInputText placeholder="userURLSiteFTP" formControlName="userURLSiteFTP" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="userURLSiteCommande" class="block font-bold bg-green-200 p-2">userURLSiteCommande</label>
+        <input class="w-full" type="text" pInputText placeholder="userURLSiteCommande" formControlName="userURLSiteCommande" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="clientIndivSiteCommande" class="block font-bold bg-green-200 p-2">clientIndivSiteCommande</label>
+        <input class="w-full" type="text" pInputText placeholder="clientIndivSiteCommande" formControlName="clientIndivSiteCommande" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="nomBoulangerie" class="block font-bold bg-green-200 p-2">nomBoulangerie</label>
+        <input class="w-full"  type="text" pInputText placeholder="nomBoulangerie" formControlName="nomBoulangerie" />
+      </div>
+      <div class="field mb-2">
+        <label for="logoBoulangerie" class="block font-bold bg-green-200 p-2">logoBoulangerie URL</label>
+        <input class="w-full"  type="text" pInputText placeholder="logoBoulangerie URL" formControlName="logoBoulangerie" />
+      </div>
+      <div class="field mb-2">
+        <label for="role" class="block font-bold bg-green-200 p-2">role ex:boulanger, client ou livraison</label>
+        <input class="w-full"  type="text" pInputText placeholder="ex:boulanger, client ou livraison" formControlName="role" />
+      </div>
+      <div class="field mb-2">
+        <label for="logoSignal" class="block font-bold bg-green-200 p-2">logoSignal URL </label>
+        <input class="w-full"  type="text" pInputText placeholder="logoSignal URL" formControlName="logoSignal" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="emailEnvoiAuBoulanger" class="block font-bold bg-green-200 p-2">emailEnvoiAuBoulanger</label>
+        <input class="w-full" type="text" pInputText placeholder="emailEnvoiAuBoulanger" formControlName="emailEnvoiAuBoulanger" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="dossierCommandesWeb" class="block font-bold bg-green-200 p-2">dossierCommandesWeb</label>
+        <input type="text" pInputText placeholder="dossierCommandesWeb" formControlName="dossierCommandesWeb" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="proprioBoulangerie" class="block font-bold bg-green-200 p-2">  proprioBoulangerie  1 ou 0</label>
+        <input type="text" pInputText placeholder="proprioBoulangerie" formControlName="proprioBoulangerie" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="accesSMS" class="block font-bold bg-green-200 p-2">accesSMS  1 ou 0</label>
+        <input type="text" pInputText placeholder="accesSMS" formControlName="accesSMS" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="noCellSMS" class="block font-bold bg-green-200 p-2">noCellSMS ex: +15556667777</label>
+        <input type="text" pInputText placeholder="noCellSMS" formControlName="noCellSMS" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="nomEquipe" class="block font-bold bg-green-200 p-2">nomEquipe</label>
+        <input type="text" pInputText placeholder="nomEquipe" formControlName="nomEquipe" />
+      </div>
+      <div class="field mb-2">
+        <label for="outilsGestion" class="block font-bold bg-green-200 p-2">outilsGestion 1 ou 0</label>
+        <input type="text" pInputText placeholder="outilsGestion" formControlName="outilsGestion" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="projetSherbrooke" class="block font-bold bg-green-200 p-2">projetSherbrooke? 1 ou 0</label>
+        <input type="text" pInputText placeholder="projetSherbrooke 1 ou 0" formControlName="projetSherbrooke" />
+      </div>
+      
+    <div class="w-full">
+        <button class="btn bg-green-500 text-black  p-2 mt-2 rounded-sm shadow-lg" pButton type="submit"
+        label="Modifier fiche client" [disabled]="userForm.invalid"></button>
+    </div>
+ 
+    </form>
+  <div>

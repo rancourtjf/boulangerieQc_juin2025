@@ -1,0 +1,173 @@
+<style type="text/css">
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <a href=""></a>
+  
+  <div class="text-lg md:text-xl rounded-sm pl-2">
+    <div *ngIf="(auth.isAuthenticated$ | async) === true">
+      <h2 *ngIf="auth.user$ | async as user">{{ user.name }} <br /></h2>
+      Voici les documents de votre boulangerie!
+      <img
+        *ngIf="(auth.isAuthenticated$ | async) === true"
+        class="ml-auto mr-auto h-16 w-24 md:h-24 md:w-36"
+        [src]="logoSignal()"
+        alt="logo"
+      />
+    </div>
+    <div
+      class="bg-yellow-300 w-1/4 mb-4 p-2 rounded-sm shadow-sm"
+      *ngIf="(auth.isAuthenticated$ | async) === true"
+    >
+      <a class="text-lg md:text-2xl" mat-button routerLink="/protection"
+        >Loi renseignements personnels</a
+      >
+    </div>
+  
+    <div
+      *ngIf="(auth.isAuthenticated$ | async) === true && role() == 'boulanger'"
+    >
+      <!-- <div  *ngIf="(auth.isAuthenticated$ | async) === true && role()=='boulangerie'"> -->
+      <p>Nous avisez d'un nouveau client commercial</p>
+      <button (click)="newClient()" class="btn btn-primary">Nouveau</button>
+    </div>
+  
+    <div
+      *ngIf="(auth.isAuthenticated$ | async) === true"
+      class="w-full text-center mt-2 mb-2"
+    >
+      <mat-radio-group aria-label="Faites un choix" [(ngModel)]="accesRole">
+        <mat-radio-button
+          *ngIf="auth.user$ | async as user"
+          (click)="voirURL(user.email, false, value)"
+          value="1"
+          >Boulangerie, votre production</mat-radio-button
+        >
+        <mat-radio-button
+          *ngIf="auth.user$ | async as user"
+          (click)="voirURL(user.email, false, value)"
+          value="2"
+          >Client - prise de commande</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+    <!-- <app-new-client></app-new-client> -->
+  
+    <div class="grid grid-cols-1 gap-3 mt-2">
+      <div
+        *ngIf="(auth.isAuthenticated$ | async) === true && role() == 'boulanger'"
+      >
+        <div
+          class="w-1/2 ml-auto mr-auto py-4 text-center text-white bg-blue-400 hover:bg-blue-300 rounded-sm shadow-xl"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email)"
+            [routerLink]="['/commandesWeb']"
+            routerLinkActive="router-link-active"
+            >Voir les anciennes commandes Web</a
+          >
+        </div>
+        <div
+          class="w-1/2 ml-auto mr-auto py-4 text-center bg-yellow-400 hover:bg-yellow-300 rounded-sm shadow-xl"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email, false)"
+            [routerLink]="['/siteFTP']"
+            routerLinkActive="router-link-active"
+            >Voir votre production</a
+          >
+        </div>
+        <div
+          class="w-1/2 ml-auto mr-auto py-4 text-center bg-green-200 hover:bg-green-400 rounded-sm shadow-xl"
+          *ngIf="(auth.isAuthenticated$ | async) === true"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email)"
+            [routerLink]="['/recherche']"
+            routerLinkActive="router-link-active"
+            >Voir une journée</a
+          >
+        </div>
+      </div>
+      <div *ngIf="(auth.isAuthenticated$ | async) === true && role() == 'client'">
+        <div
+          class="w-1/2 ml-auto mr-auto py-4 text-center bg-green-200 hover:bg-green-400 rounded-sm shadow-xl"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email, false)"
+            routerLink="/commande"
+            routerLinkActive="router-link-active"
+            >Passez votre commande
+          </a>
+        </div>
+        <div
+          *ngIf="(auth.isAuthenticated$ | async) === true"
+          class="w-1/2 ml-auto mr-auto py-4 text-center bg-yellow-200 hover:bg-yellow-400 rounded-sm shadow-xl"
+        >
+          <a
+            class="w-full flex justify-center"
+            *ngIf="auth.user$ | async as user"
+            (click)="voirURL(user.email, true)"
+            routerLink="/commande"
+            routerLinkActive="router-link-active"
+            >Entrez les invendus
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="auth.user$ | async as user"
+      class="bg-yellow-300 rounded-sm shadow-xl w-1/4"
+    >
+      <button
+        (click)="voirURL(user.email, false, 3)"
+        class="text-2xl w-full p-2 flex justify-center"
+      >
+        Besoin d'aide
+      </button>
+    </div>
+    <div
+      *ngIf="auth.user$ | async as user"
+      class="bg-blue-300 rounded-sm shadow-xl w-1/4"
+    >
+      <button
+        (click)="getAllBoulanger()"
+        class="text-2xl w-full p-2 flex justify-center"
+      >
+        Voir le boulanger
+      </button>
+    </div>
+    <div
+    *ngIf="auth.user$ | async as user"
+    class="bg-red-300 rounded-sm shadow-xl w-1/4"
+  >
+    <button
+      (click)="getAllClients()"
+      class="text-2xl w-full p-2 flex justify-center"
+    >
+      Voir les clients
+    </button>
+  </div>
+  <div
+  *ngIf="auth.user$ | async as user"
+  class="bg-yellow-300 rounded-sm shadow-xl w-1/4"
+  >
+  <button
+    (click)="getAllFactures()"
+    class="text-2xl w-full p-2 flex justify-center"
+  >
+    Voir les factures
+  </button>
+  </div>
+  </div>
+  

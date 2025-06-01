@@ -1,0 +1,40 @@
+@if(!openGraphic){
+<div *ngIf="!loading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="grid grid-cols-2" *ngIf="loading">
+
+
+    <div>
+        <form [formGroup]="produitForm" (ngSubmit)="onSubmit()">
+
+            <select formControlName="nomProduit">
+                <option [ngValue]="null" disabled>Choisir un produit</option>
+                <option *ngFor="let produit of produits()" [ngValue]="produit">
+                    {{produit}}
+                </option>
+            </select>
+            @if(onClick){
+            <button class="ml-2 bg-yellow-400  p-2 rounded-sm shadow-sm" type="submit">Ce produit a été choisi</button>
+            }
+            @else {
+            <button class="ml-2 bg-green-400  p-2 rounded-sm shadow-sm" type="submit">Enregistrer produit</button>
+
+            }
+        </form>
+    </div>
+    <div>
+        <app-select-client />
+    </div>
+
+    <button class="bg-blue-500 text-white p-2  shadow-xl mt-4 w-1/2 ml-auto mr-auto" (click)="voirGraphic()">Voir le graphique</button>
+
+</div>
+}
+
+@if(openGraphic){
+<div>
+    <app-voir-graphic [unProduit]="nomProduit"></app-voir-graphic>
+</div>
+}

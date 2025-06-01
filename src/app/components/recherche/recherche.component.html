@@ -1,0 +1,47 @@
+<div class="container">
+
+    <div *ngIf="isOpen" class="addsection">
+
+        <div>
+            <img class="ml-auto mr-auto h-16 w-24 md:h-24 md:w-36"  [src] = "logo | safe:'url'" alt="logo">
+        </div>
+      <div class="text-center mt-2"><h1>Recherchez les bons documents</h1></div>
+      <div style="width:50%;margin:auto">
+        
+        <form [formGroup]="findForm" (submit)="onSubmit()" novalidate class="form">
+        <div class="grid grid-cols-2 gap-2">
+            <div class="row inline-block">
+              <div class="text-lg">Date:</div>
+              <div class=""><input class="form-control" type="date" name="date" formControlName="date"></div>
+            </div>
+            <div class="row inline-block">
+              <div class=" text-lg">Dossier</div>
+              <div class="">
+                <select  name="dossier" class="form-control" formControlName="dossier">
+                  <option value="ProductionQuotidienne">ProductionQuotidienne</option>
+                  <option value="FacturationQuotidienne">FacturationQuotidienne</option>
+                  <option value="FacturationHebdomadaire">FacturationHebdomadaire</option>
+                  <option value="FactureSortie">FactureSortie</option>
+                  <option value="CommandesFournisseur">CommandesFournisseur</option>
+                  <option value="recettesBoulangerie">Vos recettes en pdf</option>
+
+                </select>
+              </div>
+            </div>
+          </div>
+      
+          <div class="w-1/2 md:w-1/4 ml-auto mr-auto mt-8">
+            <ng-container *ngIf="!isResultFindComplet">
+              <p>Vous devez entrer le nom de dossier!</p>
+            </ng-container>
+            <div class="col-md-12">
+              <button [disabled]="!isResultFindComplet" class="btn bg-green-500 p-4 text-black font-bold text-lg md:text-xl hover:bg-green-400  rounded-sm shadow-sm"  type="submit" >Rechercher...</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <app-voir-production [formDate]="resultRecherche" [isOpen]="isOpen" class="w-full h-full"></app-voir-production>
+    <!-- <app-site-ftp [formDate]="resultRecherche" ></app-site-ftp> -->
+
+  </div>

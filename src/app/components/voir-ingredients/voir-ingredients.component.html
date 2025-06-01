@@ -1,0 +1,68 @@
+<div class=" p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased flex justify-center ">
+    <button (click)="goToCommande()"
+      class="mr-4  cursor-pointer p-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased bg-gray-100 rounded-sm shadow-xl flex justify-center ">
+      Retour à la commande
+    </button>
+  </div>
+  <ng-container>
+    @for (item of dataSource; track item) {
+    <p>{{item.title}}</p>
+    }
+  
+  </ng-container>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="nom" matSortDirection="desc"
+    (matSortChange)="sortData($event)">
+    <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+    'ID', 'nom_ingredient_a', 'fournisseur_a', 'categorie', 'no_code_ingr_fournisseur_a', 'prix_au_kilo_r', 'Modifier'];
+
+    <!-- ID  -->
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.ID }}</td>
+    </ng-container>
+        <!-- nom_ingredient_a -->
+    <ng-container matColumnDef="nom_ingredient_a">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>nom_ingredient_a</th>
+      <td mat-cell *matCellDef="let element">{{ element.nom_ingredient_a }}</td>
+    </ng-container>
+    <!-- fournisseur_a Column-->
+    <ng-container matColumnDef="fournisseur_a">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>fournisseur</th>
+      <td mat-cell *matCellDef="let element">{{ element.fournisseur_a }}</td>
+    </ng-container>
+    <!-- categorie Column -->
+    <ng-container matColumnDef="categorie">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>categorie</th>
+      <td mat-cell *matCellDef="let element">{{ element.categorie }}</td>
+    </ng-container>
+  
+    <!-- no_code_ingr_fournisseur_a Column -->
+    <ng-container matColumnDef="no_code_ingr_fournisseur_a">
+      <th mat-header-cell *matHeaderCellDef>no_code_fournisseur</th>
+      <td mat-cell *matCellDef="let element">{{ element.no_code_ingr_fournisseur_a }}</td>
+    </ng-container>
+  
+    <!-- prix_au_kilo_r Column -->
+    <ng-container matColumnDef="prix_au_kilo_r">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Prix au kg</th>
+      <td mat-cell *matCellDef="let element">{{ element.prix_au_kilo_r }}</td>
+    </ng-container>
+  
+  
+    <ng-container  matColumnDef="Modifier">
+      <th mat-header-cell *matHeaderCellDef>Modifier</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="mb-4"></div>
+        <button  *ngIf="(proprioBoulangerie())" class="mb-2" (click)=" modifIngredient(element.ID)"><fa-icon class="text-green-600"
+            [icon]="faEdit"></fa-icon> {{ element.ID }}</button>
+        <hr class="border-4 mb-2">
+        <button *ngIf="proprioBoulangerie()" (click)=" deleteIngredient(element.ID)"><fa-icon class="text-red-500 " [icon]="faTrash"></fa-icon> {{
+          element.id }}</button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>

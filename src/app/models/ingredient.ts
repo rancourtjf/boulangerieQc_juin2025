@@ -1,0 +1,32 @@
+
+
+export interface Ingredient {
+ID :number,
+id_liste:number,
+allergene_a:string,
+categorie:string,
+coeffprixvente:number,
+date_modif_stock:Date,
+date_modification:Date,
+description_fournisseur:string,
+fournisseur_a:string,
+fournisseurId_el:number,
+id_categorie_ingredient:number,
+IdFournIngrBest:number,
+ingredient_description_a:string,
+inventaire_b:boolean,
+limite_alerte_kg:number,
+masquage_sur_etiquette:boolean,
+nbr_sacs:number,
+no_code_ingr_fournisseur_a:string,
+nom_ingredient_a:string,
+nomIngrFournisseur:string,
+prix_au_kilo_r:number,
+prix_par_sac_r:number,
+prixdevente:number,
+produit_allergisant_b:boolean,
+qte_en_stock_kg:number,
+qteOptimale:number,
+quantite_par_sac_en_kg_r:number,
+unite_a:string
+}

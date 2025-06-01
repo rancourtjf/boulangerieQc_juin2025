@@ -1,0 +1,20 @@
+<HTML>
+    <HEAD>
+    <TITLE>Fichier de test Upload</TITLE>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+
+    </HEAD>
+    <BODY>
+    Fichier de test Upload
+    <form method="post" action="upload.php" enctype="multipart/form-data">
+    <h3>Exemple : Quelle fichier voulez-vous me transmettre svp?</h3>
+    <p>Votre fichier :<br>
+    <input type="hidden" name="MAX_FILE_SIZE" value="0">
+    <input type="file" name="fichier"><br><br>
+    </p>
+    <input type="submit" name="Submit" value="R-Envoyer le fichier">
+    </form>
+    
+    </BODY>
+    </HTML>
+    

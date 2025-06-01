@@ -1,0 +1,35 @@
+<div *ngIf="boulanger.role == 'boulanger'">
+  <h3 class="text-center mt-2 font-bold">
+    Modifier le message qui apparaîtra sur la page des clients.
+  </h3>
+
+  <button
+    (click)="delete_message()"
+    class="mt-2 btn btn-danger rounded-sm shadow-sm mb-2"
+  >
+    Supprimer le message précédent
+  </button>
+
+  <div class="w-3/4 md:w-1/2 mr-auto ml-auto">
+    <form [formGroup]="newMessage" (ngSubmit)="envoiAjoutMessage()">
+      <label for="message">Contenu du prochain message</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="messageText"
+        id="messageText"
+      />
+
+      <button
+        class="bg-blue-500 text-white p-2 mt-2 rounded-sm shadow-xl"
+        type="submit"
+      >
+        Cliquez, pour mettre à jour le message sur la page web
+      </button>
+    </form>
+  </div>
+  <!-- <button (click)="view_message()" class="btn btn-primary">Voir le dernier message</button>
+   -->
+</div>
+
+<app-message-affiche [message]="messageImport()"></app-message-affiche>

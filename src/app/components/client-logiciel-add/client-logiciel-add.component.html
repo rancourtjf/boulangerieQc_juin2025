@@ -1,0 +1,237 @@
+
+<p-card styleClass="user-form" class="flex justify-content-center">
+    <form [formGroup]="userForm" (ngSubmit)="addUser()" novalidate>
+        <div class="field mb-2">
+            <label for="nomBoulangerie" class="block">nom de la boulangerie</label>
+            <input type="text" pInputText placeholder="nom de la boulangerie" formControlName="nomBoulangerie" />
+            <small class="p-error block" *ngIf="
+                userForm.get('nomBoulangerie')?.invalid && userForm.get('nomBoulangerie')?.dirty
+              ">
+              Le nom de la boulangerie est requis</small>
+          </div>
+          <div class="field mb-2">
+            <label for="courriel" class="block">courriel</label>
+            <input type="text" pInputText placeholder="courriel" formControlName="courriel" />
+            <small class="p-error block" *ngIf="
+                userForm.get('courriel')?.invalid && userForm.get('courriel')?.dirty
+              ">
+              Le courriel est requis</small>
+          </div>
+
+
+          <div class="field mb-2">
+            <label for="actifBoolean" class="block">Drop actif licence payée?</label>
+
+            <p-dropdown 
+                formControlName="actifBoolean" 
+                [options]="choix"
+                optionLabel="choixValue"
+            
+                optionValue="boolLience">
+              </p-dropdown>
+              <small class="p-error block" *ngIf="
+              userForm.get('actifBoolean')?.invalid && userForm.get('actifBoolean')?.dirty
+            ">
+            Vous devez indiquer si la licence mensuelle est payée ...</small>
+          </div>
+      
+      <div class="field mb-2">
+        <label for="prenom" class="block">Prénom</label>
+        <input type="text" pInputText placeholder="Prénom" formControlName="prenom" />
+        <!-- <small class="p-error block" *ngIf="
+            userForm.get('prenom')?.invalid && userForm.get('prenom')?.dirty
+          ">
+          Le prénom est requis</small> -->
+      </div>
+      <div class="field mb-2">
+        <label for="nomFamille" class="block">Nom de famille</label>
+        <input type="text" pInputText placeholder="Nom de famille" formControlName="nomFamille" />
+      </div>
+  
+      <div formGroupName="adresse">
+        <h2>Adresse</h2>
+        <div class="field mb-2">
+          <label for="rue" class="block">Rue</label>
+          <input type="text" pInputText placeholder="rue" formControlName="rue" />
+        </div>
+        <div class="field mb-2">
+            <label for="ville" class="block">ville</label>
+            <input type="text" pInputText placeholder="ville" formControlName="ville" />
+          </div>
+        <div class="field mb-2">
+          <label for="codepostal" class="block">Code postal</label>
+          <input type="text" pInputText placeholder="code postal" formControlName="codePostal" />
+          <!-- <small class="p-error block" *ngIf="
+              userForm.get('adresse')?.get('codePostal')?.invalid &&
+              userForm.get('adresse')?.get('codePostal')?.dirty
+            ">
+            Le code postal est requis</small> -->
+        </div>
+      </div>
+      <div class="field mb-2">
+        <label for="telephone" class="block">no de téléphone</label>
+        <input type="text" pInputText placeholder="telephone" formControlName="telephone" />
+      </div>
+      <div class="field mb-2">
+        <label for="dateDebut" class="block">Date de début</label>
+        <input type="date" pInputText placeholder="la date du début" formControlName="dateDebut" />
+      </div>
+      <div class="field mb-2">
+        <label for="dateFin" class="block">Date de fin de contrat</label>
+        <input type="date" pInputText placeholder="la date de fin de contrat" formControlName="dateFin" />
+      </div>
+      <div class="field mb-2">
+        <label for="identifiant" class="block">identifiant data client</label>
+        <input type="text" pInputText placeholder="identifiant" formControlName="identifiant" />
+      </div>
+      <div class="field mb-2">
+        <label for="logoBoulangerie" class="block">url logo boulangerie</label>
+        <input type="text" pInputText placeholder="logoBoulangerie" formControlName="logoBoulangerie" />
+      </div>
+      <div class="field mb-2">
+        <label for="emailEnvoiAuBoulanger" class="block">courriel envoi commande boulangerie</label>
+        <input type="text" pInputText placeholder="courriel" formControlName="emailEnvoiAuBoulanger" />
+      </div>
+      <h2>Paramètres SMTP Client dans 4D</h2>
+      <div class="field mb-2">
+        <label for="host" class="block">host messagerie</label>
+        <input type="text" pInputText placeholder="host" formControlName="host" />
+      </div>
+      <div class="field mb-2">
+        <label for="user" class="block">user messagerie</label>
+        <input type="text" pInputText placeholder="user" formControlName="user" />
+      </div>
+      <div class="field mb-2">
+        <label for="password" class="block">password messagerie</label>
+        <input type="text" pInputText placeholder="password" formControlName="password" />
+      </div>
+      <div class="field mb-2">
+        <label for="port" class="block">port messagerie</label>
+        <input type="number" pInputText placeholder="port" formControlName="port" />
+      </div>
+      <div class="field mb-2">
+        <label for="logfile" class="block">logfile 4D</label>
+        <input type="text" pInputText placeholder="logfile" formControlName="logfile" />
+      </div>
+      <div class="field mb-2">
+        <label for="serveurFTP" class="block">serveurFTP </label>
+        <input type="text" pInputText placeholder="serveurFTP" formControlName="serveurFTP" />
+      </div>
+      <div class="field mb-2">
+        <label for="userFTP" class="block">userFTP </label>
+        <input type="text" pInputText placeholder="userFTP" formControlName="userFTP" />
+      </div>
+      <div class="field mb-2">
+        <label for="passwordFTP" class="block">passwordFTP </label>
+        <input type="text" pInputText placeholder="passwordFTP" formControlName="passwordFTP" />
+      </div>
+      <div class="field mb-2">
+        <label for="site_web_documents" class="block">site_web_documents </label>
+        <input type="text" pInputText placeholder="site_web_documents" formControlName="site_web_documents" />
+      </div>
+      <div class="field mb-2">
+        <label for="user_site_web" class="block">user_site_web </label>
+        <input type="text" pInputText placeholder="user_site_web" formControlName="user_site_web" />
+      </div>
+      <div class="field mb-2">
+        <label for="pwd_site_web" class="block">pwd_site_web </label>
+        <input type="text" pInputText placeholder="pwd_site_web" formControlName="pwd_site_web" />
+      </div>
+      <div class="field mb-2">
+        <label for="serveurFTP_bkup" class="block">serveurFTP_bkup </label>
+        <input type="text" pInputText placeholder="serveurFTP_bkup" formControlName="serveurFTP_bkup" />
+      </div>
+      <div class="field mb-2">
+        <label for="userFTP_bkup" class="block">userFTP_bkup </label>
+        <input type="text" pInputText placeholder="userFTP_bkup" formControlName="userFTP_bkup" />
+      </div>
+      <div class="field mb-2">
+        <label for="pwdFTPbkup" class="block">pwdFTPbkup </label>
+        <input type="text" pInputText placeholder="pwdFTPbkup" formControlName="pwdFTPbkup" />
+      </div>
+      <div class="field mb-2">
+        <label for="dataFile4DD" class="block">dataFile4DD </label>
+        <input type="text" pInputText placeholder="dataFile4DD" formControlName="dataFile4DD" />
+      </div>
+      <div class="field mb-2">
+        <label for="dataFile4DIndx" class="block">dataFile4DIndx </label>
+        <input type="text" pInputText placeholder="dataFile4DIndx" formControlName="dataFile4DIndx" />
+      </div>
+      <div class="field mb-2">
+        <label for="depotListePrixClients" class="block">depotListePrixClients </label>
+        <input type="text" pInputText placeholder="depotListePrixClients" formControlName="depotListePrixClients" />
+      </div>
+      <div class="field mb-2">
+        <label for="userFTPDepot" class="block">userFTPDepot </label>
+        <input type="text" pInputText placeholder="userFTPDepot" formControlName="userFTPDepot" />
+      </div>
+      <div class="field mb-2">
+        <label for="pwdFTPDepot" class="block">pwdFTPDepot </label>
+        <input type="text" pInputText placeholder="pwdFTPDepot" formControlName="pwdFTPDepot" />
+      </div>
+      <div class="field mb-2">
+        <label for="serveurFTPListePrixClients" class="block">serveurFTPListePrixClients </label>
+        <input type="text" pInputText placeholder="serveurFTPListePrixClients" formControlName="serveurFTPListePrixClients" />
+      </div>
+      <div class="field mb-2">
+        <label for="serveurFTPSansFTP" class="block">serveurFTPSansFTP </label>
+        <input type="text" pInputText placeholder="serveurFTPSansFTP" formControlName="serveurFTPSansFTP" />
+      </div>
+      <div class="field mb-2">
+        <label for="passwordFTPHash" class="block">passwordFTPHash </label>
+        <input type="text" pInputText placeholder="passwordFTPHash" formControlName="passwordFTPHash" />
+      </div>
+      <div class="field mb-2">
+        <label for="serveurFTPSansFTP_bkup" class="block">serveurFTPSansFTP_bkup </label>
+        <input type="text" pInputText placeholder="serveurFTPSansFTP_bkup" formControlName="serveurFTPSansFTP_bkup" />
+      </div>
+      <div class="field mb-2">
+        <label for="pwdFTPbkup_Hash" class="block">pwdFTPbkup_Hash </label>
+        <input type="text" pInputText placeholder="pwdFTPbkup_Hash" formControlName="pwdFTPbkup_Hash" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_host_mysql" class="block">db_host_mysql </label>
+        <input type="text" pInputText placeholder="db_host_mysql" formControlName="db_host_mysql" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_name_mysql" class="block">db_name_mysql </label>
+        <input type="text" pInputText placeholder="db_name_mysql" formControlName="db_name_mysql" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_username_mysql" class="block">db_username_mysql </label>
+        <input type="text" pInputText placeholder="db_username_mysql" formControlName="db_username_mysql" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_password_mysql" class="block">db_password_mysql </label>
+        <input type="text" pInputText placeholder="db_password_mysql" formControlName="db_password_mysql" />
+      </div>
+      <div class="field mb-2">
+        <label for="repertoireBoulangerie" class="block">repertoireBoulangerie </label>
+        <input type="text" pInputText placeholder="repertoireBoulangerie" formControlName="repertoireBoulangerie" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_host_mysql_boulangerieqc" class="block">db_host_mysql_boulangerieqc </label>
+        <input type="text" pInputText placeholder="db_host_mysql_boulangerieqc" formControlName="db_host_mysql_boulangerieqc" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_name_mysql_boulangerieqc" class="block">db_name_mysql_boulangerieqc </label>
+        <input type="text" pInputText placeholder="db_name_mysql_boulangerieqc" formControlName="db_name_mysql_boulangerieqc" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_username_mysql_boulangerieqc" class="block">db_username_mysql_boulangerieqc </label>
+        <input type="text" pInputText placeholder="db_username_mysql_boulangerieqc" formControlName="db_username_mysql_boulangerieqc" />
+      </div>
+      <div class="field mb-2">
+        <label for="db_password_mysql_boulangerieqc" class="block">db_password_mysql_boulangerieqc </label>
+        <input type="text" pInputText placeholder="db_password_mysql_boulangerieqc" formControlName="db_password_mysql_boulangerieqc" />
+      </div>
+      <div class="field mb-2">
+        <label for="suiviDeProjetGoogle" class="block">suiviDeProjetGoogle </label>
+        <input type="text" pInputText placeholder="suiviDeProjetGoogle" formControlName="suiviDeProjetGoogle" />
+      </div>
+  
+      <button class="bg-green-500 text-black mt-2 p-2 rounded-sm shadow-lg" pButton type="submit" label="Transmettre MySql" [disabled]="userForm.invalid"></button>
+
+    </form>
+
+  </p-card>

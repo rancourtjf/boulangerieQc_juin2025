@@ -1,0 +1,99 @@
+<p>Recettes du jour</p>
+<p class="font-bold">{{jourDeLaProduction}} {{datedujour}} </p>
+<!-- <button (click)="recettesDrag()" class="btn btn-primary">Recettes Drag</button> -->
+
+<!-- <div
+  class="p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased flex justify-center"
+>
+
+  <div *ngIf="role() == 'boulanger'">
+    
+    <form [formGroup]="dateForm" (submit)="onSubmitDate()" novalidate class="form">
+
+          <div class="row inline-block">
+            <div class="text-lg">Date:</div>
+            <div class=""><input class="form-control" type="date" name="date" formControlName="date"></div>
+          </div>
+          <button class="ml-2 bg-yellow-400 p-2 rounded-sm shadow-sm" type="submit">Soumettre</button>
+
+      </form>
+  </div>
+</div> -->
+<table mat-table #table [dataSource]="listRecettes()" class="mat-elevation-z8 demo-table" matSort cdkDropList
+  matSortActive="dateProd" matSortDirection="desc" (matSortChange)="sortData($event)"
+  (cdkDropListDropped)="drop($event)" cdkDropListData="dataSource">
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+
+  <!-- date production Column -->
+  <ng-container matColumnDef="dateProd">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date prod.</th>
+    <td class="text-sm md:text-md " mat-cell *matCellDef="let element">
+      {{ element.dateProd }}
+    </td>
+  </ng-container>
+  <!-- chemin Column -->
+  <ng-container matColumnDef="chemin">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Voir la recette</th>
+    <td mat-cell *matCellDef="let element ; let i = index">
+      <a href="{{ element.chemin }}" target="_blank"><button
+          class="bg-green-400 text-md md:text-xl font-bold rounded-sm shadow-xl p-2" type="button">
+          {{ element.nomDocument }}
+        </button></a>
+    </td>
+  </ng-container>
+  <!-- @if(role()=="livraison"){ -->
+  <ng-container matColumnDef="production">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>à faire?</th>
+    <td mat-cell *matCellDef="let element ; let i = index">
+
+      @if( element.production ==true){
+      <p>
+        Production = true
+      </p>
+
+      }
+      @else {
+      <p> Production = false</p>
+
+      }
+      <button (click)="productionFaite(i)"
+        [ngClass]="[element.production == true ? 'block' : 'hidden']" class="rounded-sm bg-green-400">
+        <i class="fa-solid fa-bread-slice h-6 w-6"></i>
+      </button>
+      <button (click)="productionFaite(i)"
+        class="ml-2 btn bg-yellow-400 p-0 rounded-sm shadow-sm text-red-400">
+        <span [ngClass]="[element.production  == true ? 'bg-green-400' : '']"
+          class="font-bold text-sm md:text-md text-black p-0"> {{element.production ? "" : "À faire!" }}</span>
+      </button>
+    </td>
+  </ng-container>
+  <!-- } -->
+
+  <!-- nom Column -->
+  <!-- <ng-container matColumnDef="categorie">
+    <th class=" flex justify-center" mat-header-cell  *matHeaderCellDef mat-sort-header >chemin</th>
+    <td
+      class="font-bold"
+      [ngClass]="{ 'text-black': element.categorie != '' }"
+      *matCellDef="let element"
+    >
+    <a href="{{ element.chemin }}" target="_blank"
+    ><button class="bg-green-100 text-md md:text-xl font-bold rounded-sm shadow-xl p-2" type="button">
+     {{ element.chemin }}
+    </button></a
+  >
+    
+    </td>
+  </ng-container> -->
+
+  <!-- id_commande Column -->
+  <ng-container matColumnDef="timestamp">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</th>
+    <td mat-cell *matCellDef="let element">{{ element.timestamp }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns" cdkDrag [cdkDragData]="row"></tr>
+</table>

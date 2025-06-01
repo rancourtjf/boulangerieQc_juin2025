@@ -1,0 +1,29 @@
+<style type="text/css">
+
+    iframe {
+    width: 100%;
+    height: 100%;
+    }
+</style>
+<body >
+    
+
+
+<div *ngIf="!isOpen" class="w-full h-screen">
+
+
+ <img class="ml-auto mr-auto h-16 w-24 md:h-24 md:w-36"  [src] = "logo | safe:'resourceUrl'" alt="logo">
+
+ <button *ngIf="dossier==='ProductionQuotidienne'" class="btn btn-dark shadow-xl rounded-sm hover:text-white"><a [href]="lienURL+'/recettes/' | safe:'url'">recettes du jour</a></button>
+ <button *ngIf="dossier==='ProductionQuotidienne'" class="btn btn-warning shadow-xl rounded-sm hover:text-white"><a [href]="lienURL+'/Client_par_produit.pdf' | safe:'url'">Produits par client</a></button>
+ <button  class="btn btn-gray-300 shadow-xl rounded-sm hover:text-gray-700"><a [href]="lienURLFacturation | safe:'url'">Factures client </a></button>
+ <button  class="btn btn-gray-300 shadow-xl rounded-sm hover:text-gray-700"><a [href]="lienRecettes | safe:'url'">Vos recettes en pdf </a></button>
+
+
+
+
+ <iframe [src] = "lienURL | safe:'resourceUrl'" title="cédule de production" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ {{lienURL}}
+
+</div>
+</body>

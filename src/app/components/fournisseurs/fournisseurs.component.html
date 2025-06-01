@@ -1,0 +1,69 @@
+<div class=" p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased flex justify-center ">
+    <button (click)="goToCommande()"
+        class="mr-4  cursor-pointer p-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased bg-gray-100 rounded-sm shadow-xl flex justify-center ">
+        Retour à la commande
+    </button>
+</div>
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="datePrevue"
+    matSortDirection="desc" (matSortChange)="sortData($event)">
+    <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+
+
+    <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>nom</th>
+        <td mat-cell *matCellDef="let element">
+            <p class="font-bold text-xl "> {{ element.nom }}</p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="courriel">
+        <th mat-header-cell *matHeaderCellDef>Courriel</th>
+        <td mat-cell *matCellDef="let element"> <a href="mailto:{{ element.courriel }}" target="_blank">Envoi courriel</a>
+        </td>
+      </ng-container>
+
+    <ng-container matColumnDef="telephone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>telephone</th>
+        <td mat-cell *matCellDef="let element">
+            <p class="font-bold text-xl "> {{ element.telephone | phoneFormat }}</p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="ville">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ville</th>
+        <td mat-cell *matCellDef="let element">
+            <p class="font-bold text-xl "> {{ element.ville }}</p>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nom_responsable">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>nom_responsable</th>
+        <td mat-cell *matCellDef="let element">
+            <p class="font-bold text-xl "> {{ element.prenom_responsable }} {{ element.nom_responsable }}</p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="fax">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>fax</th>
+        <td mat-cell *matCellDef="let element">
+            <p class="font-bold text-xl">  {{ element.fax | phoneFormat }}</p>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Modifier">
+        <th mat-header-cell *matHeaderCellDef>Modifier</th>
+        <td mat-cell *matCellDef="let element">
+            <div class="mb-4"></div>
+            <button (click)=" modifFournisseur(element.id)"class="mb-2" ><fa-icon class="text-green-600"
+                    [icon]="faEdit"></fa-icon> {{ element.id }}</button>
+            <hr class="border-4 mb-2">
+            <button (click)=" deleteFournisseur(element.id)"><fa-icon class="text-red-500 "
+                    [icon]="faTrash"></fa-icon> {{
+                element.id }}</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

@@ -1,0 +1,38 @@
+<div class="grid grid-cols-1">
+    <div class="text-center w-full ml-auto mr-auto ">
+  
+      <label class="bg-green-200 font-bold p-2" for="inputFile">
+        3- Choisir fichier et envoyer pour Tablette ou cellulaire seulement</label
+      >
+      <input  class="form-control" type="file" (change)="onChange($event)" />
+    </div>
+  </div>
+  
+  <!-- <input
+    type="file"
+    class="file-input"
+    (change)="onFileSelected($event)"
+    #fileUpload
+  /> -->
+  
+  <!-- <div class="file-upload">
+    {{ fileName || "Choisir le fichier" }}
+  
+    <button
+      mat-mini-fab
+      color="primary"
+      class="upload-btn"
+      (click)="fileUpload.click()"
+    >
+      <mat-icon>attach_file</mat-icon>
+    </button>
+  </div> -->
+  <div class="container" *ngIf="!loading()">
+    <h3>Transmission en cours...</h3>
+
+  </div>
+    <div class="container" *ngIf="loading()">
+    <h3>Transmission faite!...</h3>
+
+  </div>
+  

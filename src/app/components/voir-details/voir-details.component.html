@@ -1,0 +1,58 @@
+<div *ngIf="loading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!loading">
+    
+    <app-tableau-croise     
+    [clients]="clients"
+    [produits]="produits"
+    [listeDetail]="details()">
+</app-tableau-croise>
+<br><br>
+<hr class="border-2 border-red-500">
+    <p-table   [columns]="cols" 
+    [value]="details()" 
+    [scrollable]="true" 
+    scrollHeight="500px"
+    styleClass="p-datatable-striped"  
+    sortMode="multiple" 
+    [tableStyle]="{ 'min-width': '50rem' }" >
+        <ng-template pTemplate="header" let-columns>
+            <!-- <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+            </tr> -->
+            <th (click)="sort('nom_client')" style="width:30%">nom <span [ngClass]="getSortIcon('nom_client')"></span></th>
+            <th (click)="sort('prix_escompte')" style="width:10%">$ Esc </th>
+            <th (click)="sort('nom_produit')" style="width:40%">Nom <span [ngClass]="getSortIcon('nom_produit')"></span></th>
+            <th (click)="sort('quantite')" style="width:20%">Qté <span [ngClass]="getSortIcon('quantite')"></span></th>
+            <th (click)="sort('date_prod')" style="width:20%">dateProd <span [ngClass]="getSortIcon('date_prod')"></span></th>
+            <!-- <th (click)="sort('jour_semaine')" style="width:20%">jour<span [ngClass]="getSortIcon('jour_semaine')"></span></th> -->
+            <th (click)="sort('nom_pate')" style="width:20%">nom_pate<span [ngClass]="getSortIcon('nom_pate')"></span></th>
+            <th (click)="sort('poids_pate')" style="width:20%">Kg_pate<span [ngClass]="getSortIcon('poids_pate')"></span></th>
+            <th (click)="sort('cout_pate')" style="width:20%">coût<span [ngClass]="getSortIcon('cout_pate')"></span></th>
+            <th (click)="sort('prix_boutique')" style="width:20%">$ <span [ngClass]="getSortIcon('prix_boutique')"></span></th>
+            <!-- <th (click)="sort('invendus')" style="width:20%">invend<span [ngClass]="getSortIcon('invendus')"></span></th> -->
+            <th (click)="sort('tot_non_taxable')" style="width:20%">$non_tax<span [ngClass]="getSortIcon('tot_non_taxable')"></span></th>
+            <th (click)="sort('tot_taxable')" style="width:20%">$tax<span [ngClass]="getSortIcon('tot_taxable')"></span></th>
+            <th (click)="sort('tps')" style="width:20%">tps<span [ngClass]="getSortIcon('tps')"></span></th>
+            <th (click)="sort('tvq')" style="width:20%">tvq<span [ngClass]="getSortIcon('tvq')"></span></th>
+            <th (click)="sort('total_vente')" style="width:20%">$vente<span [ngClass]="getSortIcon('total_vente')"></span></th>
+            <!-- <th (click)="sort('heureRupture')" style="width:20%">hrRupt<span [ngClass]="getSortIcon('heureRupture')"></span></th>
+            <th (click)="sort('timeStamp')" style="width:20%">timeStamp<span [ngClass]="getSortIcon('timeStamp')"></span></th> -->
+            <!-- <th (click)="sort('clientRegroupement')" style="width:20%">Regroup<span [ngClass]="getSortIcon('clientRegroupement')"></span></th> -->
+           
+
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" >
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{ rowData[col.field] }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <hr class="border-black border-2">
+
+</div>

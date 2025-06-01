@@ -1,0 +1,410 @@
+<app-navbar-factures />
+<app-message></app-message>
+<div>Client individuel</div>
+<p>{{clientIndividuel.prenom}} {{clientIndividuel.nom}} {{clientIndividuel.courriel}} {{clientIndividuel.telephone}}</p>
+<p>{{clientIndividuel.lieu}}</p>
+<p class="font-bold">{{clientIndividuel.commentaires}}</p>
+<div>
+  {{nomClient}} paiement fait?: {{clientIndividuel.paye}}
+</div>
+           <div class="ml-2 mt-2">
+        <a class="text-2xl bg-red-600 p-2 text-white shadow-xl" mat-button
+          href="https://www.boulangerieqc.com/wiki/doku.php?id=start">Aide
+        </a>
+      </div>
+
+
+<ng-container *ngIf="role != 'livraison'">
+  <div class="w-full text-center bg-gray-100" *ngIf="commande1semaine == 1">
+    <form [formGroup]="inputDate">
+      <label for="dateCommande">Choississez un <span class="font-bold text-xl">Lundi</span> début de
+        commande 1 semaine</label>
+      <mat-form-field>
+        <!-- {{dateChoisie | customDate:'fr'}} -->
+        {{ dateChoisie | date : "dd/MM/yy HH:mm" }}
+
+        <input matInput [matDatepicker]="dp" [matDatepickerFilter]="dateFilter" placeholder="Verbose datepicker"
+          type="Date" class="form-control hidden" name="dateCommande" formControlName="dateCommande" />
+
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+      <button
+        class="mb-2 center rounded-lg bg-green-500 py-2 px-4 font-sans text-sm font-bold uppercase text-gray-100 shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+        (click)="onSubmitDateCommande()" type="submit">
+        Validez la date
+      </button>
+    </form>
+  </div>
+
+  <mat-form-field appearance="outline" class="bg-green-200 text-xxl hidden">
+    <mat-label class="p-2 text-xxl">Heure de rupture</mat-label>
+    <input (click)="obtenirListeProduitZero()" type="text" matInput [ngxMatTimepicker]="timepicker" [format]="24"
+      [required]="required" readonly [formControl]="formControlItem" />
+
+    <mat-icon matPrefix *ngIf="formControlItem.value && !formControlItem.disabled && !required"
+      (click)="onClear($event)">
+      close
+    </mat-icon>
+
+    <mat-icon matSuffix *ngIf="!formControlItem.disabled" (click)="openFromIcon(timepicker)">schedule</mat-icon>
+  </mat-form-field>
+
+  <ngx-mat-timepicker #timepicker [enableKeyboardInput]="true" [max]="maxTime" [min]="minTime"></ngx-mat-timepicker>
+  <div class="ml-auto mr-auto text-center w-1/2 md:w-1/4 border-4 border-black p-2 mb-2">
+    <button class="bg-green-400 p-2 rounded-sm shadow-sm" (click)="tabletteAdd()">
+      @if(tabletteOK){
+      <p>J'utilise une tablette ou un cellulaire <fa-icon class="ml-2 p-2 bg-white" [icon]="faMobilePhone"></fa-icon>
+      </p>
+      } @else{
+      <p>J'utilise un ordinateur <fa-icon class="ml-2 p-2 bg-white" [icon]="faDesktop"></fa-icon></p>
+      }
+    </button>
+  </div>
+  <div *ngIf="submitted1sem" class="w-full text-center">
+    <mat-radio-group aria-label="Faites un choix" [(ngModel)]="commande1semaine">
+      <mat-radio-button (click)="
+          this.router.navigate(['/cedule']); (this.commande1semaine === 1)
+        " value="1">
+        Reprendre à neuf</mat-radio-button>
+      <!-- <mat-radio-button value="2">Commande 1 journée</mat-radio-button> -->
+
+      <!-- <mat-radio-button (click)="commandeClientIndividuel()" value="5">Commande client individuel</mat-radio-button> -->
+      <!-- <mat-radio-button (click)="oldCommandeClick()" value="3">choisir une ancienne commande</mat-radio-button> -->
+      <mat-radio-button (click)="obtenirListeProduitZero()" value="4">
+        <span class="font-bold text-red-600 text-lg md:text-xl">Remettre les quantités à 0</span></mat-radio-button>
+      @if(role==="boulanger"){
+      <ng-container>
+        <mat-radio-button (click)="entrerDeuxCuissons()" value="5">
+          <span class="font-bold text-blue-600 text-lg md:text-xl">Deux cuissons</span></mat-radio-button>
+      </ng-container>
+      }
+
+    </mat-radio-group>
+  </div>
+
+  <div class="w-full text-center" *ngIf="commande1semaine == 2">
+    <form [formGroup]="inputDate1jour">
+      <label for="dateCommande">Date commande 1 jour</label>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dp" placeholder="Verbose datepicker" type="Date" class="form-control"
+          name="dateCommande" formControlName="dateCommande" />
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+      <button class="btn bg-green-200 p-2" (click)="onSubmitDateCommande1jour()" type="submit">
+        Validez la date
+      </button>
+    </form>
+  </div>
+  <div class="w-1/2 text-center ml-auto mr-auto" *ngIf="commande1semaine == 3">
+    <div class="text-center w-full my-2">
+      <label class="bg-green-200 font-bold p-2" for="inputFile">
+        Choisir fichier ancienne commande
+      </label>
+
+
+      <input class="form-control p-2 bg-gray-400" type="file" (change)="onChange($event)" />
+    </div>
+  </div>
+
+  <div class="w-full text-center my-4" *ngIf="saisieVerticale == false">
+    <button (click)="saisieVerticale = !saisieVerticale"
+      class="middle none center inline-block rounded-lg bg-yellow-400 py-2 px-4 font-sans text-sm font-bold uppercase shadow-md shadow-yellow-500/20 transition-all hover:shadow-lg hover:shadow-yellow-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+      Confirmez pour Saisie par journée avec touche TAB<mat-icon>swap_vert</mat-icon>
+    </button>
+  </div>
+
+  <div class="ml-auto mr-auto flex justify-center">
+    <button (click)="gotoRupture()"
+      class="p-2 shadow-lg rounded-lg  bg-blue-200 hover:bg-blue-600 hover:text-white mb-2">
+      Heure de rupture
+    </button>
+  </div>
+  <div class="ml-auto mr-auto flex justify-center">
+    <button (click)="triParNomUp()" class="p-2 shadow-lg rounded-lg  bg-blue-600 text-white mb-2">
+      Tri par nom a-z
+    </button>
+  </div>
+
+  <div class="ml-auto mr-auto flex justify-center">
+    <button (click)="triParCategoriesUp()" class="p-2 shadow-lg rounded-lg  bg-blue-600 text-white">
+      Tri par catégorie a-z
+    </button>
+  </div>
+  <!-- <div class="ml-auto mr-auto flex justify-center">
+  <button (click)="triParCategoriesDown()" class="btn btn-primary">
+    Tri par catégorie z-a
+  </button>
+</div> -->
+  <div class="w-full flex justify-center my-4" *ngIf="saisieVerticale == true">
+    <button (click)="saisieVerticale = !saisieVerticale"
+      class="middle none center inline-block rounded-lg bg-linear-to-tr from-green-500 to-green-300 py-2 px-4 font-sans text-xs font-bold uppercase shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+      Confirmez pour Saisie horizontale par pain avec touche TAB<mat-icon>swap_horiz</mat-icon>
+    </button>
+  </div>
+
+  <div class="w-full text-center font-bold bg-gray-100 p-2">
+    Dernière mise à jour des produits: {{ dateDernierMajProduit() }}
+    <img class="ml-4 w-16 h-16 inline-block mr-4" [src]="logoClient" alt="logo" />
+    <button (click)="invendus()"
+      class="middle none center inline-block rounded-lg bg-red-600 py-2 px-4 font-sans text-sm font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+      @if(invendusActif){
+      <span> Retirer Invendus </span>
+      } @else { Invendus? }
+    </button>
+
+
+    Date de la commande
+    <span *ngIf="commande1semaine == 1">de la semaine du {{ dateLundiString }}</span>
+    <span *ngIf="commande1semaine == 2">du {{ dateStringCommande }}</span> pour:
+    {{ nomClient }}
+    <span class="ml-4 text-red-600 font-bold text-md md:text-lg" *ngIf="invendusActif">Pour des INVENDUS</span>
+  </div>
+  <ng-container *ngIf="loading">Chargement en cours...</ng-container>
+  <ng-container *ngIf="!loading">
+    <form id="datatableArrow" *ngIf="submitted1sem" [formGroup]="commandeForm" (ngSubmit)="envoiCommande()">
+      <table class="border-2 border-black ml-4 bg-gray-100 text-lg">
+        <thead>
+          <tr class="text-center">
+            <th class="text-sm">ID</th>
+
+            <th>Produit</th>
+            <th>Lundi {{ dateLundiString }}</th>
+            <th>Mardi {{ dateMardiString }}</th>
+            <th>Mercredi {{ dateMercrediString }}</th>
+            <th>Jeudi {{ dateJeudiString }}</th>
+            <th>Vendredi {{ dateVendrediString }}</th>
+            <th>Samedi {{ dateSamediString }}</th>
+            <th>Dimanche {{ dateDimancheString }}</th>
+            <th>catégorie</th>
+            <th>prix escompté</th>
+            <th>prix vente</th>
+
+          </tr>
+        </thead>
+        <tbody formArrayName="Rows">
+          <!-- <tr *ngFor="let itemrow of commandeForm.controls.Rows.controls; let i=index;let l=last" -->
+          <tr *ngFor="
+              let itemrow of getFormControls.controls;
+              let i = index;
+              let l = last
+            " id="idRow{{ i }}" [formGroupName]="i">
+            <td>
+              <input [ngClass]="
+                  dataListeProdSignal()[i].produit_special_b == 'Vrai'
+                    ? 'hidden'
+                    : 'block '
+                " readonly id="ID{{ i }}" formControlName="ID" class="w-16 text-center text-sm" />
+              <img (click)="openImage(dataListeProdSignal()[i].url_image)" [ngClass]="
+                  dataListeProdSignal()[i].produit_special_b == 'Vrai' &&
+                  dataListeProdSignal()[i].url_image == null
+                    ? ' w-8 h-8 md:w-12 md:h-12 showme  border-4 border-green-400 transform hover:scale-150'
+                    : 'hideme'
+                " src="https://www.boulangerieqc.com/assets/images/star.png" alt="star" />
+              <img (click)="openImage(dataListeProdSignal()[i].url_image)" [ngClass]="
+                  dataListeProdSignal()[i].produit_special_b == 'Faux' &&
+                  dataListeProdSignal()[i].url_image != null
+                    ? '  w-8 h-8 md:w-12 md:h-12  showme   transform hover:scale-150'
+                    : 'hideme'
+                " src="{{ dataListeProdSignal()[i].url_image }}" alt="pain" />
+
+              <img (click)="openImage(dataListeProdSignal()[i].url_image)" [ngClass]="
+                  dataListeProdSignal()[i].produit_special_b == 'Vrai' &&
+                  dataListeProdSignal()[i].url_image != null
+                    ? '  w-8 h-8 md:w-12 md:h-12  showme  border-4 border-green-400 transform hover:scale-150'
+                    : 'hideme'
+                " src="{{ dataListeProdSignal()[i].url_image }}" alt="sapin" />
+            </td>
+
+            <td>
+              <input (click)="voir2Cuissons(i)" readonly id="{{ 'variete_poids_a' + i }}"
+                formControlName="variete_poids_a"
+                class="bg-gray-600 text-gray-50 w-72 text-left pl-2 text-sm hover:text-md md:text-lg shadow-sm py-2" />
+            </td>
+            <td>
+              <input [hidden]="" [ngClass]="{
+                             'font-bold text-md md:text-lg': dataListeProdSignal()[i].produit_lundi_b == 'Vrai',
+                             'hidden':
+                             dataListeProdSignal()[i].produit_lundi_b == 'Faux' ||
+                               (commande1semaine == 2 && jourdelaCommande !== 'lundi') ,
+                           }" [ngClass]="{
+                               'bg-green-200': dataListeProdSignal()[i].input0_lundi > 0
+                             }" type="number" [tabIndex]="getTabIndex(1)" id="{{ 'input0_lundi' + i }}"
+                formControlName="input0_lundi" class="form-control text-center"
+                (change)="envoiInput(i, 'input0_lundi', $event, 2)" (keydown)="focusMyInput($event, i, 'input0_lundi')"
+                (focus)="focusRow(i)" [class.invalid]="
+                               commandeForm.get('input0_lundi')?.invalid &&
+                               commandeForm.get('input0_lundi')?.dirty &&
+                               commandeForm.get('input0_lundi')?.touched
+                             " />
+
+
+            </td>
+            <td>
+              <input [hidden]="" [ngClass]="{
+                             'font-bold text-md md:text-lg': dataListeProdSignal()[i].produit_mardi_b == 'Vrai',
+                             'hidden':
+                             dataListeProdSignal()[i].produit_mardi_b == 'Faux' ||
+                               (commande1semaine == 2 && jourdelaCommande !== 'mardi') ,
+                           }" [ngClass]="{
+                               'bg-green-200': dataListeProdSignal()[i].input0_mardi > 0
+                             }" type="number" [tabIndex]="getTabIndex(2)" id="{{ 'input0_mardi' + i }}"
+                formControlName="input0_mardi" class="form-control text-center"
+                (change)="envoiInput(i, 'input0_mardi', $event, 3)" (keydown)="focusMyInput($event, i, 'input0_mardi')"
+                (focus)="focusRow(i)" [class.invalid]="
+                               commandeForm.get('input0_mardi')?.invalid &&
+                               commandeForm.get('input0_mardi')?.dirty &&
+                               commandeForm.get('input0_mardi')?.touched
+                             " />
+            </td>
+            <td>
+              <input [hidden]="" [ngClass]="{
+                             'font-bold text-md md:text-lg': dataListeProdSignal()[i].produit_mercredi_b == 'Vrai',
+                             'hidden':
+                             dataListeProdSignal()[i].produit_mercredi_b == 'Faux' ||
+                               (commande1semaine == 2 && jourdelaCommande !== 'mercredi') ,
+                           }" [ngClass]="{
+                               'bg-green-200': dataListeProdSignal()[i].input0_mercredi > 0
+                             }" type="number" [tabIndex]="getTabIndex(3)" id="{{ 'input0_mercredi' + i }}"
+                formControlName="input0_mercredi" class="form-control text-center"
+                (change)="envoiInput(i, 'input0_mercredi', $event, 4)"
+                (keydown)="focusMyInput($event, i, 'input0_mercredi')" (focus)="focusRow(i)" [class.invalid]="
+                               commandeForm.get('input0_maercredi')?.invalid &&
+                               commandeForm.get('input0_maercredi')?.dirty &&
+                               commandeForm.get('input0_maercredi')?.touched
+                             " />
+            </td>
+
+            <td>
+              <input [hidden]="" [ngClass]="{
+                             'font-bold text-md md:text-lg': dataListeProdSignal()[i].produit_jeudi_b == 'Vrai',
+                             'hidden':
+                             dataListeProdSignal()[i].produit_jeudi_b == 'Faux' ||
+                               (commande1semaine == 2 && jourdelaCommande !== 'jeudi') ,
+                           }" [ngClass]="{
+                               'bg-green-200': dataListeProdSignal()[i].input0_jeudi> 0
+                             }" type="number" [tabIndex]="getTabIndex(4)" id="{{ 'input0_jeudi' + i }}"
+                formControlName="input0_jeudi" class="form-control text-center"
+                (change)="envoiInput(i, 'input0_jeudi', $event, 5)" (keydown)="focusMyInput($event, i, 'input0_jeudi')"
+                (focus)="focusRow(i)" [class.invalid]="
+                               commandeForm.get('input0_jeudi')?.invalid &&
+                               commandeForm.get('input0_jeudi')?.dirty &&
+                               commandeForm.get('input0_jeudi')?.touched
+                             " />
+            </td>
+            <td>
+              <input [hidden]="" [ngClass]="{
+                             'font-bold text-md md:text-lg': dataListeProdSignal()[i].produit_vendredi_b == 'Vrai',
+                             'hidden':
+                             dataListeProdSignal()[i].produit_vendredi_b == 'Faux' ||
+                               (commande1semaine == 2 && jourdelaCommande !== 'vendredi') ,
+                           }" [ngClass]="{
+                               'bg-green-200': dataListeProdSignal()[i].input0_vendredi> 0
+                             }" type="number" [tabIndex]="getTabIndex(5)" id="{{ 'input0_vendredi' + i }}"
+                formControlName="input0_vendredi" class="form-control text-center"
+                (change)="envoiInput(i, 'input0_vendredi', $event, 6)"
+                (keydown)="focusMyInput($event, i, 'input0_vendredi')" (focus)="focusRow(i)" [class.invalid]="
+                               commandeForm.get('input0_vendredi')?.invalid &&
+                               commandeForm.get('input0_vendredi')?.dirty &&
+                               commandeForm.get('input0_vendredi')?.touched
+                             " />
+            </td>
+            <td>
+              <input [hidden]="" [ngClass]="{
+                             'font-bold text-md md:text-lg': dataListeProdSignal()[i].produit_samedi_b == 'Vrai',
+                             'hidden':
+                             dataListeProdSignal()[i].produit_samedi_b == 'Faux' ||
+                               (commande1semaine == 2 && jourdelaCommande !== 'samedi') ,
+                           }" [ngClass]="{
+                               'bg-green-200': dataListeProdSignal()[i].input0_samedi> 0
+                             }" type="number" [tabIndex]="getTabIndex(6)" id="{{ 'input0_samedi' + i }}"
+                formControlName="input0_samedi" class="form-control text-center"
+                (change)="envoiInput(i, 'input0_samedi', $event, 7)"
+                (keydown)="focusMyInput($event, i, 'input0_samedi')" (focus)="focusRow(i)" [class.invalid]="
+                               commandeForm.get('input0_samedi')?.invalid &&
+                               commandeForm.get('input0_samedi')?.dirty &&
+                               commandeForm.get('input0_samedi')?.touched
+                             " />
+            </td>
+            <td>
+              <input [hidden]="" [ngClass]="{
+                             'font-bold text-md md:text-lg': dataListeProdSignal()[i].produit_dimanche_b == 'Vrai',
+                             'hidden':
+                             dataListeProdSignal()[i].produit_dimanche_b == 'Faux' ||
+                               (commande1semaine == 2 && jourdelaCommande !== 'dimanche') ,
+                           }" [ngClass]="{
+                               'bg-green-200': dataListeProdSignal()[i].input0_dimanche> 0
+                             }" type="number" [tabIndex]="getTabIndex(7)" id="{{ 'input0_dimanche' + i }}"
+                formControlName="input0_dimanche" class="form-control text-center"
+                (change)="envoiInput(i, 'input0_dimanche', $event, 8)"
+                (keydown)="focusMyInput($event, i, 'input0_dimanche')" (focus)="focusRow(i)" [class.invalid]="
+                               commandeForm.get('input0_dimanche')?.invalid &&
+                               commandeForm.get('input0_dimanche')?.dirty &&
+                               commandeForm.get('input0_dimanche')?.touched
+                             " />
+            </td>
+            <td>
+              <input readonly id="{{ 'categorie_a' + i }}" formControlName="categorie_a"
+                class="text-sm w-16 text-center" />
+            </td>
+
+            <td>
+              <!-- <input readonly id="prixEscompte" formControlName="prixEscompte" class="form-control text-center"> -->
+              <input readonly id="{{ 'prixEscompte' + i }}" formControlName="prixEscompte"
+                class="form-control text-center text-sm" />
+            </td>
+            <td>
+              <input readonly id="{{ 'prix_vente_variete_r' + i }}" formControlName="prix_vente_variete_r"
+                class="form-control text-center text-sm" />
+            </td>
+            <td>
+              <input [hidden]="true" readonly type="number" id="{{ 'totalProduit' + i }}" formControlName="totalProduit"
+                class="form-control text-center" (change)="envoiInput(i, 'totalProduit', $event, 2)" />
+            </td>
+          </tr>
+          <!-- <div class="font-bold p-2 bg-green-200">Total: $ {{ total|number:'.2' }}</div> -->
+        </tbody>
+      </table>
+
+      <div class="ml-2 font-bold p-2 bg-green-200">
+        Le total de la commande ajouté: {{ totalCommande() | number : ".2" }} $
+      </div>
+      <div class="border-2 border-red-600 my-4">
+        <form [formGroup]="formMessage" (ngSubmit)="envoiMessage($event)">
+          <label class="font-bold" for="inputMessage">Ajoutez un message dans le courriel d'envoi</label>
+          <input class="border-4 border-green-400 bg-gray-100 w-3/4 md:w-1/2 ml-2 py-4 text-lg md:text-md md:text-lg"
+            type="text" formControlName="inputMessage" />
+          <button class="font-bold p-4 ml-2 bg-green-200 hover:bg-green-400 shadow-sm inline-block" type="submit">
+            Ajouter le message
+          </button>
+        </form>
+      </div>
+      <div class="w-full md:w-3/4 mr-auto ml-auto grid grid-cols-3 gap-2 md:grid-cols-3">
+        <div>
+          <button type="submit" class="btn bg-yellow-400 p-2 shadow-xl rounded-sm hover:bg-yellow-800 hover:text-white">
+            1 - Validez ces données: {{ totalCommande() | number : ".2" }} $
+          </button>
+        </div>
+        @if(!proprio()){
+        <div>
+          <button *ngIf="submitted1sem" (click)="downloadCSV(dataListeProdSignal())" type="button"
+            class="btn bg-yellow-400 p-2 rounded-sm shadow-xl hover:bg-yellow-200">
+            @if(!tabletteOK){ 2 - Téléchargement et
+            <span class="font-bold text-red-600">Envoi automatique au boulanger</span>
+            } @else { 2 - Téléchargement et
+            <span class="font-bold text-red-600">faire l'étape 3</span>
+            }
+          </button>
+        </div>
+        @if(tabletteOK){
+        <div>
+          <app-file-upload [dateLundiCommandeString]="dateLundiString" [objDataToMysql]="objDataToMysql"
+            [montant]="totalCommande()" [oldCommande]="oldCommande"></app-file-upload>
+        </div>
+        }
+        }
+      </div>
+    </form>
+  </ng-container>
+</ng-container>

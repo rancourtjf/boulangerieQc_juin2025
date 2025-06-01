@@ -1,0 +1,10 @@
+<!-- https://discover.hubpages.com/technology/How-to-Populate-HTML-Dropdown-List-from-MySql-Table-using-PHP-Function -->
+<!-- https://www.telerik.com/blogs/angular-basics-how-to-get-value-selected-dropdown-menu-item -->
+<!-- https://www.geeksforgeeks.org/how-to-use-ngfor-to-make-a-dropdown-in-angular-from-an-array/ -->
+
+<div class="w-full mt-4 flex justify-center">
+
+        <select (change)="update($event)">
+            <option *ngFor="let equipe of listEquipe" [value]="equipe">{{equipe.nom}}</option>
+        </select>
+    </div>

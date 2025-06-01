@@ -1,0 +1,227 @@
+<div styleClass="user-form" class=" w-1/2 ml-auto mr-auto">
+    <form [formGroup]="userForm" (ngSubmit)="modifyProduit()" novalidate>
+        
+      <div class="field mb-2">
+        <label for="id" class="block font-bold bg-green-200 p-2">Id</label>
+        <input class="read-only:" type="number" pInputText placeholder="id du produit" formControlName="id" />
+      </div>
+
+        <!-- categorie Column -->
+   
+      <div class="field mb-2">
+        <label for="categorie" class="block font-bold bg-green-200 p-2">categorie</label>
+        <input type="text" pInputText placeholder="categorie" formControlName="categorie" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="condition_taxable" class="block font-bold bg-green-200 p-2">condition_taxable</label>
+        <input type="text" pInputText placeholder="condition_taxable" formControlName="condition_taxable" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="consommation_temp" class="block font-bold bg-green-200 p-2">consommation_temp</label>
+        <input type="number" pInputText placeholder="consommation_temp" formControlName="consommation_temp" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="contenu_codebarre" class="block font-bold bg-green-200 p-2">contenu_codebarre</label>
+        <input type="text" pInputText placeholder="contenu_codebarre" formControlName="contenu_codebarre" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="date_ancienprixListe" class="block font-bold bg-green-200 p-2">date_ancienprixListe</label>
+        <input type="date" pInputText placeholder="date_ancienprixListe" formControlName="date_ancienprixListe" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="descriptionProd" class="block font-bold bg-green-200 p-2">descriptionProd</label>
+        <input class="w-full"  type="text" pInputText placeholder="descriptionProd" formControlName="descriptionProd" />
+      </div>
+      <div class="field mb-2">
+        <label for="descriptdifferenceargentionProd" class="block font-bold bg-green-200 p-2">differenceargent</label>
+        <input type="number" pInputText placeholder="differenceargent" formControlName="differenceargent" />
+      </div>
+      <div class="field mb-2">
+        <label for="differencepourcentage" class="block font-bold bg-green-200 p-2">differencepourcentage</label>
+        <input type="number" pInputText placeholder="differencepourcentage" formControlName="differencepourcentage" />
+      </div>
+      <div class="field mb-2">
+        <label for="duree_de_conservation" class="block font-bold bg-green-200 p-2">duree_de_conservation</label>
+        <input type="number" pInputText placeholder="duree_de_conservation" formControlName="duree_de_conservation" />
+      </div>
+      <div class="field mb-2">
+        <label for="id_recette" class="block font-bold bg-green-200 p-2">id_recette</label>
+        <input type="number" pInputText placeholder="id_recette" formControlName="id_recette" />
+      </div>
+      <div class="field mb-2">
+        <label for="id_recetteSecPrincipale" class="block font-bold bg-green-200 p-2">id_recetteSecPrincipale</label>
+        <input type="number" pInputText placeholder="id_recetteSecPrincipale" formControlName="id_recetteSecPrincipale" />
+      </div>
+      <div class="field mb-2">
+        <label for="input0_dimanche" class="block font-bold bg-green-200 p-2">input0_dimanche</label>
+        <input type="number" pInputText placeholder="input0_dimanche" formControlName="input0_dimanche" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="input0_jeudi" class="block font-bold bg-green-200 p-2">input0_jeudi</label>
+        <input type="number" pInputText placeholder="input0_jeudi" formControlName="input0_jeudi" />
+      </div>
+      <div class="field mb-2">
+        <label for="input0_dimanche" class="block font-bold bg-green-200 p-2">input0_dimanche</label>
+        <input type="number" pInputText placeholder="input0_dimanche" formControlName="input0_dimanche" />
+      </div>
+      <div class="field mb-2">
+        <label for="input0_lundi" class="block font-bold bg-green-200 p-2">input0_lundi</label>
+        <input type="number" pInputText placeholder="input0_lundi" formControlName="input0_lundi" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="input0_mardi" class="block font-bold bg-green-200 p-2">input0_mardi</label>
+        <input type="number" pInputText placeholder="input0_mardi" formControlName="input0_mardi" />
+      </div>
+      <div class="field mb-2">
+        <label for="input0_mercredi" class="block font-bold bg-green-200 p-2">input0_mercredi</label>
+        <input type="number" pInputText placeholder="input0_mercredi" formControlName="input0_mercredi" />
+      </div>
+      <div class="field mb-2">
+        <label for="input0_samedi" class="block font-bold bg-green-200 p-2">input0_samedi</label>
+        <input type="number" pInputText placeholder="input0_samedi" formControlName="input0_samedi" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="input0_vendredi" class="block font-bold bg-green-200 p-2">input0_vendredi</label>
+        <input type="number" pInputText placeholder="input0_vendredi" formControlName="input0_vendredi" />
+      </div>
+      <div class="field mb-2">
+        <label for="nom_recette" class="block font-bold bg-green-200 p-2">nom_recette</label>
+        <input type="text" pInputText placeholder="nom_recette" formControlName="nom_recette" />
+      </div>
+      <div class="field mb-2">
+        <label for="nom_sac" class="block font-bold bg-green-200 p-2">nom_sac</label>
+        <input type="text" pInputText placeholder="nom_sac" formControlName="nom_sac" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="nom_variete" class="block font-bold bg-green-200 p-2">nom_variete</label>
+        <input type="text" pInputText placeholder="nom_variete" formControlName="nom_variete" />
+      </div>
+      <div class="field mb-2">
+        <label for="poids_apres_cuisson" class="block font-bold bg-green-200 p-2">poids_apres_cuisson</label>
+        <input type="number" pInputText placeholder="poids_apres_cuisson" formControlName="poids_apres_cuisson" />
+      </div>
+      <div class="field mb-2">
+        <label for="poids_avant_perte" class="block font-bold bg-green-200 p-2">poids_avant_perte</label>
+        <input type="number" pInputText placeholder="poids_avant_perte" formControlName="poids_avant_perte" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="poids_variete" class="block font-bold bg-green-200 p-2">poids_variete</label>
+        <input type="number" pInputText placeholder="poids_variete" formControlName="poids_variete" />
+      </div>
+      <div class="field mb-2">
+        <label for="ponderation_temps" class="block font-bold bg-green-200 p-2">ponderation_temps</label>
+        <input type="number" pInputText placeholder="ponderation_temps" formControlName="ponderation_temps" />
+      </div>
+      <div class="field mb-2">
+        <label for="portion_par_bacplaque" class="block font-bold bg-green-200 p-2">portion_par_bacplaque</label>
+        <input type="number" pInputText placeholder="portion_par_bacplaque" formControlName="portion_par_bacplaque" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="pourc_perte" class="block font-bold bg-green-200 p-2">pourc_perte</label>
+        <input type="number" pInputText placeholder="pourc_perte" formControlName="pourc_perte" />
+      </div>
+      <div class="field mb-2">
+        <label for="prix_vente_variete" class="block font-bold bg-green-200 p-2">prix_vente_variete</label>
+        <input type="number" pInputText placeholder="prix_vente_variete" formControlName="prix_vente_variete" />
+      </div>
+      <div class="field mb-2">
+        <label for="prixauclientsuggere" class="block font-bold bg-green-200 p-2">prixauclientsuggere</label>
+        <input type="number" pInputText placeholder="prixauclientsuggere" formControlName="prixauclientsuggere" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="prixderevient" class="block font-bold bg-green-200 p-2">prixderevient</label>
+        <input type="number" pInputText placeholder="prixderevient" formControlName="prixderevient" />
+      </div>
+      <div class="field mb-2">
+        <label for="prixderevientavant" class="block font-bold bg-green-200 p-2">prixderevientavant</label>
+        <input type="number" pInputText placeholder="prixderevientavant" formControlName="prixderevientavant" />
+      </div>
+      <div class="field mb-2">
+        <label for="prixKgPate" class="block font-bold bg-green-200 p-2">prixKgPate</label>
+        <input type="number" pInputText placeholder="prixKgPate" formControlName="prixKgPate" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="produit_dimanche" class="block font-bold bg-green-200 p-2">produit_dimanche</label>
+        <input type="text" pInputText placeholder="produit_dimanche" formControlName="produit_dimanche" />
+      </div>
+      <div class="field mb-2">
+        <label for="produit_jeudi" class="block font-bold bg-green-200 p-2">produit_jeudi</label>
+        <input type="text" pInputText placeholder="produit_jeudi" formControlName="produit_jeudi" />
+      </div>
+      <div class="field mb-2">
+        <label for="produit_lundi" class="block font-bold bg-green-200 p-2">produit_lundi</label>
+        <input type="text" pInputText placeholder="produit_lundi" formControlName="produit_lundi" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="produit_mardi" class="block font-bold bg-green-200 p-2">produit_mardi</label>
+        <input type="text" pInputText placeholder="produit_mardi" formControlName="produit_mardi" />
+      </div>
+      <div class="field mb-2">
+        <label for="produit_mercredi" class="block font-bold bg-green-200 p-2">produit_mercredi</label>
+        <input type="text" pInputText placeholder="produit_mercredi" formControlName="produit_mercredi" />
+      </div>
+      <div class="field mb-2">
+        <label for="produit_samedi" class="block font-bold bg-green-200 p-2">produit_samedi</label>
+        <input type="text" pInputText placeholder="produit_samedi" formControlName="produit_samedi" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="produit_special" class="block font-bold bg-green-200 p-2">produit_special</label>
+        <input type="text" pInputText placeholder="produit_special" formControlName="produit_special" />
+      </div>
+      <div class="field mb-2">
+        <label for="produit_vendredi" class="block font-bold bg-green-200 p-2">produit_vendredi</label>
+        <input type="text" pInputText placeholder="produit_vendredi" formControlName="produit_vendredi" />
+      </div>
+      <div class="field mb-2">
+        <label for="profit" class="block font-bold bg-green-200 p-2">profit</label>
+        <input type="number" pInputText placeholder="profit" formControlName="profit" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="qte_par_bac" class="block font-bold bg-green-200 p-2">qte_par_bac</label>
+        <input type="number" pInputText placeholder="qte_par_bac" formControlName="qte_par_bac" />
+      </div>
+      <div class="field mb-2">
+        <label for="qte_par_plaque" class="block font-bold bg-green-200 p-2">qte_par_plaque</label>
+        <input type="number" pInputText placeholder="qte_par_plaque" formControlName="qte_par_plaque" />
+      </div>
+      <div class="field mb-2">
+        <label for="sac_associe_ID" class="block font-bold bg-green-200 p-2">sac_associe_ID</label>
+        <input type="number" pInputText placeholder="sac_associe_ID" formControlName="sac_associe_ID" />
+      </div>
+
+      <div class="field mb-2">
+        <label for="taxable" class="block font-bold bg-green-200 p-2">taxable</label>
+        <input type="number" pInputText placeholder="taxable" formControlName="taxable" />
+      </div>
+      <div class="field mb-2">
+        <label for="url_image" class="block font-bold bg-green-200 p-2">url_image</label>
+        <input class="w-full"  type="text" pInputText placeholder="url_image" formControlName="url_image" />
+      </div>
+      <div class="field mb-2">
+        <label for="variete_poids" class="block font-bold bg-green-200 p-2">variete_poids</label>
+        <input class="w-full"  type="text" pInputText placeholder="variete_poids" formControlName="variete_poids" />
+      </div>
+
+    <div class="w-full">
+        <button class="btn bg-green-500 text-black  p-2 mt-2 rounded-sm shadow-lg" pButton type="submit"
+        label="Modifier fiche client" [disabled]="userForm.invalid"></button>
+    </div>
+ 
+    </form>
+  <div>

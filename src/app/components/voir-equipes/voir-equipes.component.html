@@ -1,0 +1,35 @@
+<div class=" p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased flex justify-center ">
+    <button (click)="goToCommande()"
+        class="mr-4  cursor-pointer p-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased bg-gray-100 rounded-sm shadow-xl flex justify-center ">
+        Retour à la commande
+    </button>
+</div>
+
+<table mat-table [dataSource]="dataSource()" class="mat-elevation-z8" matSort matSortActive="nomEquipe"
+    matSortDirection="desc" (matSortChange)="sortData($event)">
+    <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- nomEquipe Column -->
+    <ng-container matColumnDef="nomEquipe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipe</th>
+        <td mat-cell *matCellDef="let element">
+         
+                  <p class="font-bold text-3xl">{{ element.nomEquipe }} </p>  
+
+            
+            </td>
+    </ng-container>
+        <ng-container matColumnDef="Supprimer">
+            <th mat-header-cell *matHeaderCellDef>Supprimer</th>
+            <td class="font-bold text-xl" mat-cell *matCellDef="let element">
+            <br>
+              <button class="border-4 p-2" (click)=" deleteEquipe(element.ID)"><fa-icon class="text-red-500 text-xl md:text-xxl" [icon]="faTrash"></fa-icon> {{
+                element.ID }}</button>
+         
+            </td>
+          </ng-container>
+ù
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

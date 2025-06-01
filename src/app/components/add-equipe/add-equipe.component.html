@@ -1,0 +1,18 @@
+<div *ngIf="boulanger.role == 'boulanger'">
+    <h3 class="text-center mt-2 font-bold">
+      Ajouter une équipe à votre entreprise
+    </h3>
+    <app-voir-equipes></app-voir-equipes>
+  
+    <div class="w-3/4 md:w-1/2 mr-auto ml-auto">
+      <form [formGroup]="newEquipe" (ngSubmit)="envoiAjoutEquipe()">
+        <br><br>
+        <label class="font-bold text-xxl" for="nomEquipe">Nom de la nouvelle équipe</label>
+        <input class="form-control" type="text" formControlName="nomEquipe" id="nomEquipe" />
+ 
+        <button class="p-2 bg-blue-500 text-white text-3xl mt-4 rounded-sm shadow-xl" type="submit">
+          Cliquez, pour ajouter cette équipe
+        </button>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,71 @@
+@if(role != "client"){
+<button class="w-full text-center my-2" (click)="saveContent()"><i class=" pi pi-save"
+    style="font-size: 3rem; color: green;"></i></button>
+}
+
+
+<form [formGroup]="formdateMAJ" (ngSubmit)="saveDateMAJ($event)">
+  <label class="font-bold" class="" for="dateMAJ">Changez la date de mise-à-jour</label>
+  <input class="" type="date" formControlName="dateMAJ" />
+  <button class="font-bold p-4 ml-2 bg-green-200 hover:bg-green-400 shadow-sm inline-block" type="submit">
+    Sauvegardez la date de mise-à-jour
+  </button>
+</form>
+<div class="h-full">
+
+  {{dateMAJ}}
+
+  @if(role === "client"){
+  <div>
+    <p-editor [(ngModel)]="content" [styleClass]="'my-editor'" [readonly]="true">
+    </p-editor>
+
+  </div>
+  }
+  @else {
+
+  <p-editor [(ngModel)]="content" [styleClass]="'my-editor'" [readonly]="false">
+
+    <!--     
+           <ng-template pTemplate="header">
+              <span class="ql-formats">
+                <select class="ql-header">
+                  <option selected></option>
+                  <option value="1"></option>
+                  <option value="2"></option>
+                </select>
+                <select class="ql-font"></select>
+                <select class="ql-size"></select>
+              </span>
+              <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+              </span>
+              <span class="ql-formats">
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+              </span>
+              <span class="ql-formats">
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+                <button class="ql-indent" value="-1"></button>
+                <button class="ql-indent" value="+1"></button>
+              </span>
+              <span class="ql-formats">
+                <button class="ql-link"></button>
+                <button class="ql-image"></button>
+                <button class="ql-video"></button>
+              </span>
+              <span class="ql-formats">
+                <select class="ql-align"></select>
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+                <button class="ql-clean"></button>
+              </span>
+            </ng-template>  -->
+  </p-editor>
+  }
+
+</div>

@@ -1,0 +1,17 @@
+<div *ngIf="boulanger.role=='boulanger'">
+<h3 class="text-center mt-2 font-bold">Nous faire parvenir les coordonnées d'un nouveau client commercial pour lui donner des droits de faire les commande sur le site web.</h3>
+
+<div class="w-3/4 md:w-1/2 mr-auto ml-auto">
+    <form [formGroup]="newClient"   (ngSubmit)="envoiAjoutClient()">
+<label for="nom">Nom du commerce</label>
+<input class="form-control" type="text"    formControlName="nom" id="nom">
+<label for="email">Courriel du commerçant inscrit dans votre BoulangerieQc</label>
+<input class="form-control" type="email"    formControlName="courriel" id="nom">
+<label for="ID">ID commerçant dans logiciel BoulangerieQc</label>
+<input class="form-control" type="number"    formControlName="ID" id="ID">
+<label for="password">Mot de passe commande web inscrit dans votre logiciel BoulangerieQc</label>
+<input class="form-control" type="text"    formControlName="password" id="password">
+<button class="bg-blue-500 text-white p-2 mt-2 rounded-sm shadow-xl" type="submit">Cliquez, pour envoyer par courriel à: {{emailBoulanger}} </button>
+</form>
+</div>
+</div>

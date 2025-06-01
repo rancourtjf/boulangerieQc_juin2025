@@ -1,0 +1,78 @@
+<h3 class="h-3 text-center mt-2 font-bold">
+    Entrez les coordonnées de votre client pour sa commande à venir chercher.
+</h3>
+
+<div class="w-3/4 md:w-1/2 mr-auto ml-auto">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="text-lg">
+
+        <div>
+            <label for="prenom">Prénom</label>
+            <input class="form-control font-bold text-2xl border-2" type="text" formControlName="prenom" id="prenom" />
+            <!-- @if(form.controls.prenom.invalid && form.controls.prenom.touched || form.controls.prenom.dirty){ -->
+            @if(form.controls.prenom.invalid){
+            <p class="text-red-600 font-bold text-md ">Le prénom est requis et doit avoir au moins 1 caractère</p>
+            }
+        </div>
+        <br>
+
+        <label for="nom">Nom de famille</label>
+        <input class="form-control font-bold text-2xl border-2" type="text" formControlName="nom" id="nom" required />
+        @if(form.controls.nom.invalid && (form.controls.nom.touched || form.controls.nom.dirty)) {
+            <p class="text-red-600 font-bold text-md">Le nom est requis et doit avoir au moins 1 caractère</p>
+        }
+        <br>
+        <label for="telephone">Son no de téléphone <span class="text-red-600 font-bold">obligatoire</span></label>
+        <input class="form-control text-2xl font-bold border-2" type="text" formControlName="telephone" id="telephone"
+            mask="(000)000-0000" />
+        <br>
+        @if(form.controls.telephone.invalid){
+        <p class="text-red-600 font-bold text-md ">Le téléphone est requis et doit avoir 10 chiffre</p>
+        }
+        <label for="courriel">Son courriel</label>
+
+        <input class="form-control font-bold text-2xl border-2" type="email" formControlName="courriel" id="courriel" />
+        @if(form.controls.courriel.invalid){
+        <p class="text-red-600 font-bold text-md ">le courriel n'a pas un format valide</p>
+        }<br>
+           <label for="commentaires">Commentaires</label>
+        <input class="form-control font-bold text-2xl border-2" type="text" formControlName="commentaires" id="commentaires"  />
+        <br>
+        <label for="cueillette">lieu de cueillette</label>
+        <br>
+        <!-- <input class="form-control" type="cueillette" formControlName="cueillette" id="cueillette" /> -->
+        <select class="w-full" formControlName="lieu">
+            <option [ngValue]="null" disabled>Choisir un lieu de cueillette</option>
+            <option *ngFor="let lieu of listeLieux()" [ngValue]="lieu">
+                {{lieu}}
+            </option>
+        </select>
+        @if(form.controls.cueillette.invalid){
+        <p class="text-red-600 font-bold text-md">le lieu de cueillette est requis</p>
+        }
+        <div class="mt-4">
+            <label class="font-bold text-lg block mb-2">Commande payée ?</label>
+            <div class="flex items-center space-x-4">
+                <label class="flex items-center">
+                    <input type="radio" formControlName="paye" [value]="true" class="mr-2" />
+                    Oui
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" formControlName="paye" [value]="false" class="mr-2" />
+                    Non
+                </label>
+            </div>
+            @if(form.controls.paye.invalid && form.controls.paye.touched){
+            <p class="text-red-600 font-bold text-md">Merci d'indiquer si la commande est payée.</p>
+            }
+        </div>
+        <br>
+        <div class="mt-2">
+            <button class=" bg-blue-600 text-white p-2 mt-2 rounded-sm shadow-xl" type="submit"   [disabled]="form.invalid">
+                Cliquez, pour associer les coordonnées de ce client à la commande
+            </button>
+        </div>
+
+    </form>
+</div>
+<!-- <button (click)="view_message()" class="btn btn-primary">Voir le dernier message</button>
+     -->

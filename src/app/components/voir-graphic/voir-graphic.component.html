@@ -1,0 +1,31 @@
+<h1  class=" mb-2">Sélection des dates de calcul des ventes par période pour <span class="font-bold text-red-600">{{unProduit()}}  du client= {{unNomClient}}</span></h1>
+@if(ouvrirGraphique){
+    <button class="bg-blue-500 p-2  text-white rounded-sm shadow-lg w-1/2 flex justify-center mr-auto ml-auto" (click)="rePrendreProduit()">Revenir page principale</button>
+}
+@if(!ouvrirGraphique){
+<div class="grid grid-cols-2 gap-2">
+    <div>
+        <p class="text-center font-bold text-lg bg-blue-400 p-2">Période 1 {{startEnd1}}</p>
+        <app-select-date-range  (status)="syncProducts(1)" [dateRangChoix]=1 class="w-1/2"></app-select-date-range>
+    </div>
+    <div>
+        <p class="text-center font-bold text-lg bg-blue-400 p-2">Période 2 {{startEnd2}}</p>
+        <app-select-date-range (status)="syncProducts(2)" [dateRangChoix]=2 class="w-1/4"></app-select-date-range>
+    </div>
+    <div>
+        <p class="text-center font-bold text-lg bg-blue-400 p-2">Période 3 {{startEnd3}}</p>
+        <app-select-date-range (status)="syncProducts(3)" [dateRangChoix]=3 class="w-1/4"></app-select-date-range>
+    </div>
+    <div>
+        <p class="text-center font-bold text-lg bg-blue-400 p-2">Période 4{{startEnd4}}</p>
+        <app-select-date-range (status)="syncProducts(4)" [dateRangChoix]=4 class="w-1/4"></app-select-date-range>
+    </div>
+</div>
+}
+@if(!ouvrirGraphique){
+    <button class="bg-yellow-500 p-2  rounded-sm shadow-lg w-1/2 flex justify-center mr-auto ml-auto" (click)="voirGraphique()">Voir le graphique</button>
+
+}
+@if(ouvrirGraphique){
+    <app-graphic ></app-graphic>
+}
