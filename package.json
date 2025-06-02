@@ -34,7 +34,7 @@
     "date-fns": "^3.6.0",
     "file-saver": "^2.0.5",
     "ngx-csv": "^0.3.2",
-    "ngx-csv-parser": "^1.3.1",
+    "ngx-csv-parser": "^2.0.0",
     "ngx-device-detector": "^10.0.2",
     "ngx-filesaver": "^17.0.0",
     "ngx-mask": "^18.0.4",
