@@ -1,15 +1,14 @@
 import { Component,Input,OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { SafePipe } from 'src/app/safe.pipe';
 import { ExtractLienFTPService } from 'src/app/extract-lien-ftp.service';
 import { AideComponent } from '../aide/aide.component';
 import { CommonModule } from '@angular/common';
-import { SafePipeModule } from 'safe-pipe';
+import { SafePipe } from 'safe-pipe';
 
 @Component({
   selector: 'app-site-ftp',
   standalone:true,
-imports:[AideComponent,CommonModule,SafePipeModule],
+imports:[AideComponent,CommonModule,SafePipe],
   templateUrl: './site-ftp.component.html',
   styleUrls: ['./site-ftp.component.scss']
 })

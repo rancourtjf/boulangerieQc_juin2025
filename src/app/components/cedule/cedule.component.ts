@@ -20,7 +20,7 @@ import { BoulangerBoss } from "src/app/models/boulagerBoss";
 import { MessageAfficheComponent } from "../../components/message-affiche/message-affiche.component";
 import { MatRadioModule } from "@angular/material/radio";
 import { FormsModule } from "@angular/forms";
-import { SafePipeModule } from "safe-pipe";
+import { SafePipe } from "safe-pipe";
 import { VoirRecettesComponent } from "../voir-recettes/voir-recettes.component";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,7 +44,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
     MatRadioModule,
     FormsModule,
     RouterModule,
-    SafePipeModule,
+    SafePipe,
     VoirRecettesComponent, MatMenuModule, MatButtonModule,
 
 ],

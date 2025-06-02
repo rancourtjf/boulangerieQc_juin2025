@@ -8,14 +8,14 @@ import {
 import { ExtractLienFTPService } from "src/app/extract-lien-ftp.service";
 import { AuthService } from "@auth0/auth0-angular";
 import { Router } from "@angular/router";
-import { SafePipeModule } from "safe-pipe";
+import { SafePipe } from "safe-pipe";
 import { CommonModule } from "@angular/common";
 
 
 @Component({
   selector: "app-voir-production",
   standalone: true,
-  imports: [SafePipeModule, CommonModule],
+  imports: [SafePipe, CommonModule],
   templateUrl: "./voir-production.component.html",
   styleUrls: ["./voir-production.component.scss"],
 })

@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { SafePipeModule } from 'safe-pipe';
+import { SafePipe } from 'safe-pipe';
 import { ExtractLienFTPService } from 'src/app/extract-lien-ftp.service';
 
 
 @Component({
   selector: 'app-commandes-web',
-  imports:[SafePipeModule],
+  imports:[SafePipe],
   standalone:true,
 
   templateUrl: './commandes-web.component.html',
