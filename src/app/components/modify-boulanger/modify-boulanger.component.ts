@@ -19,6 +19,8 @@ import { DropdownModule } from 'primeng/dropdown';
 //import { environment } from 'src/environnement/environnement';
 import { environment } from 'src/environnement/environnement.prod';
 import { PhoneFormatPipe } from '../../services/phone.pipe';
+import { Boulanger } from 'src/app/identificationBoul';
+
 
 @Component({
   selector: 'app-modify-boulanger',
@@ -43,7 +45,7 @@ export class ModifyBoulangerComponent {
   clientAjout: any = null
 
   connection: any = {}
-  boulLogin: import("/Users/1jf/Documents/siteWebBoulangerieQcoct2024/src/app/identificationBoul").Boulanger;
+  boulLogin: Boulanger;
 
 
   constructor() {
