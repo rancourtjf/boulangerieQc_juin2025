@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SafePipeModule } from 'safe-pipe';
+import { SafePipe } from 'safe-pipe';
 
 @Component({
   selector: 'app-logiciel',
   standalone: true,
-  imports:[SafePipeModule],
+  imports:[SafePipe],
   templateUrl: './logiciel.component.html',
   styleUrls: ['./logiciel.component.scss']
 })

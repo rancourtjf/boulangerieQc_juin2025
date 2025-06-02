@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SafePipeModule } from 'safe-pipe';
+import { SafePipe } from 'safe-pipe';
 import { BannerComponent } from '../banner/banner.component';
 import { VoirProductionComponent} from '../voir-production/voir-production.component'
 
@@ -20,7 +20,7 @@ import { VoirProductionComponent} from '../voir-production/voir-production.compo
   selector: 'app-recherche',
   standalone: true,
   imports:[VoirProductionComponent,CommonModule,
-    FormsModule,SafePipeModule,ReactiveFormsModule],
+    FormsModule,SafePipe,ReactiveFormsModule],
   templateUrl: './recherche.component.html',
   styleUrls: ['./recherche.component.scss']
 })
