@@ -130,7 +130,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
       "tambour.cafe@outlook.com", "info@phoenixduparvis.com",
       "comptabilite@delisuisse.ca", "solutionchasseur@gmail.com",
       "zakarya.benamor@gmail.com", "bistrosuacoche@gmail.com",
-      "pgagne@quebecinternational.ca", "c.thibault@lecroissantdelune.ca","admin@cestmoncarrefour.com","catherine.sylvain@leclerc.ca","annrika@oravito.com"
+      "pgagne@quebecinternational.ca", "c.thibault@lecroissantdelune.ca",
+      "admin@cestmoncarrefour.com","catherine.sylvain@leclerc.ca","annrika@oravito.com",
+      "lesjardinsdelevis@hotmail.com"
     ];
     const emailsVraiesRichesses = ["lesvraiesrichesses@boulangerieqc.com", "sherbrooke@boulangerieqc.com",
       "rockforest@boulangerieqc.com", "lucia@boulangerieqc.com",
