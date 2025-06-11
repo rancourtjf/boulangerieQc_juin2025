@@ -55,7 +55,7 @@
         </div>
 
       <div class="field mb-2">
-        <label for="telephone" class="block font-bold bg-green-200 p-2">no de téléphone</label>
+        <label for="telephone" class="block font-bold bg-green-200 p-2">no de téléphone ex: 1112223333</label>
         <p>Numéro: {{ userForm.get('telephone')?.value | phoneFormat }}</p>
         <input type="text" pInputText placeholder="téléphone" formControlName="telephone"  />
       </div>

@@ -189,11 +189,14 @@ export class VoirFacturesComponent implements AfterViewInit, OnInit {
         if (this.role() == "client") {
           const source: Observable<Facture> = from(this.dataSource());
           const req = [];
-          let example = source.pipe(
-            filter((obj) => obj.idclient == this.boulLogin.idclient)
-          );
+      const example = source.pipe(
+    filter((obj) =>
+      obj.idclient == this.boulLogin.idclient &&
+      obj.type_facture == 'factureQuotidienne'
+    )
+  );
           //  example = source.pipe(
-          //   filter((obj) => obj.dateProd == this.dateProd)
+          //   filter((obj) => obj.type_facture == 'factureQuotidienne')
           // );
 
           const subscribe = example.subscribe((val) => {

@@ -264,6 +264,7 @@ console.log("on entre dans getProduitsInformation")
       "viewFactures.php" +
       "?dossierCommandesWeb=" +
       dossierCommandesWeb
+
     );
   }
   getFactureSortieInformation(
